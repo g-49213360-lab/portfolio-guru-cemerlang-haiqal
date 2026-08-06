@@ -158,9 +158,10 @@ function kadDokBaris(kunci, nota = '') {
  * Kad seragam. Semua kad di seluruh laman melalui fungsi ini supaya
  * strukturnya sama dan barisnya sejajar.
  */
-function kad({ label = '', tajuk, teks = '', butir = [], kaki = '', emas = false, pautan = '', padat = false }) {
-  const kelas = ['kad', emas ? 'kad-emas' : '', padat ? 'kad-padat' : ''].filter(Boolean).join(' ');
+function kad({ label = '', tajuk, teks = '', butir = [], kaki = '', emas = false, pautan = '', padat = false, imej = '', imejAlt = '' }) {
+  const kelas = ['kad', emas ? 'kad-emas' : '', padat ? 'kad-padat' : '', imej ? 'kad-imej' : ''].filter(Boolean).join(' ');
   const isi = [
+    imej ? `<span class="kad-gambar"><img src="${imej}" alt="${esc(imejAlt)}" loading="lazy" width="900" height="1273" decoding="async"></span>` : '',
     label ? `<span class="label">${label}</span>` : '',
     `<h3>${tajuk}</h3>`,
     teks ? `<p>${teks}</p>` : '',
@@ -271,6 +272,19 @@ function kemasKapsyen(teks) {
 const KECUALI = {
   // kemenjadian: [4],
 };
+
+/**
+ * Galeri imej terpilih dengan kapsyen yang ditulis sendiri, bukan diambil
+ * daripada PDF. Guna untuk jalur sorotan di halaman Utama.
+ */
+function galeriPilihan(nama, senarai) {
+  return `<div class="galeri galeri-sorotan" data-galeri="${nama}">
+      ${senarai.map(([slug, fail, tajuk, nota]) => `<button type="button" class="galeri-item" data-imej="assets/eviden/${slug}/${fail}" data-kapsyen="${esc(tajuk)}">
+        <span class="galeri-imej"><img src="assets/eviden/${slug}/${fail}" alt="${esc(tajuk)}" loading="lazy" width="900" height="1273" decoding="async"></span>
+        <span class="galeri-kapsyen"><b>${esc(nota)}</b>${esc(tajuk)}</span>
+      </button>`).join('\n      ')}
+    </div>`;
+}
 
 /**
  * Galeri halaman evidens. Setiap imej membuka pemapar penuh.
@@ -420,6 +434,8 @@ const IMPAK = [
     tajuk: 'Daripada 21 kepada 36 penghantaran tepat masa',
     hasil: 'Apabila tugasan projek Tahun 4 beralih daripada buku skrap fizikal kepada Canva dan Google Classroom, kesemua <strong>36 murid</strong> menghantar dalam tempoh ditetapkan — berbanding 21 sebelum itu.',
     contoh: 'Johan English Sketch dan Poetry Recitation peringkat negeri Selangor; dua Anugerah Emas Show and Tell peringkat kebangsaan.',
+    imej: 'assets/eviden/kemenjadian/h-10.jpg',
+    imejAlt: 'Pasukan English Sketch SK Abdul Samat, Johan peringkat negeri Selangor 2022',
     pautan: 'kemenjadian.html',
     labelPautan: 'Lihat 16 kisah kemenjadian',
   },
@@ -428,6 +444,8 @@ const IMPAK = [
     tajuk: 'Empat lantikan jurulatih utama',
     hasil: 'Termasuk <strong>Jurulatih Utama Kebangsaan Kajian Tindakan Berasaskan AI</strong> (2026) dan Master Trainer CEFR sejak 2016 — mandat melatih guru, bukan sekadar mengajar murid.',
     contoh: 'Panel penulis dua modul di Bahagian Pembangunan Kurikulum; tiga buku cerita Bahasa Inggeris berdaftar ISBN.',
+    imej: 'assets/eviden/wau/h-46.jpg',
+    imejAlt: 'Ahli panel Bicara Buku Laporan Pencapaian Tujuh Teras NADI KPM 2024',
     pautan: 'kepakaran.html',
     labelPautan: 'Lihat penulisan &amp; kepakaran',
   },
@@ -436,6 +454,8 @@ const IMPAK = [
     tajuk: 'Dua pengiktirafan kebangsaan bagi kajian AI',
     hasil: '<strong>Best Innovation Gold Award</strong> dan <strong>Bronze</strong> Pertandingan Kajian Tindakan (Terbuka) peringkat kebangsaan, kedua-duanya bagi kajian penggunaan Google Gemini dalam penulisan Bahasa Inggeris.',
     contoh: 'Lebih 20 episod DidikTV KPM; 20+ set permainan tatabahasa Blooket dikongsi percuma kepada guru.',
+    imej: 'assets/eviden/anugerah/h-5.jpg',
+    imejAlt: 'Certificate of Excellence — Best Innovation Gold Award',
     pautan: 'wau.html',
     labelPautan: 'Lihat Faktor WAU &amp; anugerah',
   },
@@ -443,6 +463,17 @@ const IMPAK = [
 
 /* Tiga laluan pantas, menggantikan senarai lapan bahagian yang hanya
    mengulang navigasi di bahagian atas laman. */
+/* Enam evidens paling kuat, dipilih sendiri. Ini yang panel patut nampak
+   dalam sepuluh saat pertama. */
+const SOROTAN_IMEJ = [
+  ['anugerah', 'h-5.jpg', 'Best Innovation Gold Award — kajian penulisan karangan menerusi Google Gemini', 'Gold Award · Antarabangsa'],
+  ['anugerah', 'h-6.jpg', 'Bronze, Pertandingan Kajian Tindakan (Terbuka), Karnival Pengajian Pendidikan UPSI 2026', 'Bronze · Kebangsaan'],
+  ['anugerah', 'h-7.jpg', 'Sijil Perkhidmatan Cemerlang, Kementerian Pendidikan Malaysia (2020)', 'Perkhidmatan Cemerlang'],
+  ['anugerah', 'h-3.jpg', 'Best Virtual Presenter, 1st International Conference on Digital Innovations in Education 2025', 'Antarabangsa'],
+  ['wau', 'h-11.jpg', 'Surat pelantikan sebagai Pengacara Majlis SEAMEO SEN 2026', 'Pengacara · Antarabangsa'],
+  ['kemenjadian', 'h-11.jpg', 'Johan Poetry Recitation, Karnival Koakademik Bahasa Inggeris negeri Selangor 2023', 'Johan · Negeri'],
+];
+
 const LALUAN = [
   ['Nilai Profil &amp; Kelayakan', 'Butiran asas, kelayakan akademik, lantikan dan dokumen rasmi Bahagian 1.0–1.11.', 'profil.html'],
   ['Nilai Impak PdP &amp; Kemenjadian', 'Enam belas kisah kemenjadian murid, boleh ditapis mengikut pertandingan, bimbingan atau bekas murid.', 'kemenjadian.html'],
@@ -488,6 +519,17 @@ function halamanUtama() {
 <section class="sek">
   <div class="balut">
     ${kepalaSek({
+      label: 'Sorotan kejayaan',
+      tajuk: 'Enam Evidens Paling Kuat',
+      pengenalan: 'Anugerah antarabangsa, pengiktirafan kebangsaan dan johan peringkat negeri — halaman sebenar daripada portfolio. Klik untuk melihat penuh.',
+    })}
+    ${galeriPilihan('sorotan', SOROTAN_IMEJ)}
+  </div>
+</section>
+
+<section class="sek sek-kelabu">
+  <div class="balut">
+    ${kepalaSek({
       label: 'Impak',
       tajuk: 'Tiga Impak Utama',
       pengenalan: 'Setiap kad menyatakan satu hasil, satu contoh, dan pautan terus kepada evidensnya.',
@@ -498,13 +540,15 @@ function halamanUtama() {
         tajuk: i.tajuk,
         teks: i.hasil,
         butir: [i.contoh],
+        imej: i.imej,
+        imejAlt: i.imejAlt,
         kaki: `<a class="btn btn-garis btn-kecil" href="${i.pautan}">${i.labelPautan} <span aria-hidden="true">→</span></a>`,
       })).join('\n      ')}
     </div>
   </div>
 </section>
 
-<section class="sek sek-kelabu">
+<section class="sek">
   <div class="balut">
     <div class="belah">
       <div>
@@ -557,6 +601,7 @@ const LANTIKAN = [
   ['Jurulatih Utama Kebangsaan Kajian Tindakan Berasaskan AI', '2026 hingga kini'],
   ['Master Trainer CEFR', 'dilantik pada 2016'],
   ['Ketua Hakim Poem Recitation', 'peringkat negeri Selangor 2025'],
+  ['Sijil Perkhidmatan Cemerlang KPM', 'dianugerahkan pada 2020'],
 ];
 
 const KEMAHIRAN = [
@@ -612,7 +657,7 @@ ${kepalaLaman('Bahagian 1.0 · Dokumentasi', 'Profil & Kelayakan',
           ${LANTIKAN.map(([n, t]) => `<li><strong>${n}</strong> — ${t}</li>`).join('\n          ')}
         </ul>
         <h3 class="mt-5">Kemahiran</h3>
-        <ul class="senarai-tanda mt-3">
+        <ul class="senarai-tanda mt-4">
           ${KEMAHIRAN.map((k) => `<li>${k}</li>`).join('\n          ')}
         </ul>
       </div>

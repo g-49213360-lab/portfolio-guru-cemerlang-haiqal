@@ -52,11 +52,20 @@
         b.setAttribute('aria-pressed', b.getAttribute('data-tapis') === pilihan ? 'true' : 'false');
       });
       if (kira) {
-        kira.textContent = nampak === item.length
-          ? 'Memaparkan kesemua ' + item.length + ' ' + kataSemua + '.'
-          : nampak === 0
-            ? 'Tiada ' + kataSatu + ' sepadan. Cuba kata kunci lain atau pilih Semua.'
-            : 'Memaparkan ' + nampak + ' daripada ' + item.length + ' ' + kataSemua + '.';
+        if (nampak === item.length && pilihan === 'semua' && !carian) {
+          kira.innerHTML = 'Memaparkan kesemua <b>' + item.length + '</b> ' + kataSemua + '.';
+          kira.classList.remove('tapis-kira-aktif');
+        } else if (nampak === 0) {
+          kira.innerHTML = '<b>Tiada ' + kataSatu + ' sepadan.</b> Cuba kata kunci lain, atau '
+            + '<button type="button" class="tapis-set-semula">tunjukkan semua</button>.';
+          kira.classList.add('tapis-kira-aktif');
+        } else {
+          var nama = bar.querySelector('[data-tapis="' + pilihan + '"]');
+          var label = pilihan === 'semua' ? '' : (nama ? nama.textContent.replace(/\d+\s*$/, '').trim() + ' — ' : '');
+          kira.innerHTML = label + 'Memaparkan <b>' + nampak + '</b> daripada ' + item.length + ' '
+            + kataSemua + '. <button type="button" class="tapis-set-semula">Tunjukkan semua</button>';
+          kira.classList.add('tapis-kira-aktif');
+        }
       }
     }
 
@@ -82,6 +91,18 @@
       lukis();
       simpanUrl(true);
     });
+
+    // Butang "tunjukkan semua" dalam baris status
+    if (kira) {
+      kira.addEventListener('click', function (e) {
+        if (!e.target.closest('.tapis-set-semula')) return;
+        pilihan = 'semua';
+        if (input) input.value = '';
+        carian = '';
+        lukis();
+        simpanUrl(true);
+      });
+    }
 
     if (input) {
       input.addEventListener('input', function () {

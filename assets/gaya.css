@@ -542,6 +542,19 @@ a.kad-emas:active { background: var(--emas-lembut); border-color: var(--emas); }
 
 .kad-padat { padding: var(--r3) var(--r4); }
 
+/* Kad dengan imej kepala — evidens sebenar, bukan teks sahaja */
+.kad-imej { padding: 0; overflow: hidden; }
+.kad-gambar {
+  display: block; aspect-ratio: 4 / 3; overflow: hidden;
+  background: var(--kertas-3); border-bottom: 1px solid var(--garis);
+}
+.kad-gambar img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+.kad-imej > .label { margin: var(--r4) var(--r4) var(--r2); }
+.kad-imej > h3 { margin: 0 var(--r4) var(--r2); }
+.kad-imej > p, .kad-imej > ul { margin-inline: var(--r4); }
+.kad-imej > .kad-kaki { margin: auto var(--r4) var(--r4); padding-top: var(--r3); }
+
+
 /* ------------------------------------------------------------ PENAPIS */
 
 .tapis {
@@ -572,10 +585,25 @@ a.kad-emas:active { background: var(--emas-lembut); border-color: var(--emas); }
 }
 .tapis-btn[aria-pressed="true"] .tapis-bil { color: #fff; background: rgba(255, 255, 255, .22); }
 
+/* Baris status tapisan. Apabila tapisan aktif ia perlu jelas kelihatan —
+   teks kelabu kecil membuatkan tapisan terasa seolah-olah tidak berfungsi. */
 .tapis-kira {
-  margin: 0 0 var(--r4); font-size: .82rem; color: var(--kelabu-muda);
+  display: flex; align-items: center; flex-wrap: wrap; gap: 10px;
+  margin: 0 0 var(--r4); font-size: .88rem; color: var(--kelabu);
 }
+.tapis-kira b { color: var(--arang); font-weight: 700; }
 .tapis-kira:empty { display: none; }
+.tapis-kira-aktif {
+  padding: 11px var(--r4); border-radius: 999px;
+  background: var(--biru-lembut); color: var(--arang-2);
+  border: 1px solid rgba(20, 66, 122, .16);
+}
+.tapis-set-semula {
+  font: inherit; font-size: .84rem; font-weight: 700; color: var(--biru);
+  background: none; border: 0; padding: 0; cursor: pointer;
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.tapis-set-semula:hover { color: var(--biru-tua); }
 
 /* ------------------------------------------------------------ SENARAI */
 
@@ -848,6 +876,17 @@ table.jad td { color: var(--arang); font-weight: 600; line-height: 1.5; }
 @media (max-width: 640px) {
   .galeri { grid-template-columns: repeat(2, 1fr); gap: var(--r2); }
 }
+
+
+/* Jalur sorotan di halaman Utama — tiga lajur, imej lebih besar daripada
+   galeri biasa. Kekhususan .galeri.galeri-sorotan diperlukan kerana
+   .galeri sendiri menetapkan grid-template-columns. */
+.galeri.galeri-sorotan { grid-template-columns: repeat(3, 1fr); gap: var(--r4); }
+.galeri-sorotan .galeri-imej { aspect-ratio: 1 / 1.2; }
+.galeri-sorotan .galeri-kapsyen { padding: var(--r3) var(--r4) var(--r4); font-size: .84rem; line-height: 1.45; }
+.galeri-sorotan .galeri-kapsyen b { font-size: .68rem; color: var(--emas); margin-bottom: 5px; }
+@media (max-width: 900px) { .galeri.galeri-sorotan { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .galeri.galeri-sorotan { grid-template-columns: 1fr; } }
 
 /* ---- Pemapar imej (lightbox) ---- */
 
