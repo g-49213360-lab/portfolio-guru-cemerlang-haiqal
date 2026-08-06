@@ -152,7 +152,7 @@ const pautanYouTube = (id, label = 'Tonton di YouTube') =>
 /** Kepala seksyen seragam: label → tajuk → pengenalan */
 function kepalaSek({ label, tajuk, pengenalan = '', tengah = false }) {
   return `<div class="sek-kepala${tengah ? ' sek-kepala-tengah' : ''}">
-        <span class="label label-merah">${label}</span>
+        <span class="label label-aksen">${label}</span>
         <h2>${tajuk}</h2>
         ${pengenalan ? `<p class="pengenalan">${pengenalan}</p>` : ''}
       </div>`;
@@ -185,7 +185,7 @@ function susunan({ fail, tajuk, huraian, badan }) {
 <meta name="description" content="${esc(huraian)}">
 <meta name="author" content="${esc(CALON.nama)}">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#15171c">
+<meta name="theme-color" content="#0f1724">
 <link rel="canonical" href="${url}">
 <meta property="og:title" content="${esc(tajuk)} · ${esc(CALON.nama)}">
 <meta property="og:description" content="${esc(huraian)}">
@@ -206,7 +206,7 @@ function susunan({ fail, tajuk, huraian, badan }) {
 <link rel="preload" href="assets/fon/source-serif-4-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/fon.css?v=${V.fon}">
 <link rel="stylesheet" href="assets/gaya.css?v=${V.gaya}">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23a8121e'/%3E%3Ctext x='16' y='22' font-family='system-ui,sans-serif' font-size='14' font-weight='800' fill='white' text-anchor='middle'%3EMH%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2314427a'/%3E%3Ctext x='16' y='22' font-family='system-ui,sans-serif' font-size='14' font-weight='800' fill='white' text-anchor='middle'%3EMH%3C/text%3E%3C/svg%3E">
 </head>
 <body>
 <a class="lompat" href="#kandungan">Lompat ke kandungan</a>
@@ -350,7 +350,7 @@ function halamanUtama() {
   <div class="balut">
     <div class="belah">
       <div>
-        <span class="label label-merah" style="margin-bottom:var(--r3)">Ringkasan calon</span>
+        <span class="label label-aksen" style="margin-bottom:var(--r3)">Ringkasan calon</span>
         <h2>Ruang ialah anugerah, dan peluang ialah amanah.</h2>
         <div class="utama-teks" style="margin-top:var(--r4)">
           <p>Hampir 14 tahun dalam perkhidmatan pendidikan, bermula sebagai guru di SK Layon, Nabawan, Sabah dan kini di SK Abdul Samat, Klang. Lantikan sebagai <strong>Master Trainer CEFR pada 2016</strong> membuka ruang memimpin bengkel dan melatih guru-guru Bahasa Inggeris.</p>
@@ -468,7 +468,7 @@ ${kepalaLaman('Bahagian 1.0 · Dokumentasi', 'Profil, kelayakan & dokumentasi ra
   <div class="balut">
     <div class="belah">
       <div>
-        <span class="label label-merah" style="margin-bottom:var(--r3)">Maklumat calon</span>
+        <span class="label label-aksen" style="margin-bottom:var(--r3)">Maklumat calon</span>
         <h2>Butiran asas</h2>
         <div class="jad-balut" style="margin-top:var(--r4)">
           <table class="jad">
@@ -487,7 +487,7 @@ ${kepalaLaman('Bahagian 1.0 · Dokumentasi', 'Profil, kelayakan & dokumentasi ra
         </div>
       </div>
       <div>
-        <span class="label label-merah" style="margin-bottom:var(--r3)">Peranan &amp; lantikan</span>
+        <span class="label label-aksen" style="margin-bottom:var(--r3)">Peranan &amp; lantikan</span>
         <h2>Profil profesional</h2>
         <ul class="senarai-tanda" style="margin-top:var(--r4)">
           ${LANTIKAN.map(([n, t]) => `<li><strong>${n}</strong> — ${t}</li>`).join('\n          ')}
@@ -507,7 +507,7 @@ ${kepalaLaman('Bahagian 1.0 · Dokumentasi', 'Profil, kelayakan & dokumentasi ra
     <div class="belah">
       <div class="masa">
         ${PENDIDIKAN.map(([thn, t, inst]) => `<div class="masa-item">
-          <span class="label label-merah">${thn}</span>
+          <span class="label label-aksen">${thn}</span>
           <h3>${t}</h3>
           <p>${inst}</p>
         </div>`).join('\n        ')}
@@ -790,7 +790,7 @@ ${kepalaLaman('Bahagian 4.0 · 6.0', 'Faktor WAU & anugerah kecemerlangan',
   <div class="balut">
     <div class="belah">
       <div>
-        <span class="label label-merah" style="margin-bottom:var(--r3)">Naratif</span>
+        <span class="label label-aksen" style="margin-bottom:var(--r3)">Naratif</span>
         <h2>Ruang dan Peluang</h2>
         <div class="utama-teks" style="margin-top:var(--r4)">
           <p>Lantikan sebagai Master Trainer CEFR pada 2016 bukan pengiktirafan semata-mata, tetapi mandat untuk membina suara yang mampu mengangkat wacana ilmu ke pentas yang lebih bermakna — memimpin bengkel, melatih guru-guru dan membentuk generasi pendidik yang bukan sahaja fasih kurikulum, malah berjiwa empati.</p>
@@ -988,7 +988,7 @@ ${kepalaLaman('Bahagian 7.0 · 8.0', 'Testimoni & penghargaan',
       <div class="btn-baris btn-baris-tengah" style="margin-top:var(--r4)">${pautanYouTube(VIDEO.testimoni.id)}</div>
 
       <div style="margin-top:var(--r7)">
-        <span class="label label-merah" style="margin-bottom:var(--r3)">Sepuluh suara dalam video ini</span>
+        <span class="label label-aksen" style="margin-bottom:var(--r3)">Sepuluh suara dalam video ini</span>
         <ul class="senarai-nama">
           ${SUARA_VIDEO.map(([nama, jawatan]) => `<li><strong>${nama}</strong><span>${jawatan}</span></li>`).join('\n          ')}
         </ul>

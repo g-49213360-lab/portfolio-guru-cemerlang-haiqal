@@ -6,22 +6,24 @@
 /* ---------------------------------------------------------------- TOKEN */
 
 :root {
-  /* Warna */
-  --merah: #a8121e;
-  --merah-tua: #780d16;
-  --merah-lembut: #fdf3f3;
-  --emas: #a9772a;
-  --emas-terang: #d3a355;
-  --emas-lembut: #fbf5e9;
-  --arang: #15171c;
-  --arang-2: #2b3038;
-  --kelabu: #5a626e;
-  --kelabu-muda: #8d95a1;
-  --garis: #e7e3dc;
-  --garis-halus: #f0ece6;
+  /* Warna — biru institusi dengan aksen emas.
+     Dipilih supaya sepadan dengan kulit dokumen portfolio itu sendiri,
+     yang kebanyakannya biru tua dan emas. */
+  --biru: #14427a;
+  --biru-tua: #0d2c55;
+  --biru-lembut: #eff4fb;
+  --emas: #a3762c;
+  --emas-terang: #cfa156;
+  --emas-lembut: #fbf6ea;
+  --arang: #0f1724;
+  --arang-2: #28323f;
+  --kelabu: #556172;
+  --kelabu-muda: #8a94a4;
+  --garis: #e2e7ef;
+  --garis-halus: #eef1f7;
   --kertas: #ffffff;
-  --kertas-2: #faf8f5;
-  --kertas-3: #f2eee8;
+  --kertas-2: #f7f9fc;
+  --kertas-3: #eaeff6;
 
   /* Fon */
   --f-tajuk: "Source Serif 4", "Iowan Old Style", Georgia, "Times New Roman", serif;
@@ -35,9 +37,9 @@
   --lebar: 1140px;
   --lengkung: 12px;
   --lengkung-s: 8px;
-  --bayang-1: 0 1px 2px rgba(21, 23, 28, .04), 0 2px 6px rgba(21, 23, 28, .04);
-  --bayang-2: 0 2px 6px rgba(21, 23, 28, .06), 0 14px 34px rgba(21, 23, 28, .09);
-  --bayang-3: 0 24px 60px rgba(21, 23, 28, .22);
+  --bayang-1: 0 1px 2px rgba(15, 23, 36, .04), 0 2px 6px rgba(15, 23, 36, .05);
+  --bayang-2: 0 2px 6px rgba(15, 23, 36, .07), 0 14px 34px rgba(15, 23, 36, .10);
+  --bayang-3: 0 24px 60px rgba(15, 23, 36, .26);
 
   --tt: .18s cubic-bezier(.2, .7, .3, 1);
 }
@@ -72,11 +74,11 @@ body {
 
 img { max-width: 100%; height: auto; display: block; }
 
-a { color: var(--merah); text-decoration: none; }
+a { color: var(--biru); text-decoration: none; }
 a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
 :focus-visible {
-  outline: 2px solid var(--merah);
+  outline: 2px solid var(--biru);
   outline-offset: 3px;
   border-radius: var(--lengkung-s);
 }
@@ -128,7 +130,7 @@ p:last-child { margin-bottom: 0; }
   color: var(--kelabu-muda);
   line-height: 1.45;
 }
-.label-merah { color: var(--merah); font-weight: 800; letter-spacing: .11em; }
+.label-aksen { color: var(--biru); font-weight: 800; letter-spacing: .11em; }
 .label-emas { color: var(--emas); font-weight: 800; letter-spacing: .11em; }
 
 /* ------------------------------------------------------------ SUSUN ATUR */
@@ -172,7 +174,7 @@ p:last-child { margin-bottom: 0; }
 .jata:hover { text-decoration: none; }
 .jata-lambang {
   width: 38px; height: 38px; border-radius: var(--lengkung-s); flex: none;
-  background: linear-gradient(145deg, var(--merah) 0%, var(--merah-tua) 100%);
+  background: linear-gradient(145deg, var(--biru) 0%, var(--biru-tua) 100%);
   color: #fff; font-weight: 800; font-size: .88rem; letter-spacing: -.01em;
   display: grid; place-items: center;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .22);
@@ -188,7 +190,7 @@ p:last-child { margin-bottom: 0; }
   transition: color var(--tt), background var(--tt); white-space: nowrap;
 }
 .nav a:hover { background: var(--kertas-3); color: var(--arang); text-decoration: none; }
-.nav a[aria-current="page"] { color: var(--merah); background: var(--merah-lembut); }
+.nav a[aria-current="page"] { color: var(--biru); background: var(--biru-lembut); }
 
 .butang-menu {
   margin-left: auto; display: none; align-items: center; gap: 8px;
@@ -214,12 +216,12 @@ p:last-child { margin-bottom: 0; }
   display: inline-flex; align-items: center; gap: 8px;
   font-family: var(--f-teks);
   font-size: .69rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase;
-  color: var(--emas-terang); background: rgba(211, 163, 85, .12);
-  border: 1px solid rgba(211, 163, 85, .3);
+  color: var(--emas-terang); background: rgba(207, 161, 86, .13);
+  border: 1px solid rgba(207, 161, 86, .32);
   padding: 7px 15px; border-radius: 999px; line-height: 1.5;
 }
 .lencana::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex: none; }
-.lencana-terang { color: var(--merah); background: var(--merah-lembut); border-color: rgba(168, 18, 30, .18); }
+.lencana-aksen { color: var(--biru); background: var(--biru-lembut); border-color: rgba(20, 66, 122, .18); }
 
 /* ------------------------------------------------------------ BUTANG */
 
@@ -231,8 +233,8 @@ p:last-child { margin-bottom: 0; }
   transition: background var(--tt), border-color var(--tt), transform var(--tt), color var(--tt);
   text-decoration: none !important; text-align: center;
 }
-.btn-utama { background: var(--merah); color: #fff; }
-.btn-utama:hover { background: var(--merah-tua); transform: translateY(-1px); }
+.btn-utama { background: var(--biru); color: #fff; }
+.btn-utama:hover { background: var(--biru-tua); transform: translateY(-1px); }
 .btn-hantu { background: rgba(255, 255, 255, .07); color: #fff; border-color: rgba(255, 255, 255, .28); }
 .btn-hantu:hover { background: rgba(255, 255, 255, .14); transform: translateY(-1px); }
 .btn-garis { background: #fff; color: var(--arang); border-color: var(--garis); }
@@ -247,15 +249,15 @@ p:last-child { margin-bottom: 0; }
 .hero {
   position: relative; overflow: hidden; color: #fff;
   background:
-    radial-gradient(1000px 500px at 78% -14%, rgba(169, 119, 42, .38), transparent 62%),
-    radial-gradient(700px 460px at 2% 110%, rgba(168, 18, 30, .5), transparent 66%),
-    linear-gradient(158deg, #1a1d23 0%, #131519 48%, #0c0e12 100%);
+    radial-gradient(1000px 500px at 78% -14%, rgba(207, 161, 86, .32), transparent 62%),
+    radial-gradient(760px 480px at 2% 110%, rgba(20, 66, 122, .72), transparent 68%),
+    linear-gradient(158deg, #18243a 0%, #111a2b 48%, #0a1120 100%);
 }
 .hero::after {
   content: ""; position: absolute; inset: 0; pointer-events: none;
   background-image:
-    linear-gradient(114deg, transparent 45%, rgba(255, 255, 255, .035) 45.4%, rgba(255, 255, 255, .035) 51%, transparent 51.4%),
-    linear-gradient(114deg, transparent 62%, rgba(211, 163, 85, .075) 62.3%, rgba(211, 163, 85, .075) 66%, transparent 66.3%);
+    linear-gradient(114deg, transparent 45%, rgba(255, 255, 255, .04) 45.4%, rgba(255, 255, 255, .04) 51%, transparent 51.4%),
+    linear-gradient(114deg, transparent 62%, rgba(207, 161, 86, .08) 62.3%, rgba(207, 161, 86, .08) 66%, transparent 66.3%);
 }
 .hero-dalam {
   position: relative; z-index: 2;
@@ -285,7 +287,7 @@ p:last-child { margin-bottom: 0; }
   width: 100%; max-width: 300px;
   border-radius: var(--lengkung) var(--lengkung) 0 0;
   border: 1px solid rgba(255, 255, 255, .2); border-bottom: 0;
-  box-shadow: 0 -2px 0 rgba(211, 163, 85, .5) inset, 0 20px 44px rgba(0, 0, 0, .5);
+  box-shadow: 0 -2px 0 rgba(207, 161, 86, .5) inset, 0 20px 44px rgba(0, 0, 0, .5);
 }
 
 @media (max-width: 860px) {
@@ -307,13 +309,13 @@ p:last-child { margin-bottom: 0; }
 
 /* Kepala halaman dalam (bukan Utama) */
 .laman-kepala {
-  background: linear-gradient(160deg, #1a1d23, #0e1014);
+  background: linear-gradient(160deg, #18243a, #0a1120);
   color: #fff; padding-block: var(--r7) var(--r6);
   position: relative; overflow: hidden;
 }
 .laman-kepala::after {
   content: ""; position: absolute; inset: 0;
-  background: radial-gradient(680px 320px at 90% 4%, rgba(169, 119, 42, .26), transparent 62%);
+  background: radial-gradient(680px 320px at 90% 4%, rgba(207, 161, 86, .24), transparent 62%);
 }
 .laman-kepala .balut { position: relative; z-index: 2; }
 .laman-kepala h1 { color: #fff; font-size: clamp(1.85rem, 4vw, 2.6rem); margin-top: var(--r3); max-width: 20ch; }
@@ -404,8 +406,8 @@ p:last-child { margin-bottom: 0; }
 /* Jalur aksen emas HANYA pada kad anugerah, melintang penuh di dalam
    sempadan. Emas bermakna pencapaian — bukan hiasan pada setiap kad. */
 .kad-emas {
-  border-color: rgba(169, 119, 42, .3);
-  background: linear-gradient(#fdfaf4, #fff 120px);
+  border-color: rgba(163, 118, 44, .3);
+  background: linear-gradient(#fbfaf5, #fff 120px);
 }
 .kad-emas::before {
   content: ""; position: absolute; inset: 0 0 auto 0; height: 3px;
@@ -414,7 +416,7 @@ p:last-child { margin-bottom: 0; }
 .kad-emas > .label { color: var(--emas); font-weight: 800; }
 
 .kad:hover { box-shadow: var(--bayang-2); border-color: #dcd6cd; transform: translateY(-2px); }
-.kad-emas:hover { border-color: rgba(169, 119, 42, .5); }
+.kad-emas:hover { border-color: rgba(163, 118, 44, .5); }
 a.kad, a.kad:hover { text-decoration: none; color: inherit; }
 
 .kad > .label { margin-bottom: var(--r2); }
@@ -427,7 +429,7 @@ a.kad, a.kad:hover { text-decoration: none; color: inherit; }
 
 .kad-pautan {
   display: inline-flex; align-items: center; gap: 7px;
-  font-size: .85rem; font-weight: 700; color: var(--merah);
+  font-size: .85rem; font-weight: 700; color: var(--biru);
 }
 .kad-pautan::after { content: "→"; transition: transform var(--tt); }
 .kad:hover .kad-pautan::after { transform: translateX(3px); }
@@ -459,7 +461,7 @@ a.kad, a.kad:hover { text-decoration: none; color: inherit; }
 }
 
 .tapis-btn[aria-pressed="true"] {
-  color: #fff; background: var(--merah); border-color: var(--merah); font-weight: 700;
+  color: #fff; background: var(--biru); border-color: var(--biru); font-weight: 700;
 }
 .tapis-btn[aria-pressed="true"] .tapis-bil { color: #fff; background: rgba(255, 255, 255, .22); }
 
@@ -474,7 +476,7 @@ a.kad, a.kad:hover { text-decoration: none; color: inherit; }
 .senarai-tanda li { position: relative; padding-left: 22px; font-size: .92rem; color: var(--kelabu); line-height: 1.55; }
 .senarai-tanda li::before {
   content: ""; position: absolute; left: 3px; top: .58em;
-  width: 6px; height: 6px; border-radius: 1px; background: var(--merah); transform: rotate(45deg);
+  width: 6px; height: 6px; border-radius: 1px; background: var(--biru); transform: rotate(45deg);
 }
 .senarai-tanda strong { color: var(--arang); font-weight: 700; }
 
@@ -518,7 +520,7 @@ a.kad, a.kad:hover { text-decoration: none; color: inherit; }
 .masa-item::before {
   content: ""; position: absolute; left: calc(var(--r5) * -1); top: 6px;
   width: 14px; height: 14px; border-radius: 50%;
-  background: #fff; border: 3px solid var(--merah);
+  background: #fff; border: 3px solid var(--biru);
 }
 .masa-item h3 { margin: var(--r1) 0 3px; }
 .masa-item p { font-size: .91rem; color: var(--kelabu); }
@@ -575,7 +577,7 @@ table.jad td { color: var(--arang); font-weight: 600; line-height: 1.5; }
   border-radius: var(--lengkung); padding: var(--r4) var(--r5);
 }
 .panel .tajuk-kajian {
-  font-family: var(--f-tajuk); color: var(--merah);
+  font-family: var(--f-tajuk); color: var(--biru);
   font-weight: 600; font-size: 1.08rem; line-height: 1.32; margin: var(--r2) 0 var(--r3);
 }
 .panel p { font-size: .91rem; color: var(--kelabu); }
@@ -657,20 +659,20 @@ table.jad td { color: var(--arang); font-weight: 600; line-height: 1.5; }
   border: 1px solid var(--garis); background: #fff;
   font-size: 1.2rem; line-height: 1; cursor: pointer; color: var(--kelabu);
 }
-.modal-tutup:hover { color: var(--merah); border-color: var(--merah); }
+.modal-tutup:hover { color: var(--biru); border-color: var(--biru); }
 .modal-badan { flex: 1; background: var(--kertas-3); }
 .modal-badan iframe { width: 100%; height: 100%; border: 0; display: block; }
 
 /* ------------------------------------------------------------ HUBUNGI */
 
 .hubungi {
-  background: linear-gradient(158deg, #1a1d23, #0e1014); color: #fff;
+  background: linear-gradient(158deg, #18243a, #0a1120); color: #fff;
   border-radius: var(--lengkung); padding: var(--r6) var(--r6);
   position: relative; overflow: hidden;
 }
 .hubungi::after {
   content: ""; position: absolute; inset: 0;
-  background: radial-gradient(560px 280px at 92% 8%, rgba(169, 119, 42, .24), transparent 62%);
+  background: radial-gradient(560px 280px at 92% 8%, rgba(207, 161, 86, .22), transparent 62%);
 }
 .hubungi > * { position: relative; z-index: 2; }
 .hubungi h2 { color: #fff; margin-top: var(--r3); }
@@ -681,11 +683,11 @@ table.jad td { color: var(--arang); font-weight: 600; line-height: 1.5; }
 /* ------------------------------------------------------------ NOTA */
 
 .nota {
-  border: 1px solid rgba(169, 119, 42, .35); background: var(--emas-lembut);
+  border: 1px solid rgba(163, 118, 44, .35); background: var(--emas-lembut);
   border-radius: var(--lengkung-s); padding: var(--r3) var(--r4);
-  font-size: .88rem; color: #6a4e14; line-height: 1.6; text-align: left;
+  font-size: .88rem; color: #6b501a; line-height: 1.6; text-align: left;
 }
-.nota strong { color: #4b370a; }
+.nota strong { color: #4c390c; }
 
 /* ------------------------------------------------------------ KAKI */
 
@@ -694,7 +696,7 @@ table.jad td { color: var(--arang); font-weight: 600; line-height: 1.5; }
 .kaki p { font-size: .85rem; color: var(--kelabu); }
 .kaki-nav { display: flex; flex-wrap: wrap; gap: 8px var(--r4); }
 .kaki-nav a { font-size: .85rem; color: var(--kelabu); font-weight: 600; }
-.kaki-nav a:hover { color: var(--merah); }
+.kaki-nav a:hover { color: var(--biru); }
 
 /* ------------------------------------------------------------ CETAK */
 
