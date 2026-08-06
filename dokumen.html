@@ -27,7 +27,7 @@
 <link rel="preload" href="assets/fon/plus-jakarta-sans-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fon/source-serif-4-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/fon.css?v=a8a9a3f5">
-<link rel="stylesheet" href="assets/gaya.css?v=1e4afc04">
+<link rel="stylesheet" href="assets/gaya.css?v=61b4c49c">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2314427a'/%3E%3Ctext x='16' y='22' font-family='system-ui,sans-serif' font-size='14' font-weight='800' fill='white' text-anchor='middle'%3EMH%3C/text%3E%3C/svg%3E">
 </head>
 <body>
@@ -62,7 +62,7 @@
 <section class="laman-kepala">
   <div class="balut">
     <span class="lencana">Arkib</span>
-    <h1>Arkib dokumen</h1>
+    <h1>Arkib Dokumen</h1>
     <p class="pengenalan">Kesemua 17 fail PDF yang dikemukakan bersama permohonan ini. Klik mana-mana kulit untuk membacanya tanpa meninggalkan laman.</p>
     <div class="kepala-sorotan">
       <div>
@@ -85,14 +85,14 @@
   <div class="balut">
     <div class="sek-kepala">
         <span class="label label-aksen">Urutan bacaan</span>
-        <h2>Disyorkan untuk panel</h2>
+        <h2>Disyorkan untuk Panel</h2>
         <p class="pengenalan">Enam langkah, daripada gambaran keseluruhan kepada dokumen sokongan penuh.</p>
       </div>
     <ol class="senarai-nombor mb-7">
       <li><strong>Ringkasan calon</strong><span>Resume, kelayakan dan lantikan dalam tiga halaman.</span><span class="mt-2"><button type="button" class="kad-pautan" data-dok="1VIUTVQUc0FPMR6kgEpsANfiZVNhFDD5u" data-dok-tajuk="Resume Calon" data-dok-sub="Pengenalan · 3 halaman">Buka dokumen</button></span></li>
       <li><strong>Kompetensi & prestasi</strong><span>Skor pencerapan PdP 2026 oleh empat pencerap, dan LNPT tiga tahun.</span><span class="mt-2"><button type="button" class="kad-pautan" data-dok="1hleS1TNpv1ZFaRXJtyZ5c93-faAKEJJr" data-dok-tajuk="Lembaran Kompetensi &amp; Dokumentasi" data-dok-sub="Bahagian 1.0 · 26 halaman">Buka dokumen</button></span></li>
       <li><strong>Impak PdP & kajian tindakan</strong><span>Kajian Google Gemini dan pengintegrasian Canva, berserta hasilnya.</span><span class="mt-2"><a class="kad-pautan" href="kepakaran.html#kajian">Buka bahagian</a></span></li>
-      <li><strong>Kemenjadian murid</strong><span>Enam belas kisah, boleh ditapis mengikut jenis impak.</span><span class="mt-2"><a class="kad-pautan" href="kemenjadian.html">Buka bahagian</a></span></li>
+      <li><strong>Kemenjadian Murid</strong><span>Enam belas kisah, boleh ditapis mengikut jenis impak.</span><span class="mt-2"><a class="kad-pautan" href="kemenjadian.html">Buka bahagian</a></span></li>
       <li><strong>Lantikan & sumbangan</strong><span>Lapan faktor WAU dan sumbangan merentas lima peringkat.</span><span class="mt-2"><a class="kad-pautan" href="wau.html">Buka bahagian</a></span></li>
       <li><strong>Dokumen sokongan penuh</strong><span>Sijil, surat penghargaan dan evidens setiap peringkat — 64 halaman.</span><span class="mt-2"><button type="button" class="kad-pautan" data-dok="1XIg-BYdbL8IALvrHpEiKhe49Xv0WIgtV" data-dok-tajuk="Sijil, Surat Penghargaan &amp; Dokumen Sokongan" data-dok-sub="Bahagian 1.11 · 64 halaman">Buka dokumen</button></span></li>
     </ol>
@@ -290,7 +290,7 @@
   <div class="balut">
     <div class="hubungi">
       <span class="lencana">Sumber asal</span>
-      <h2>Folder dokumen di Google Drive</h2>
+      <h2>Folder Dokumen di Google Drive</h2>
       <p>Setiap dokumen dalam laman ini dipaparkan terus daripada folder Drive asal, tanpa salinan berasingan. Sebarang kemas kini pada fail Drive akan terus terpapar di sini.</p>
       <div class="btn-baris">
         <a class="btn btn-utama" href="https://drive.google.com/drive/folders/1nGl9KcVwGUeID0KKAerAKqCRIoXrXb9N" target="_blank" rel="noopener">Buka folder di Drive</a>
@@ -334,6 +334,19 @@
   </div>
 </div>
 
-<script src="assets/laman.js?v=12b130d9"></script>
+<div class="lightbox" id="pemapar-imej" role="dialog" aria-modal="true" aria-label="Pemapar imej evidens">
+  <div class="lb-atas">
+    <span class="lb-kira" data-lb-kira></span>
+    <span class="lb-tajuk" data-lb-tajuk></span>
+    <button type="button" class="lb-btn lb-tutup" data-lb-tutup>Tutup</button>
+  </div>
+  <div class="lb-badan"><img data-lb-imej src="" alt=""></div>
+  <div class="lb-bawah">
+    <button type="button" class="lb-btn" data-lb-undur>&larr; Sebelum</button>
+    <button type="button" class="lb-btn" data-lb-maju>Seterusnya &rarr;</button>
+  </div>
+</div>
+
+<script src="assets/laman.js?v=325a32d6"></script>
 </body>
 </html>

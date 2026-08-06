@@ -133,6 +133,71 @@
     });
   });
 
+  /* --------------------------------------------------------- Pemapar imej evidens */
+
+  var lb = document.getElementById('pemapar-imej');
+  if (lb) {
+    var lbImej = lb.querySelector('[data-lb-imej]');
+    var lbTajuk = lb.querySelector('[data-lb-tajuk]');
+    var lbKira = lb.querySelector('[data-lb-kira]');
+    var lbUndur = lb.querySelector('[data-lb-undur]');
+    var lbMaju = lb.querySelector('[data-lb-maju]');
+    var set = [];
+    var kini = 0;
+    var pembukaImej = null;
+
+    function lukisLb() {
+      var x = set[kini];
+      lbImej.src = x.getAttribute('data-imej');
+      lbImej.alt = x.getAttribute('data-kapsyen') || 'Halaman evidens';
+      lbTajuk.textContent = x.getAttribute('data-kapsyen') || '';
+      lbKira.textContent = (kini + 1) + ' / ' + set.length;
+      lbUndur.disabled = kini === 0;
+      lbMaju.disabled = kini === set.length - 1;
+    }
+
+    function bukaLb(item) {
+      var galeri = item.closest('[data-galeri]');
+      set = Array.prototype.slice.call(galeri.querySelectorAll('.galeri-item'));
+      kini = set.indexOf(item);
+      pembukaImej = item;
+      lukisLb();
+      lb.classList.add('buka');
+      document.body.style.overflow = 'hidden';
+      lb.querySelector('[data-lb-tutup]').focus();
+    }
+
+    function tutupLb() {
+      lb.classList.remove('buka');
+      lbImej.src = '';
+      document.body.style.overflow = '';
+      if (pembukaImej) { pembukaImej.focus(); pembukaImej = null; }
+    }
+
+    function alih(arah) {
+      var baharu = kini + arah;
+      if (baharu < 0 || baharu >= set.length) return;
+      kini = baharu;
+      lukisLb();
+    }
+
+    document.addEventListener('click', function (e) {
+      var item = e.target.closest('.galeri-item');
+      if (item) { bukaLb(item); return; }
+      if (!lb.classList.contains('buka')) return;
+      if (e.target.closest('[data-lb-tutup]') || e.target === lb) tutupLb();
+      else if (e.target.closest('[data-lb-undur]')) alih(-1);
+      else if (e.target.closest('[data-lb-maju]')) alih(1);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (!lb.classList.contains('buka')) return;
+      if (e.key === 'Escape') tutupLb();
+      else if (e.key === 'ArrowLeft') alih(-1);
+      else if (e.key === 'ArrowRight') alih(1);
+    });
+  }
+
   /* ------------------------------------------------------------ Pemapar dokumen */
 
   var modal = document.getElementById('pemapar');

@@ -150,3 +150,32 @@ Tanpa ini pelayar akan terus menghidangkan gaya lama selepas deploy.
   laman tidak diindeks oleh enjin carian. Buang jika mahu laman boleh dicari.
 - Tiada CDN, tiada fon luar, tiada penjejak. Sesuai untuk hos statik mana-mana.
 - Boleh dicetak — gaya cetak disertakan (`@media print`).
+
+## Menutup halaman evidens tertentu
+
+Galeri evidens memaparkan halaman portfolio yang dirender daripada PDF. Sebahagian
+halaman mengandungi data peribadi pihak ketiga — contohnya halaman 4 set
+`kemenjadian` memaparkan nama penuh dan nombor kad pengenalan seorang murid dalam
+surat tawaran yang ditampal ke halaman itu.
+
+Untuk menutupnya, edit objek `KECUALI` dalam `bina.mjs`:
+
+```js
+const KECUALI = {
+  kemenjadian: [4],        // nombor seperti pada kapsyen "Hlm. 4"
+  sijil: [12, 30],
+};
+```
+
+Kemudian:
+
+```bash
+node bina.mjs && npx vercel@latest deploy --prod --yes
+```
+
+Halaman itu hilang daripada galeri serta-merta. Fail imejnya kekal dalam
+`assets/eviden/` tetapi tidak lagi dipaut dari mana-mana halaman.
+
+**Nota:** halaman yang sama masih boleh dicapai melalui PDF asal di folder Google
+Drive yang dipaut dari laman. Untuk menutupnya sepenuhnya, fail PDF di Drive
+perlu diganti dengan versi yang telah ditapis.

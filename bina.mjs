@@ -221,6 +221,77 @@ function kepalaLaman(label, tajuk, pengenalan, sorotan = []) {
 </section>`;
 }
 
+
+/* ------------------------------------------------------- GALERI EVIDENS */
+
+/* Halaman portfolio yang dirender daripada PDF. Manifes dijana oleh
+   skrip jana-eviden.mjs; kapsyen datang daripada lapisan teks PDF. */
+const EVIDEN = JSON.parse(readFileSync(join(AKAR, 'eviden.json'), 'utf8'));
+
+/* Singkatan yang mesti kekal huruf besar apabila kapsyen dikemaskan */
+const SINGKATAN = new Set(['KPM', 'SK', 'SKAS', 'PDP', 'PDPC', 'TKRS', 'HIP', 'HIPMAX', 'ISBN',
+  'DBP', 'IPG', 'IPGM', 'MRSM', 'UASA', 'PBD', 'MOBIM', 'CEFR', 'AI', 'QR', 'ASEAN', 'SEAMEO',
+  'UPSI', 'NILAM', 'JPN', 'PPD', 'TESL', 'EXCO', 'AJK', 'PSS', 'MADANI', 'PIBG', 'SISC', 'LNPT',
+  'PPPM', 'KSSR', 'KSSM', 'KSPK', 'MBMMBI', 'TOT', 'PPPS', 'DG12', 'TP1', 'TP2', 'MMI', 'UCMI',
+  'ATM', 'PAJSK', 'NADI', 'BPK', 'PBL', 'GEN-AI', 'T.O.T', 'DIDIKTV', 'MY', 'JOURNEY']);
+const KECIL = new Set(['dan', 'atau', 'di', 'ke', 'dari', 'daripada', 'untuk', 'yang', 'pada',
+  'dalam', 'bagi', 'serta', 'kepada', 'sebagai', 'oleh', 'ini', 'itu', 'the', 'of', 'in', 'a']);
+
+/**
+ * Kapsyen dalam PDF ditulis HURUF BESAR SEMUA. Tukar kepada huruf biasa
+ * supaya ia boleh dibaca, sambil mengekalkan singkatan dan nama khas.
+ */
+function kemasKapsyen(teks) {
+  if (!teks) return '';
+  const perkataan = teks.split(/\s+/);
+  return perkataan.map((w, i) => {
+    const bersih = w.replace(/[^\wÀ-ÿ.-]/g, '').toUpperCase();
+    if (SINGKATAN.has(bersih)) return w.toUpperCase() === w ? w : w.toUpperCase();
+    const rendah = w.toLowerCase();
+    if (i > 0 && KECIL.has(rendah.replace(/[^a-z]/g, ''))) return rendah;
+    return rendah.replace(/(^|[('"\u201c-])([a-zà-ÿ])/g, (_, a, b) => a + b.toUpperCase());
+  }).join(' ');
+}
+
+/**
+ * Halaman yang TIDAK mahu diterbitkan ke laman awam.
+ *
+ * Format: 'slug': [nombor halaman]  — nombor seperti yang dipaparkan pada
+ * kapsyen galeri ("Hlm. 4"), bukan nama fail.
+ *
+ * Guna ini untuk menutup halaman yang mengandungi data peribadi pihak
+ * ketiga. Contoh: halaman 4 set kemenjadian memaparkan nama penuh dan
+ * nombor kad pengenalan seorang murid dalam surat tawaran yang ditampal.
+ * Tambah nombornya di sini, jalankan `node bina.mjs`, dan halaman itu
+ * hilang daripada galeri serta-merta. Fail imejnya kekal di cakera tetapi
+ * tidak lagi dipaut dari mana-mana halaman.
+ *
+ *   kemenjadian: [4],
+ */
+const KECUALI = {
+  // kemenjadian: [4],
+};
+
+/**
+ * Galeri halaman evidens. Setiap imej membuka pemapar penuh.
+ * `had` mengehadkan bilangan yang dipaparkan (0 = semua).
+ */
+function galeri(slug, had = 0) {
+  const buang = new Set(KECUALI[slug] || []);
+  let senarai = EVIDEN[slug].filter((_, i) => !buang.has(i + 1));
+  if (buang.size) console.log(`  · galeri ${slug}: ${buang.size} halaman dikecualikan (${[...buang].join(', ')})`);
+  senarai = had ? senarai.slice(0, had) : senarai;
+  return `<div class="galeri" data-galeri="${slug}">
+      ${senarai.map((x, i) => {
+        const k = kemasKapsyen(x.k);
+        return `<button type="button" class="galeri-item" data-imej="assets/eviden/${slug}/${x.f}" data-indeks="${i}" data-kapsyen="${esc(k)}">
+        <span class="galeri-imej"><img src="assets/eviden/${slug}/${x.f}" alt="${esc(k || 'Halaman evidens')}" loading="lazy" width="900" height="1273" decoding="async"></span>
+        <span class="galeri-kapsyen"><b>Hlm. ${i + 1}</b>${esc(k || 'Halaman evidens')}</span>
+      </button>`;
+      }).join('\n      ')}
+    </div>`;
+}
+
 /* ---------------------------------------------------------------- SUSUNAN */
 
 function susunan({ fail, tajuk, huraian, badan }) {
@@ -312,6 +383,19 @@ ${badan}
   </div>
 </div>
 
+<div class="lightbox" id="pemapar-imej" role="dialog" aria-modal="true" aria-label="Pemapar imej evidens">
+  <div class="lb-atas">
+    <span class="lb-kira" data-lb-kira></span>
+    <span class="lb-tajuk" data-lb-tajuk></span>
+    <button type="button" class="lb-btn lb-tutup" data-lb-tutup>Tutup</button>
+  </div>
+  <div class="lb-badan"><img data-lb-imej src="" alt=""></div>
+  <div class="lb-bawah">
+    <button type="button" class="lb-btn" data-lb-undur>&larr; Sebelum</button>
+    <button type="button" class="lb-btn" data-lb-maju>Seterusnya &rarr;</button>
+  </div>
+</div>
+
 <script src="assets/laman.js?v=${V.laman}"></script>
 </body>
 </html>
@@ -332,7 +416,7 @@ const STATISTIK = [
 /* Tiga impak utama. Setiap kad: satu hasil, satu contoh, satu pautan evidens. */
 const IMPAK = [
   {
-    label: 'Impak terhadap murid',
+    label: 'Impak terhadap Murid',
     tajuk: 'Daripada 21 kepada 36 penghantaran tepat masa',
     hasil: 'Apabila tugasan projek Tahun 4 beralih daripada buku skrap fizikal kepada Canva dan Google Classroom, kesemua <strong>36 murid</strong> menghantar dalam tempoh ditetapkan — berbanding 21 sebelum itu.',
     contoh: 'Johan English Sketch dan Poetry Recitation peringkat negeri Selangor; dua Anugerah Emas Show and Tell peringkat kebangsaan.',
@@ -340,7 +424,7 @@ const IMPAK = [
     labelPautan: 'Lihat 16 kisah kemenjadian',
   },
   {
-    label: 'Kepimpinan pedagogi',
+    label: 'Kepimpinan Pedagogi',
     tajuk: 'Empat lantikan jurulatih utama',
     hasil: 'Termasuk <strong>Jurulatih Utama Kebangsaan Kajian Tindakan Berasaskan AI</strong> (2026) dan Master Trainer CEFR sejak 2016 — mandat melatih guru, bukan sekadar mengajar murid.',
     contoh: 'Panel penulis dua modul di Bahagian Pembangunan Kurikulum; tiga buku cerita Bahasa Inggeris berdaftar ISBN.',
@@ -348,7 +432,7 @@ const IMPAK = [
     labelPautan: 'Lihat penulisan &amp; kepakaran',
   },
   {
-    label: 'Inovasi &amp; jangkauan',
+    label: 'Inovasi &amp; Jangkauan',
     tajuk: 'Dua pengiktirafan kebangsaan bagi kajian AI',
     hasil: '<strong>Best Innovation Gold Award</strong> dan <strong>Bronze</strong> Pertandingan Kajian Tindakan (Terbuka) peringkat kebangsaan, kedua-duanya bagi kajian penggunaan Google Gemini dalam penulisan Bahasa Inggeris.',
     contoh: 'Lebih 20 episod DidikTV KPM; 20+ set permainan tatabahasa Blooket dikongsi percuma kepada guru.',
@@ -360,9 +444,9 @@ const IMPAK = [
 /* Tiga laluan pantas, menggantikan senarai lapan bahagian yang hanya
    mengulang navigasi di bahagian atas laman. */
 const LALUAN = [
-  ['Nilai profil &amp; kelayakan', 'Butiran asas, kelayakan akademik, lantikan dan dokumen rasmi Bahagian 1.0–1.11.', 'profil.html'],
-  ['Nilai impak PdP &amp; kemenjadian', 'Enam belas kisah kemenjadian murid, boleh ditapis mengikut pertandingan, bimbingan atau bekas murid.', 'kemenjadian.html'],
-  ['Semak evidens &amp; dokumen rasmi', 'Kesemua 17 fail PDF, 299 halaman, dipaparkan terus daripada folder Drive asal.', 'dokumen.html'],
+  ['Nilai Profil &amp; Kelayakan', 'Butiran asas, kelayakan akademik, lantikan dan dokumen rasmi Bahagian 1.0–1.11.', 'profil.html'],
+  ['Nilai Impak PdP &amp; Kemenjadian', 'Enam belas kisah kemenjadian murid, boleh ditapis mengikut pertandingan, bimbingan atau bekas murid.', 'kemenjadian.html'],
+  ['Semak Evidens &amp; Dokumen Rasmi', 'Kesemua 17 fail PDF, 299 halaman, dipaparkan terus daripada folder Drive asal.', 'dokumen.html'],
 ];
 
 
@@ -405,7 +489,7 @@ function halamanUtama() {
   <div class="balut">
     ${kepalaSek({
       label: 'Impak',
-      tajuk: 'Tiga impak utama',
+      tajuk: 'Tiga Impak Utama',
       pengenalan: 'Setiap kad menyatakan satu hasil, satu contoh, dan pautan terus kepada evidensnya.',
     })}
     <div class="grid grid-3">
@@ -425,7 +509,7 @@ function halamanUtama() {
     <div class="belah">
       <div>
         <span class="label label-aksen mb-3">Laluan pantas</span>
-        <h2>Tiga laluan untuk panel</h2>
+        <h2>Tiga Laluan untuk Panel</h2>
         <div class="grid tumpuk mt-5">
           ${LALUAN.map(([tajuk, teks, pautan]) => kad({
             tajuk, teks, pautan, padat: true, kaki: '<span class="kad-pautan">Buka bahagian</span>',
@@ -491,7 +575,7 @@ const PENDIDIKAN = [
 
 function halamanProfil() {
   const badan = `
-${kepalaLaman('Bahagian 1.0 · Dokumentasi', 'Profil & kelayakan',
+${kepalaLaman('Bahagian 1.0 · Dokumentasi', 'Profil & Kelayakan',
     'Maklumat asas calon, latar pendidikan, skor pencerapan PdP dan kesemua dokumen rasmi yang disertakan dalam Bahagian 1.0 hingga 1.11 portfolio.',
     [
       ['~14', 'tahun', 'Perkhidmatan pendidikan sejak 2012, bermula di SK Layon, Nabawan, Sabah'],
@@ -504,7 +588,7 @@ ${kepalaLaman('Bahagian 1.0 · Dokumentasi', 'Profil & kelayakan',
     <div class="belah">
       <div>
         <span class="label label-aksen mb-3">Maklumat calon</span>
-        <h2>Butiran asas</h2>
+        <h2>Butiran Asas</h2>
         <div class="jad-balut mt-4">
           <table class="jad">
             <tbody>
@@ -523,7 +607,7 @@ ${kepalaLaman('Bahagian 1.0 · Dokumentasi', 'Profil & kelayakan',
       </div>
       <div>
         <span class="label label-aksen mb-3">Peranan &amp; lantikan</span>
-        <h2>Profil profesional</h2>
+        <h2>Profil Profesional</h2>
         <ul class="senarai-tanda mt-4">
           ${LANTIKAN.map(([n, t]) => `<li><strong>${n}</strong> — ${t}</li>`).join('\n          ')}
         </ul>
@@ -538,7 +622,7 @@ ${kepalaLaman('Bahagian 1.0 · Dokumentasi', 'Profil & kelayakan',
 
 <section class="sek sek-kelabu">
   <div class="balut">
-    ${kepalaSek({ label: 'Latar pendidikan', tajuk: 'Kelayakan akademik' })}
+    ${kepalaSek({ label: 'Latar pendidikan', tajuk: 'Kelayakan Akademik' })}
     <div class="belah">
       <div class="masa">
         ${PENDIDIKAN.map(([thn, t, inst]) => `<div class="masa-item">
@@ -566,7 +650,7 @@ ${kepalaLaman('Bahagian 1.0 · Dokumentasi', 'Profil & kelayakan',
   <div class="balut">
     ${kepalaSek({
       label: 'Bahagian 1.0 – 1.11',
-      tajuk: 'Dokumen rasmi yang disertakan',
+      tajuk: 'Dokumen Rasmi yang Disertakan',
       pengenalan: 'Sembilan fail dokumentasi rasmi. Klik mana-mana kulit untuk membacanya dalam laman ini.',
     })}
     <div class="dok-grid">
@@ -628,7 +712,7 @@ const INOVASI_KONGSI = [
 
 function halamanKepakaran() {
   const badan = `
-${kepalaLaman('Bahagian 2.0 · 3.0 · 5.0', 'Kepakaran & inovasi',
+${kepalaLaman('Bahagian 2.0 · 3.0 · 5.0', 'Kepakaran & Inovasi',
     'Penulisan profesional dan buku berdaftar ISBN, kajian tindakan berasaskan AI, inovasi pengintegrasian digital dalam bilik darjah, serta program dan latihan yang dihadiri.',
     [
       ['Gold', 'award', 'Best Innovation Gold Award bagi kajian penulisan karangan menerusi Google Gemini'],
@@ -640,7 +724,7 @@ ${kepalaLaman('Bahagian 2.0 · 3.0 · 5.0', 'Kepakaran & inovasi',
   <div class="balut">
     ${kepalaSek({
       label: 'Bahagian 3.0',
-      tajuk: 'Kajian, kertas kerja &amp; penulisan profesional',
+      tajuk: 'Kajian, Kertas Kerja &amp; Penulisan Profesional',
       pengenalan: 'Sembilan evidens penulisan — buku cerita, modul kurikulum, modul intervensi, abstrak kajian tindakan dan artikel majalah.',
     })}
     <div class="belah">
@@ -656,6 +740,7 @@ ${kepalaLaman('Bahagian 2.0 · 3.0 · 5.0', 'Kepakaran & inovasi',
         ${kadDokBaris('kajian', 'Sembilan evidens penulisan profesional, termasuk muka hadapan dan belakang setiap buku.')}
       </div>
     </div>
+    <div class="mt-7">${galeri('kajian')}</div>
   </div>
 </section>
 
@@ -663,7 +748,7 @@ ${kepalaLaman('Bahagian 2.0 · 3.0 · 5.0', 'Kepakaran & inovasi',
   <div class="balut">
     ${kepalaSek({
       label: 'Kajian tindakan',
-      tajuk: 'Tiga kajian tindakan berasaskan aplikasi AI',
+      tajuk: 'Tiga Kajian Tindakan Berasaskan Aplikasi AI',
       pengenalan: 'Kajian dijalankan dalam bilik darjah sendiri di SK Abdul Samat, dengan data ujian pra dan pasca serta maklum balas murid.',
     })}
     <div class="grid grid-2">
@@ -697,12 +782,13 @@ ${kepalaLaman('Bahagian 2.0 · 3.0 · 5.0', 'Kepakaran & inovasi',
   <div class="balut">
     ${kepalaSek({
       label: 'Bahagian 5.0',
-      tajuk: 'Inovasi berkaitan mata pelajaran &amp; bidang kepakaran',
+      tajuk: 'Inovasi Berkaitan Mata Pelajaran &amp; Bidang Kepakaran',
       pengenalan: 'Lima evidens inovasi — daripada amalan bilik darjah sendiri hinggalah perkongsian bahan secara terbuka kepada komuniti guru.',
     })}
     <div class="grid grid-3">
       ${INOVASI_KONGSI.map(([p, k]) => kad({ label: 'Platform perkongsian', tajuk: p, teks: k })).join('\n      ')}
     </div>
+    <div class="mt-7">${galeri('inovasi')}</div>
     <div class="btn-baris mt-5">${pautanEvidens('inovasi', 'Buka Bahagian 5.0 — Inovasi')}</div>
   </div>
 </section>
@@ -711,7 +797,7 @@ ${kepalaLaman('Bahagian 2.0 · 3.0 · 5.0', 'Kepakaran & inovasi',
   <div class="balut">
     ${kepalaSek({
       label: 'Bahagian 2.0',
-      tajuk: 'Program &amp; latihan yang dihadiri',
+      tajuk: 'Program &amp; Latihan yang Dihadiri',
       pengenalan: 'Sepuluh evidens program dan latihan, merentas peringkat antarabangsa, kebangsaan, negeri dan daerah.',
     })}
     <div class="belah">
@@ -720,6 +806,7 @@ ${kepalaLaman('Bahagian 2.0 · 3.0 · 5.0', 'Kepakaran & inovasi',
       </ol>
       <div class="lekat">${kadDokBaris('program', 'Sijil, surat dan gambar bagi kesepuluh program.')}</div>
     </div>
+    <div class="mt-7">${galeri('program')}</div>
   </div>
 </section>
 `;
@@ -798,7 +885,7 @@ const WAU = [
     ],
   },
   {
-    no: '6.7', tajuk: 'Kemenjadian murid', dok: 'kemenjadian',
+    no: '6.7', tajuk: 'Kemenjadian Murid', dok: 'kemenjadian',
     teks: 'Enam belas kisah kemenjadian murid, daripada johan peringkat negeri hinggalah bekas murid yang kini menjadi guru pelatih dan pelajar seni lakon.',
     butir: [
       'Johan English Sketch dan Poetry Recitation peringkat negeri Selangor',
@@ -823,7 +910,7 @@ const PERINGKAT_SOKONGAN = [
 
 function halamanWau() {
   const badan = `
-${kepalaLaman('Bahagian 4.0 · 6.0', 'Faktor WAU & anugerah',
+${kepalaLaman('Bahagian 4.0 · 6.0', 'Faktor WAU & Anugerah',
     'Lapan faktor WAU yang merangkumkan sumbangan di luar bilik darjah — dan dua anugerah kecemerlangan terkini di peringkat kebangsaan.',
     [
       ['20+', 'episod', 'Penyampai DidikTV KPM sepanjang 2022 hingga 2025'],
@@ -855,7 +942,7 @@ ${kepalaLaman('Bahagian 4.0 · 6.0', 'Faktor WAU & anugerah',
   <div class="balut">
     ${kepalaSek({
       label: 'Bahagian 4.0',
-      tajuk: 'Anugerah kecemerlangan &amp; pengiktirafan terkini',
+      tajuk: 'Anugerah Kecemerlangan &amp; Pengiktirafan Terkini',
       pengenalan: 'Lima evidens anugerah, termasuk dua pencapaian dalam pertandingan kajian tindakan peringkat kebangsaan.',
     })}
     <div class="grid grid-2">
@@ -872,12 +959,13 @@ ${kepalaLaman('Bahagian 4.0 · 6.0', 'Faktor WAU & anugerah',
         kaki: pautanEvidens('anugerah'),
       })}
     </div>
+    <div class="mt-7">${galeri('anugerah')}</div>
   </div>
 </section>
 
 <section class="sek">
   <div class="balut">
-    ${kepalaSek({ label: 'Bahagian 6.0', tajuk: 'Lapan faktor WAU' })}
+    ${kepalaSek({ label: 'Bahagian 6.0', tajuk: 'Lapan Faktor WAU' })}
     <div class="grid grid-2">
       ${WAU.map((w) => kad({
         label: `Faktor ${w.no}`,
@@ -896,13 +984,35 @@ ${kepalaLaman('Bahagian 4.0 · 6.0', 'Faktor WAU & anugerah',
   <div class="balut">
     ${kepalaSek({
       label: 'Bahagian 1.11',
-      tajuk: 'Sumbangan merentas lima peringkat',
+      tajuk: 'Sumbangan Merentas Lima Peringkat',
       pengenalan: 'Fail sokongan 64 halaman disusun mengikut peringkat, dengan sepuluh evidens bagi setiap peringkat kebangsaan, negeri, daerah dan institusi.',
     })}
     <div class="grid tumpuk">
       ${PERINGKAT_SOKONGAN.map(([p, k]) => kad({ label: 'Peringkat', tajuk: p, teks: k, padat: true })).join('\n      ')}
     </div>
     <div class="btn-baris mt-5">${pautanEvidens('sijil', 'Buka fail sokongan (64 hlm.)')}</div>
+  </div>
+</section>
+
+<section class="sek">
+  <div class="balut">
+    ${kepalaSek({
+      label: 'Evidens bergambar',
+      tajuk: 'Enam Puluh Sembilan Halaman Faktor WAU',
+      pengenalan: 'Sijil Edufluencer, surat pelantikan pengacara ASEAN dan SEAMEO, rakaman DidikTV, kulit buku dan sesi panel.',
+    })}
+    ${galeri('wau')}
+  </div>
+</section>
+
+<section class="sek sek-kelabu">
+  <div class="balut">
+    ${kepalaSek({
+      label: 'Evidens bergambar',
+      tajuk: 'Sijil, Surat Penghargaan & Dokumen Sokongan',
+      pengenalan: 'Enam puluh empat halaman evidens, disusun daripada peringkat antarabangsa hingga institusi.',
+    })}
+    ${galeri('sijil')}
   </div>
 </section>
 `;
@@ -948,7 +1058,7 @@ const TAPIS = [
 
 function halamanKemenjadian() {
   const badan = `
-${kepalaLaman('Bahagian 6.7', 'Kemenjadian murid',
+${kepalaLaman('Bahagian 6.7', 'Kemenjadian Murid',
     'Enam belas kisah kemenjadian yang direkodkan dalam portfolio — pencapaian pertandingan, bimbingan individu, dan bekas murid yang kini meneruskan jejak dalam pendidikan dan seni.',
     [
       ['2', 'johan', 'Johan peringkat negeri Selangor — English Sketch 2022 dan Poetry Recitation 2023'],
@@ -958,7 +1068,7 @@ ${kepalaLaman('Bahagian 6.7', 'Kemenjadian murid',
 
 <section class="sek">
   <div class="balut">
-    <h2 class="tajuk-tersembunyi">Suara bekas anak didik</h2>
+    <h2 class="tajuk-tersembunyi">Suara Bekas Anak Didik</h2>
     <div class="belah mb-7">
       <blockquote class="petikan petikan-tengah">
         <p>“Kemenjadian Murid tetap menjadi keutamaan. Ia bukan slogan, tetapi doa yang dijelmakan dalam tindakan dan pencapaian.”</p>
@@ -974,7 +1084,7 @@ ${kepalaLaman('Bahagian 6.7', 'Kemenjadian murid',
 
     ${kepalaSek({
       label: 'Bahagian 6.7',
-      tajuk: 'Enam belas kisah kemenjadian',
+      tajuk: 'Enam Belas Kisah Kemenjadian',
       pengenalan: 'Tapis mengikut jenis impak. Satu kisah boleh tergolong dalam lebih daripada satu kategori.',
     })}
     <!-- Bar penapis. Disembunyikan secara lalai dan didedahkan oleh JS,
@@ -993,6 +1103,17 @@ ${kepalaLaman('Bahagian 6.7', 'Kemenjadian murid',
         return k.replace('<div class="kad"', `<div class="kad" data-kategori="${kategori.join(' ')}"`);
       }).join('\n      ')}
     </div>
+  </div>
+</section>
+
+<section class="sek sek-kelabu">
+  <div class="balut">
+    ${kepalaSek({
+      label: 'Evidens bergambar',
+      tajuk: 'Dua Puluh Empat Halaman Evidens',
+      pengenalan: 'Halaman sebenar daripada portfolio bercetak — gambar pertandingan, sijil dan murid. Klik untuk melihat penuh.',
+    })}
+    ${galeri('kemenjadian')}
   </div>
 </section>
 `;
@@ -1029,7 +1150,7 @@ const TESTIMONI_TULIS = [
 
 function halamanTestimoni() {
   const badan = `
-${kepalaLaman('Bahagian 7.0 · 8.0', 'Testimoni & penghargaan',
+${kepalaLaman('Bahagian 7.0 · 8.0', 'Testimoni & Penghargaan',
     'Sebuah video testimoni yang menghimpunkan sepuluh suara — pentadbir, rakan guru, kakitangan sekolah, pengurusan DidikTV KPM dan wakil ibu bapa — serta lima testimoni bertulis.',
     [
       ['10', 'suara', 'Dalam satu video khas, daripada Guru Besar hinggalah pengawal keselamatan sekolah'],
@@ -1041,7 +1162,7 @@ ${kepalaLaman('Bahagian 7.0 · 8.0', 'Testimoni & penghargaan',
   <div class="balut">
     ${kepalaSek({
       label: 'Bahagian 7.0',
-      tajuk: 'Video testimoni',
+      tajuk: 'Video Testimoni',
       pengenalan: 'Satu video khas merakamkan pandangan rakan pentadbir, guru, kakitangan sekolah dan ibu bapa terhadap calon.',
       tengah: true,
     })}
@@ -1061,7 +1182,7 @@ ${kepalaLaman('Bahagian 7.0 · 8.0', 'Testimoni & penghargaan',
 
 <section class="sek sek-kelabu">
   <div class="balut">
-    ${kepalaSek({ label: 'Testimoni bertulis', tajuk: 'Lima testimoni bertulis' })}
+    ${kepalaSek({ label: 'Testimoni bertulis', tajuk: 'Lima Testimoni Bertulis' })}
     <div class="belah">
       ${kad({
         label: 'Bahagian 7.0',
@@ -1071,12 +1192,13 @@ ${kepalaLaman('Bahagian 7.0 · 8.0', 'Testimoni & penghargaan',
       })}
       <div class="lekat">${kadDokBaris('testimoni', 'Senarai penuh pemberi testimoni, kod QR video khas dan salinan testimoni bertulis.')}</div>
     </div>
+    <div class="mt-7">${galeri('testimoni')}</div>
   </div>
 </section>
 
 <section class="sek">
   <div class="balut">
-    ${kepalaSek({ label: 'Bahagian 8.0', tajuk: 'Seuntai kata untuk dirasa' })}
+    ${kepalaSek({ label: 'Bahagian 8.0', tajuk: 'Seuntai Kata untuk Dirasa' })}
     <div class="belah">
       <div class="utama-teks">
         <p>Penghargaan dirakamkan kepada barisan pentadbir SK Abdul Samat yang diterajui oleh <strong>Encik Faridzul Azwan bin Mohd Kamarudin</strong>, serta rakan-rakan guru yang sentiasa memberi ruang, peluang dan kepercayaan untuk terus meneroka potensi diri dan menyumbang bakti dalam pelbagai lapangan di pelbagai peringkat.</p>
@@ -1112,7 +1234,7 @@ const BACAAN_PANEL = [
   ['Ringkasan calon', 'Resume, kelayakan dan lantikan dalam tiga halaman.', 'dok', 'resume'],
   ['Kompetensi & prestasi', 'Skor pencerapan PdP 2026 oleh empat pencerap, dan LNPT tiga tahun.', 'dok', 'kompetensi'],
   ['Impak PdP & kajian tindakan', 'Kajian Google Gemini dan pengintegrasian Canva, berserta hasilnya.', 'laman', 'kepakaran.html#kajian'],
-  ['Kemenjadian murid', 'Enam belas kisah, boleh ditapis mengikut jenis impak.', 'laman', 'kemenjadian.html'],
+  ['Kemenjadian Murid', 'Enam belas kisah, boleh ditapis mengikut jenis impak.', 'laman', 'kemenjadian.html'],
   ['Lantikan & sumbangan', 'Lapan faktor WAU dan sumbangan merentas lima peringkat.', 'laman', 'wau.html'],
   ['Dokumen sokongan penuh', 'Sijil, surat penghargaan dan evidens setiap peringkat — 64 halaman.', 'dok', 'sijil'],
 ];
@@ -1120,7 +1242,7 @@ const BACAAN_PANEL = [
 function halamanDokumen() {
   const jumlahHlm = Object.values(DOK).reduce((a, d) => a + d.hlm, 0);
   const badan = `
-${kepalaLaman('Arkib', 'Arkib dokumen',
+${kepalaLaman('Arkib', 'Arkib Dokumen',
     `Kesemua ${Object.keys(DOK).length} fail PDF yang dikemukakan bersama permohonan ini. Klik mana-mana kulit untuk membacanya tanpa meninggalkan laman.`,
     [
       [`${Object.keys(DOK).length}`, 'fail', 'Setiap fail dipaparkan terus daripada folder Drive asal, tanpa salinan berasingan'],
@@ -1132,7 +1254,7 @@ ${kepalaLaman('Arkib', 'Arkib dokumen',
   <div class="balut">
     ${kepalaSek({
       label: 'Urutan bacaan',
-      tajuk: 'Disyorkan untuk panel',
+      tajuk: 'Disyorkan untuk Panel',
       pengenalan: 'Enam langkah, daripada gambaran keseluruhan kepada dokumen sokongan penuh.',
     })}
     <ol class="senarai-nombor mb-7">
@@ -1186,7 +1308,7 @@ ${kepalaLaman('Arkib', 'Arkib dokumen',
   <div class="balut">
     <div class="hubungi">
       <span class="lencana">Sumber asal</span>
-      <h2>Folder dokumen di Google Drive</h2>
+      <h2>Folder Dokumen di Google Drive</h2>
       <p>Setiap dokumen dalam laman ini dipaparkan terus daripada folder Drive asal, tanpa salinan berasingan. Sebarang kemas kini pada fail Drive akan terus terpapar di sini.</p>
       <div class="btn-baris">
         <a class="btn btn-utama" href="https://drive.google.com/drive/folders/${CALON.folderDrive}" target="_blank" rel="noopener">Buka folder di Drive</a>
