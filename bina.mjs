@@ -647,7 +647,7 @@ ${kepalaLaman('Bahagian 2.0 · 3.0 · 5.0', 'Kepakaran, penulisan & inovasi',
       tajuk: 'Inovasi berkaitan mata pelajaran &amp; bidang kepakaran',
       pengenalan: 'Lima evidens inovasi — daripada amalan bilik darjah sendiri hinggalah perkongsian bahan secara terbuka kepada komuniti guru.',
     })}
-    <div class="grid grid-3">
+    <div class="grid grid-3 grid-rapat">
       ${INOVASI_KONGSI.map(([p, k]) => kad({ label: 'Platform perkongsian', tajuk: p, teks: k })).join('\n      ')}
     </div>
     <div class="btn-baris" style="margin-top:var(--r5)">${pautanEvidens('inovasi', 'Buka Bahagian 5.0 — Inovasi')}</div>
@@ -841,7 +841,7 @@ ${kepalaLaman('Bahagian 4.0 · 6.0', 'Faktor WAU & anugerah kecemerlangan',
       tajuk: 'Sumbangan merentas lima peringkat',
       pengenalan: 'Fail sokongan 64 halaman disusun mengikut peringkat, dengan sepuluh evidens bagi setiap peringkat kebangsaan, negeri, daerah dan institusi.',
     })}
-    <div class="grid" style="gap:var(--r3)">
+    <div class="grid grid-rapat" style="gap:var(--r3)">
       ${PERINGKAT_SOKONGAN.map(([p, k]) => kad({ label: 'Peringkat', tajuk: p, teks: k, padat: true })).join('\n      ')}
     </div>
     <div class="btn-baris" style="margin-top:var(--r5)">${pautanEvidens('sijil', 'Buka fail sokongan (64 hlm.)')}</div>
@@ -885,7 +885,7 @@ ${kepalaLaman('Bahagian 6.7', 'Kemenjadian murid',
 <section class="sek">
   <div class="balut">
     <div class="belah" style="margin-bottom:var(--r6)">
-      <blockquote class="petikan">
+      <blockquote class="petikan petikan-tengah">
         <p>“Kemenjadian Murid tetap menjadi keutamaan. Ia bukan slogan, tetapi doa yang dijelmakan dalam tindakan dan pencapaian.”</p>
         <footer>Faktor WAU · hlm. 206</footer>
       </blockquote>
@@ -896,9 +896,9 @@ ${kepalaLaman('Bahagian 6.7', 'Kemenjadian murid',
         kaki: pautanEvidens('kemenjadian', 'Buka Bahagian 6.7 (24 hlm.)'),
       })}
     </div>
-    <div class="grid grid-2">
-      ${KEMENJADIAN.map(([nama, peranan, teks], i) => kad({
-        label: `Kemenjadian ${String(i + 1).padStart(2, '0')} · ${peranan}`,
+    <div class="grid grid-2 grid-rapat">
+      ${KEMENJADIAN.map(([nama, peranan, teks]) => kad({
+        label: peranan,
         tajuk: nama,
         teks,
       })).join('\n      ')}

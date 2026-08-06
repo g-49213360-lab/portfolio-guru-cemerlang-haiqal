@@ -61,8 +61,14 @@ body {
   background: var(--kertas);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-variant-numeric: tabular-nums;
+  /* Angka berkadar (proportional) untuk teks berjalan. Angka lebar tetap
+     (tabular) hanya dipakai pada data — lihat .angka-data di bawah. */
+  font-variant-numeric: proportional-nums;
 }
+
+/* Angka lebar tetap: hanya untuk statistik, jadual dan kiraan halaman,
+   supaya lajur berbaris. Jangan gunakan pada ayat. */
+.stat-nilai, table.jad td, .dok-hlm, .senarai-nombor li::before { font-variant-numeric: tabular-nums; }
 
 img { max-width: 100%; height: auto; display: block; }
 
@@ -100,24 +106,30 @@ h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); }
 h3 { font-size: 1.08rem; }
 h4 { font-size: .96rem; }
 
-p { margin: 0 0 .9em; }
+/* text-wrap:pretty menghalang perkataan yatim di hujung perenggan —
+   tepi kanan menjadi lebih rata tanpa perlu justify penuh. */
+p, li, dd, figcaption { text-wrap: pretty; }
+
+p { margin: 0 0 .9em; max-width: 68ch; }
 p:last-child { margin-bottom: 0; }
 
 .utama-teks { font-size: 1.02rem; }
+.utama-teks p { max-width: 64ch; }
 .kecil { font-size: .9rem; }
 
-/* Label huruf besar — digunakan konsisten untuk semua meta */
+/* Label huruf besar. Sengaja dibuat senyap: nama atau tajuk di bawahnya
+   yang patut memimpin, bukan label. */
 .label {
   display: block;
-  font-size: .69rem;
-  font-weight: 800;
-  letter-spacing: .13em;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .09em;
   text-transform: uppercase;
   color: var(--kelabu-muda);
-  line-height: 1.4;
+  line-height: 1.45;
 }
-.label-merah { color: var(--merah); }
-.label-emas { color: var(--emas); }
+.label-merah { color: var(--merah); font-weight: 800; letter-spacing: .11em; }
+.label-emas { color: var(--emas); font-weight: 800; letter-spacing: .11em; }
 
 /* ------------------------------------------------------------ SUSUN ATUR */
 
@@ -354,8 +366,16 @@ p:last-child { margin-bottom: 0; }
 
 /* ------------------------------------------------------------ GRID */
 
+/* Kad meregang untuk berbaris HANYA apabila ia ada kaki (butang) untuk
+   dilekatkan ke bawah. Tanpa kaki, regangan cuma menghasilkan ruang
+   kosong — jadi .grid-rapat membiarkan kad memeluk kandungannya. */
 .grid { display: grid; gap: var(--r4); align-items: stretch; }
 .grid > * { min-width: 0; }
+/* align-items:start sahaja tidak cukup — height:100% pada kad diselesaikan
+   terhadap tinggi baris grid, jadi ia tetap meregang. Tinggi mesti
+   dikembalikan kepada auto. */
+.grid-rapat { align-items: start; }
+.grid-rapat > .kad { height: auto; }
 .grid-2 { grid-template-columns: repeat(2, 1fr); }
 .grid-3 { grid-template-columns: repeat(3, 1fr); }
 .grid-4 { grid-template-columns: repeat(4, 1fr); }
@@ -377,17 +397,24 @@ p:last-child { margin-bottom: 0; }
 .kad {
   display: flex; flex-direction: column; height: 100%;
   background: #fff; border: 1px solid var(--garis); border-radius: var(--lengkung);
-  padding: var(--r4); position: relative; isolation: isolate;
+  padding: var(--r4); position: relative; overflow: hidden;
   transition: box-shadow var(--tt), border-color var(--tt), transform var(--tt);
 }
-.kad::before {
-  content: ""; position: absolute; top: -1px; left: var(--r4);
-  width: 32px; height: 3px; border-radius: 0 0 2px 2px; background: var(--merah);
+
+/* Jalur aksen emas HANYA pada kad anugerah, melintang penuh di dalam
+   sempadan. Emas bermakna pencapaian — bukan hiasan pada setiap kad. */
+.kad-emas {
+  border-color: rgba(169, 119, 42, .3);
+  background: linear-gradient(#fdfaf4, #fff 120px);
 }
-.kad-emas::before { background: var(--emas-terang); }
-.kad-sunyi::before { display: none; }
+.kad-emas::before {
+  content: ""; position: absolute; inset: 0 0 auto 0; height: 3px;
+  background: linear-gradient(90deg, var(--emas), var(--emas-terang));
+}
+.kad-emas > .label { color: var(--emas); font-weight: 800; }
 
 .kad:hover { box-shadow: var(--bayang-2); border-color: #dcd6cd; transform: translateY(-2px); }
+.kad-emas:hover { border-color: rgba(169, 119, 42, .5); }
 a.kad, a.kad:hover { text-decoration: none; color: inherit; }
 
 .kad > .label { margin-bottom: var(--r2); }
@@ -464,21 +491,44 @@ a.kad, a.kad:hover { text-decoration: none; color: inherit; }
 
 /* ------------------------------------------------------------ JADUAL */
 
-.jad-balut { overflow-x: auto; border: 1px solid var(--garis); border-radius: var(--lengkung); background: #fff; }
-table.jad { width: 100%; border-collapse: collapse; font-size: .92rem; min-width: 440px; }
-table.jad th, table.jad td { text-align: left; padding: 13px 20px; border-bottom: 1px solid var(--garis-halus); vertical-align: top; }
+/* Helaian spesifikasi. Tiada latar pada lajur label — hanya garis rambut
+   antara baris, supaya nilai berbaris kemas dalam satu lajur. */
+.jad-balut { border: 1px solid var(--garis); border-radius: var(--lengkung); background: #fff; }
+table.jad { width: 100%; border-collapse: collapse; font-size: .93rem; table-layout: fixed; }
+table.jad th, table.jad td {
+  text-align: left; vertical-align: baseline;
+  padding: 14px var(--r4); border-bottom: 1px solid var(--garis-halus);
+}
 table.jad tr:last-child th, table.jad tr:last-child td { border-bottom: 0; }
-table.jad th { width: 38%; color: var(--kelabu); font-weight: 500; background: var(--kertas-2); }
-table.jad td { color: var(--arang); font-weight: 600; }
+table.jad th {
+  width: 40%; font-weight: 600; color: var(--kelabu-muda);
+  font-size: .77rem; letter-spacing: .05em; text-transform: uppercase;
+  padding-top: 16px;
+}
+table.jad td { color: var(--arang); font-weight: 600; line-height: 1.5; }
+
+/* Pada telefon, label di atas nilai — jauh lebih kemas daripada
+   memaksa jadual menyorong ke tepi. */
+@media (max-width: 560px) {
+  table.jad, table.jad tbody, table.jad tr, table.jad th, table.jad td { display: block; width: auto; }
+  table.jad tr { padding: 12px var(--r4); border-bottom: 1px solid var(--garis-halus); }
+  table.jad tr:last-child { border-bottom: 0; }
+  table.jad th, table.jad td { padding: 0; border: 0; }
+  table.jad th { margin-bottom: 3px; }
+}
 
 /* ------------------------------------------------------------ PETIKAN */
 
 .petikan {
-  margin: 0; padding-left: var(--r4);
+  margin: 0; padding-left: var(--r5);
   border-left: 3px solid var(--emas-terang);
-  font-family: var(--f-tajuk); font-size: 1.14rem; line-height: 1.55; color: var(--arang-2);
+  font-family: var(--f-tajuk); font-size: 1.2rem; line-height: 1.55; color: var(--arang-2);
 }
-.petikan p { font-style: italic; }
+.petikan p { font-style: italic; max-width: 46ch; }
+/* Petikan sentiasa lebih pendek daripada lajur di sebelahnya. Pusatkan
+   menegak supaya baris itu seimbang, bukan berat sebelah atas dengan
+   lubang kosong di bawah. */
+.belah > .petikan { align-self: center; }
 .petikan footer {
   margin-top: var(--r3); font-family: var(--f-teks); font-style: normal;
   font-size: .7rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
