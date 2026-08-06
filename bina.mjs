@@ -567,22 +567,26 @@ function halamanUtama() {
   </div>
 </section>
 
+<section class="sek sek-gelap">
+  <div class="balut">
+    <blockquote class="petikan-besar">
+      <p>Ruang ialah anugerah, dan peluang ialah amanah.</p>
+      <footer>Faktor WAU · hlm. 205</footer>
+    </blockquote>
+  </div>
+</section>
+
 <section class="sek">
   <div class="balut">
-    <div class="belah">
-      <div>
-        <span class="label label-aksen mb-3">Laluan pantas</span>
-        <h2>Tiga Laluan untuk Panel</h2>
-        <div class="grid tumpuk mt-5">
-          ${LALUAN.map(([tajuk, teks, pautan]) => kad({
-            tajuk, teks, pautan, padat: true, kaki: '<span class="kad-pautan">Buka bahagian</span>',
-          })).join('\n          ')}
-        </div>
-      </div>
-      <blockquote class="petikan">
-        <p>“Ruang ialah anugerah, dan peluang ialah amanah.”</p>
-        <footer>Faktor WAU · hlm. 205</footer>
-      </blockquote>
+    ${kepalaSek({
+      label: 'Laluan pantas',
+      tajuk: 'Tiga Laluan untuk Panel',
+      pengenalan: 'Pilih satu untuk terus ke bahagian yang hendak dinilai.',
+    })}
+    <div class="grid grid-3">
+      ${LALUAN.map(([tajuk, teks, pautan]) => kad({
+        tajuk, teks, pautan, kaki: '<span class="kad-pautan">Buka bahagian</span>',
+      })).join('\n      ')}
     </div>
   </div>
 </section>

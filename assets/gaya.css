@@ -9,21 +9,22 @@
   /* Warna — biru institusi dengan aksen emas.
      Dipilih supaya sepadan dengan kulit dokumen portfolio itu sendiri,
      yang kebanyakannya biru tua dan emas. */
-  --biru: #14427a;
-  --biru-tua: #0d2c55;
-  --biru-lembut: #eff4fb;
-  --emas: #a3762c;
-  --emas-terang: #cfa156;
-  --emas-lembut: #fbf6ea;
-  --arang: #0f1724;
-  --arang-2: #28323f;
-  --kelabu: #556172;
-  --kelabu-muda: #8a94a4;
-  --garis: #e2e7ef;
-  --garis-halus: #eef1f7;
+  --biru: #123a6b;
+  --biru-tua: #0b2748;
+  --biru-hidup: #1c5fa8;      /* untuk keadaan interaktif — lebih bertenaga */
+  --biru-lembut: #eaf2fc;
+  --emas: #9c6f21;
+  --emas-terang: #d9ad5f;
+  --emas-lembut: #fdf7e9;
+  --arang: #0c1421;
+  --arang-2: #262f3c;
+  --kelabu: #525e70;
+  --kelabu-muda: #86909f;
+  --garis: #dfe5ee;
+  --garis-halus: #ecf0f6;
   --kertas: #ffffff;
-  --kertas-2: #f7f9fc;
-  --kertas-3: #eaeff6;
+  --kertas-2: #f5f8fc;
+  --kertas-3: #e6edf6;
 
   /* Fon */
   --f-tajuk: "Source Serif 4", "Iowan Old Style", Georgia, "Times New Roman", serif;
@@ -163,7 +164,29 @@ p:last-child { margin-bottom: 0; }
 
 .sek { padding-block: var(--r8); }
 .sek-rapat { padding-block: var(--r7); }
-.sek-kelabu { background: var(--kertas-2); border-block: 1px solid var(--garis); }
+.sek-kelabu {
+  background: linear-gradient(180deg, var(--kertas-2) 0%, #fbfcfe 100%);
+  border-block: 1px solid var(--garis);
+}
+
+/* Jalur gelap penuh lebar — untuk memberi rentak pada halaman yang
+   sebelum ini putih dan kelabu sahaja. */
+.sek-gelap {
+  position: relative; overflow: hidden; color: #fff;
+  background:
+    radial-gradient(760px 380px at 82% -20%, rgba(217, 173, 95, .22), transparent 62%),
+    radial-gradient(620px 420px at 6% 120%, rgba(28, 95, 168, .5), transparent 68%),
+    linear-gradient(155deg, #16223a 0%, #101a2b 50%, #0a1120 100%);
+}
+.sek-gelap::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(114deg, transparent 44%, rgba(255, 255, 255, .035) 44.4%, rgba(255, 255, 255, .035) 50%, transparent 50.4%),
+    linear-gradient(114deg, transparent 61%, rgba(217, 173, 95, .075) 61.3%, rgba(217, 173, 95, .075) 65%, transparent 65.3%);
+}
+.sek-gelap > .balut { position: relative; z-index: 2; }
+.sek-gelap h2 { color: #fff; }
+.sek-gelap .pengenalan { color: rgba(255, 255, 255, .74); }
 
 /* Kepala seksyen — struktur tetap: label → tajuk → pengenalan */
 .sek-kepala { max-width: 66ch; margin-bottom: var(--r6); }
@@ -262,7 +285,8 @@ main:focus { outline: none; }
   text-decoration: none !important; text-align: center;
 }
 .btn-utama { background: var(--biru); color: #fff; }
-.btn-utama:hover { background: var(--biru-tua); transform: translateY(-1px); }
+.btn-utama:hover { background: var(--biru-hidup); }
+.btn-utama:hover { background: var(--biru-hidup); transform: translateY(-1px); }
 .btn-hantu { background: rgba(255, 255, 255, .07); color: #fff; border-color: rgba(255, 255, 255, .28); }
 .btn-hantu:hover { background: rgba(255, 255, 255, .14); transform: translateY(-1px); }
 .btn-garis { background: #fff; color: var(--arang); border-color: var(--garis); }
@@ -730,6 +754,28 @@ table.jad td { color: var(--arang); font-weight: 600; line-height: 1.5; }
    menegak supaya baris itu seimbang, bukan berat sebelah atas dengan
    lubang kosong di bawah. */
 .belah > .petikan { align-self: center; }
+
+/* Petikan sorotan — dijadikan ciri, bukan catatan tepi. Tanda petik besar
+   dilukis dengan CSS supaya tiada imej diperlukan. */
+.petikan-besar {
+  position: relative; margin: 0; padding: 0; border: 0;
+  max-width: 34ch; margin-inline: auto; text-align: center;
+}
+.petikan-besar::before {
+  content: "\201C"; display: block;
+  font-family: var(--f-tajuk); font-size: 5.5rem; line-height: .75;
+  color: var(--emas-terang); opacity: .5; margin-bottom: -.05em;
+}
+.petikan-besar p {
+  font-family: var(--f-tajuk); font-style: italic; font-weight: 400;
+  font-size: clamp(1.55rem, 3.4vw, 2.4rem); line-height: 1.32;
+  color: #fff; max-width: none; letter-spacing: -.014em;
+}
+.petikan-besar footer {
+  margin-top: var(--r5); font-family: var(--f-teks); font-style: normal;
+  font-size: .72rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--emas-terang);
+}
 .petikan footer {
   margin-top: var(--r3); font-family: var(--f-teks); font-style: normal;
   font-size: .7rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
