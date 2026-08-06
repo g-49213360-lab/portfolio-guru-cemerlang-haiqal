@@ -24,6 +24,7 @@ const CALON = {
   sijilGuru: 'G130316-03922',
   permohonan: 'Permohonan Guru Cemerlang DG12 · Sesi 2026',
   folderDrive: '1nGl9KcVwGUeID0KKAerAKqCRIoXrXb9N',
+  laman: 'https://mrmohdhaiqal.vercel.app', // tanpa garis miring di hujung
   // Video "MY JOURNEY" — https://youtu.be/qyhawB76ucs
   // Guna domain nocookie supaya YouTube tidak menetapkan kuki penjejakan sebelum video dimainkan.
   videoJourney: 'https://www.youtube-nocookie.com/embed/qyhawB76ucs?rel=0',
@@ -102,6 +103,7 @@ function pautanEvidens(kunci, label = 'Lihat evidens') {
 function susunan({ fail, tajuk, huraian, badan, kelasBadan = '' }) {
   const nav = NAV.map((n) => `<a href="${n.f}"${n.f === fail ? ' aria-current="page"' : ''}>${n.t}</a>`).join('\n        ');
   const kakiNav = NAV.map((n) => `<a href="${n.f}">${n.t}</a>`).join('\n            ');
+  const url = fail === 'index.html' ? `${CALON.laman}/` : `${CALON.laman}/${fail}`;
 
   return `<!doctype html>
 <html lang="ms">
@@ -112,9 +114,22 @@ function susunan({ fail, tajuk, huraian, badan, kelasBadan = '' }) {
 <meta name="description" content="${esc(huraian)}">
 <meta name="author" content="${esc(CALON.nama)}">
 <meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="${url}">
 <meta property="og:title" content="${esc(tajuk)} · ${esc(CALON.nama)}">
 <meta property="og:description" content="${esc(huraian)}">
 <meta property="og:type" content="profile">
+<meta property="og:url" content="${url}">
+<meta property="og:site_name" content="Portfolio Guru Cemerlang · ${esc(CALON.nama)}">
+<meta property="og:locale" content="ms_MY">
+<meta property="og:image" content="${CALON.laman}/assets/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="${esc(CALON.nama)} — ${esc(CALON.permohonan)}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${esc(tajuk)} · ${esc(CALON.nama)}">
+<meta name="twitter:description" content="${esc(huraian)}">
+<meta name="twitter:image" content="${CALON.laman}/assets/og.jpg">
 <link rel="stylesheet" href="assets/gaya.css">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23b3121f'/%3E%3Ctext x='16' y='22' font-family='system-ui,sans-serif' font-size='15' font-weight='800' fill='white' text-anchor='middle'%3EMH%3C/text%3E%3C/svg%3E">
 </head>

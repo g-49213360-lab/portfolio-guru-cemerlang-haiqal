@@ -46,6 +46,13 @@ Kemudian buka <http://127.0.0.1:8899>
 | `assets/laman.js` | Menu mudah alih + pemapar PDF |
 | `assets/potret.jpg` | Potret hero (dipotong daripada halaman 1 RESUME.pdf) |
 | `assets/kulit/*.jpg` | Imej muka depan setiap PDF (dijana dengan `pdftoppm`) |
+| `assets/og.jpg` | Imej pratonton 1200×630 untuk WhatsApp / Telegram / Facebook |
+| `assets/qr/kad-qr-cetak.png` | **Kad QR sedia cetak** 2000×2600 — untuk borang permohonan atau kulit fail |
+| `assets/qr/qr-mrmohdhaiqal.png` | Kod QR sahaja, 1400×1400 PNG |
+| `assets/qr/qr-mrmohdhaiqal.svg` | Kod QR vektor — guna ini jika perlu dibesarkan untuk poster |
+
+Kod QR menggunakan aras pembetulan ralat **H** (tahan sehingga 30% kerosakan cetakan)
+dan telah dinyahkod semula untuk mengesahkan ia membawa ke `https://mrmohdhaiqal.vercel.app`.
 
 ## Cara mengemas kini kandungan
 
