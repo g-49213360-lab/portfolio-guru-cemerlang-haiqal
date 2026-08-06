@@ -1137,9 +1137,10 @@ ${kepalaLaman('Arkib', 'Arkib dokumen',
     })}
     <ol class="senarai-nombor mb-7">
       ${BACAAN_PANEL.map(([tajuk, teks, jenis, sasaran]) => {
+        // Anak panah datang daripada .kad-pautan::after — jangan tambah lagi.
         const pautan = jenis === 'dok'
-          ? pemicuDok(sasaran, 'Buka dokumen <span aria-hidden="true">→</span>', 'kad-pautan')
-          : `<a class="kad-pautan" href="${sasaran}">Buka bahagian <span aria-hidden="true">→</span></a>`;
+          ? pemicuDok(sasaran, 'Buka dokumen', 'kad-pautan')
+          : `<a class="kad-pautan" href="${sasaran}">Buka bahagian</a>`;
         return `<li><strong>${tajuk}</strong><span>${teks}</span><span class="mt-2">${pautan}</span></li>`;
       }).join('\n      ')}
     </ol>

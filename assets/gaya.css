@@ -501,10 +501,14 @@ a.kad, a.kad:hover { text-decoration: none; color: inherit; }
 .kad-kaki { margin-top: auto; padding-top: var(--r3); }
 .kad-kaki:empty { display: none; }
 
+/* Guna pada <a> dan <button>; tetapkan semula gaya butang lalai supaya
+   kedua-duanya kelihatan serupa. */
 .kad-pautan {
   display: inline-flex; align-items: center; gap: 7px;
-  font-size: .85rem; font-weight: 700; color: var(--biru);
+  font: inherit; font-size: .85rem; font-weight: 700; color: var(--biru);
+  background: none; border: 0; padding: 0; cursor: pointer; text-align: left;
 }
+.kad-pautan:hover { text-decoration: underline; text-underline-offset: 3px; }
 .kad-pautan::after { content: "→"; transition: transform var(--tt); }
 .kad:hover .kad-pautan::after { transform: translateX(3px); }
 
