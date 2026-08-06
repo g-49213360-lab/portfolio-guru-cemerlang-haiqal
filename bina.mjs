@@ -694,7 +694,7 @@ ${kepalaLaman('Bahagian 2.0 · 3.0 · 5.0', 'Kepakaran & inovasi',
       tajuk: 'Inovasi berkaitan mata pelajaran &amp; bidang kepakaran',
       pengenalan: 'Lima evidens inovasi — daripada amalan bilik darjah sendiri hinggalah perkongsian bahan secara terbuka kepada komuniti guru.',
     })}
-    <div class="grid grid-3 grid-rapat">
+    <div class="grid grid-3">
       ${INOVASI_KONGSI.map(([p, k]) => kad({ label: 'Platform perkongsian', tajuk: p, teks: k })).join('\n      ')}
     </div>
     <div class="btn-baris" style="margin-top:var(--r5)">${pautanEvidens('inovasi', 'Buka Bahagian 5.0 — Inovasi')}</div>
@@ -893,7 +893,7 @@ ${kepalaLaman('Bahagian 4.0 · 6.0', 'Faktor WAU & anugerah',
       tajuk: 'Sumbangan merentas lima peringkat',
       pengenalan: 'Fail sokongan 64 halaman disusun mengikut peringkat, dengan sepuluh evidens bagi setiap peringkat kebangsaan, negeri, daerah dan institusi.',
     })}
-    <div class="grid grid-rapat" style="gap:var(--r3)">
+    <div class="grid" style="gap:var(--r3)">
       ${PERINGKAT_SOKONGAN.map(([p, k]) => kad({ label: 'Peringkat', tajuk: p, teks: k, padat: true })).join('\n      ')}
     </div>
     <div class="btn-baris" style="margin-top:var(--r5)">${pautanEvidens('sijil', 'Buka fail sokongan (64 hlm.)')}</div>
@@ -974,7 +974,7 @@ ${kepalaLaman('Bahagian 6.7', 'Kemenjadian murid',
     </div>
     <p class="tapis-kira" role="status" aria-live="polite"></p>
 
-    <div class="grid grid-2 grid-rapat" id="senarai-kemenjadian">
+    <div class="grid grid-2" id="senarai-kemenjadian">
       ${KEMENJADIAN.map(([nama, peranan, teks, kategori]) => {
         const k = kad({ label: peranan, tajuk: nama, teks });
         return k.replace('<div class="kad"', `<div class="kad" data-kategori="${kategori.join(' ')}"`);

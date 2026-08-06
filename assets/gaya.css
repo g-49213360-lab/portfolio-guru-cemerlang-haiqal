@@ -396,16 +396,11 @@ p:last-child { margin-bottom: 0; }
 
 /* ------------------------------------------------------------ GRID */
 
-/* Kad meregang untuk berbaris HANYA apabila ia ada kaki (butang) untuk
-   dilekatkan ke bawah. Tanpa kaki, regangan cuma menghasilkan ruang
-   kosong — jadi .grid-rapat membiarkan kad memeluk kandungannya. */
 .grid { display: grid; gap: var(--r4); align-items: stretch; }
 .grid > * { min-width: 0; }
-/* align-items:start sahaja tidak cukup — height:100% pada kad diselesaikan
-   terhadap tinggi baris grid, jadi ia tetap meregang. Tinggi mesti
-   dikembalikan kepada auto. */
-.grid-rapat { align-items: start; }
-.grid-rapat > .kad { height: auto; }
+/* Semua kad dalam satu baris grid berkongsi tinggi yang sama.
+   .kad-kaki (margin-top:auto) menolak butang ke bawah, jadi butang
+   setiap kad dalam baris itu berbaris pada paras yang sama. */
 .grid-2 { grid-template-columns: repeat(2, 1fr); }
 .grid-3 { grid-template-columns: repeat(3, 1fr); }
 .grid-4 { grid-template-columns: repeat(4, 1fr); }
