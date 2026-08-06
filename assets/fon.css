@@ -1,0 +1,29 @@
+/* Fon dihoskan sendiri — Source Serif 4 & Plus Jakarta Sans.
+   Lesen: SIL Open Font License 1.1 (membenarkan pengehosan sendiri).
+   Subset latin sahaja, dipangkas kepada julat aksara yang diperlukan.
+   Fail variable — satu fail meliputi keseluruhan julat berat.
+   Tiada permintaan kepada mana-mana hos pihak ketiga. */
+
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('fon/plus-jakarta-sans-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fon/source-serif-4-italic.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('fon/source-serif-4-normal.woff2') format('woff2');
+}

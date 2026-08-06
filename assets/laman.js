@@ -12,6 +12,42 @@
     });
   }
 
+  // ---- Penapis kemenjadian ----
+  // Bar penapis mempunyai atribut `hidden` dalam HTML dan hanya didedahkan
+  // di sini, jadi tanpa JavaScript kesemua kisah kekal terpapar.
+  var barTapis = document.getElementById('tapis-kemenjadian');
+  var senarai = document.getElementById('senarai-kemenjadian');
+
+  if (barTapis && senarai) {
+    var kad = Array.prototype.slice.call(senarai.querySelectorAll('[data-kategori]'));
+    var kira = document.querySelector('.tapis-kira');
+    barTapis.hidden = false;
+
+    function tapis(pilihan) {
+      var nampak = 0;
+      kad.forEach(function (k) {
+        var padan = pilihan === 'semua' || k.getAttribute('data-kategori').split(' ').indexOf(pilihan) > -1;
+        k.hidden = !padan;
+        if (padan) nampak++;
+      });
+      barTapis.querySelectorAll('.tapis-btn').forEach(function (b) {
+        b.setAttribute('aria-pressed', b.getAttribute('data-tapis') === pilihan ? 'true' : 'false');
+      });
+      if (kira) {
+        kira.textContent = pilihan === 'semua'
+          ? 'Memaparkan kesemua ' + kad.length + ' kisah.'
+          : 'Memaparkan ' + nampak + ' daripada ' + kad.length + ' kisah.';
+      }
+    }
+
+    barTapis.addEventListener('click', function (e) {
+      var b = e.target.closest('.tapis-btn');
+      if (b) tapis(b.getAttribute('data-tapis'));
+    });
+
+    tapis('semua');
+  }
+
   // ---- Pemapar dokumen ----
   var modal = document.getElementById('pemapar');
   if (!modal) return;

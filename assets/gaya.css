@@ -434,6 +434,40 @@ a.kad, a.kad:hover { text-decoration: none; color: inherit; }
 
 .kad-padat { padding: var(--r3) var(--r4); }
 
+/* ------------------------------------------------------------ PENAPIS */
+
+.tapis {
+  display: flex; flex-wrap: wrap; gap: var(--r2);
+  padding-bottom: var(--r4); margin-bottom: var(--r3);
+  border-bottom: 1px solid var(--garis);
+}
+.tapis[hidden] { display: none; }
+
+.tapis-btn {
+  display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+  font: inherit; font-size: .87rem; font-weight: 600; color: var(--kelabu);
+  background: #fff; border: 1px solid var(--garis); border-radius: 999px;
+  padding: 9px 16px; line-height: 1.2;
+  transition: color var(--tt), background var(--tt), border-color var(--tt);
+}
+.tapis-btn:hover { color: var(--arang); border-color: var(--kelabu-muda); }
+
+.tapis-bil {
+  font-size: .72rem; font-weight: 700; font-variant-numeric: tabular-nums;
+  color: var(--kelabu-muda); background: var(--kertas-3);
+  border-radius: 999px; padding: 2px 7px; min-width: 24px; text-align: center;
+}
+
+.tapis-btn[aria-pressed="true"] {
+  color: #fff; background: var(--merah); border-color: var(--merah); font-weight: 700;
+}
+.tapis-btn[aria-pressed="true"] .tapis-bil { color: #fff; background: rgba(255, 255, 255, .22); }
+
+.tapis-kira {
+  margin: 0 0 var(--r4); font-size: .82rem; color: var(--kelabu-muda);
+}
+.tapis-kira:empty { display: none; }
+
 /* ------------------------------------------------------------ SENARAI */
 
 .senarai-tanda { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }

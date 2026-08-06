@@ -57,7 +57,8 @@ Kemudian buka <http://127.0.0.1:8899>
 | --- | --- |
 | `bina.mjs` | **Semua kandungan laman ada di sini.** Edit, kemudian `node bina.mjs` |
 | `assets/gaya.css` | Gaya |
-| `assets/laman.js` | Menu mudah alih + pemapar PDF |
+| `assets/laman.js` | Menu mudah alih, penapis kemenjadian, pemapar PDF |
+| `assets/fon.css` + `assets/fon/` | Fon dihoskan sendiri (lihat di bawah) |
 | `assets/potret.jpg` | Potret hero (dipotong daripada halaman 1 RESUME.pdf) |
 | `assets/kulit/*.jpg` | Imej muka depan setiap PDF (dijana dengan `pdftoppm`) |
 | `assets/og.jpg` | Imej pratonton 1200×630 untuk WhatsApp / Telegram / Facebook |
@@ -107,6 +108,41 @@ Kedua-duanya masih boleh dilihat oleh sesiapa yang membuka fail PDF asal melalui
 Jika ini menjadi kebimbangan, hadkan perkongsian folder Drive kepada individu tertentu
 sahaja — tetapi ambil perhatian bahawa pemapar PDF dalam laman ini juga akan berhenti
 berfungsi untuk orang luar.
+
+## Fon
+
+Dihoskan sendiri — **tiada permintaan kepada Google Fonts atau mana-mana hos luar**.
+Laman kekal berfungsi jika rangkaian sekolah menyekat `fonts.gstatic.com`.
+
+| Keluarga | Guna | Fail |
+| --- | --- | --- |
+| Source Serif 4 | Tajuk dan petikan | `source-serif-4-normal.woff2` (101 KB), `source-serif-4-italic.woff2` (42 KB) |
+| Plus Jakarta Sans | Teks badan dan antara muka | `plus-jakarta-sans-normal.woff2` (22 KB) |
+
+Ketiga-tiganya fail *variable* — satu fail meliputi keseluruhan julat berat, jadi
+tiga fail sudah memadai. Subset `latin` sahaja, dipangkas dengan `pyftsubset`
+kepada ASCII penuh, Latin-1 dan tanda tipografi yang digunakan. Jumlah 164 KB
+berbanding 767 KB jika semua subset dan berat dimuat turun mentah.
+
+Kedua-dua keluarga di bawah **SIL Open Font License 1.1**, yang membenarkan
+pengehosan sendiri. Untuk menjana semula selepas menukar keluarga fon, muat turun
+CSS Google Fonts, ambil blok `latin` sahaja, nyahduplikasi mengikut URL, kemudian
+`pyftsubset` setiap fail.
+
+## Penapis kemenjadian
+
+Halaman Kemenjadian mempunyai penapis: **Semua · Pertandingan · Bimbingan individu ·
+Bekas murid**. Kategori setiap kisah ditetapkan dalam elemen keempat setiap baris
+`KEMENJADIAN` di dalam `bina.mjs` — satu kisah boleh tergolong dalam lebih daripada
+satu kategori.
+
+Bar penapis mempunyai atribut `hidden` dalam HTML dan hanya didedahkan oleh
+JavaScript, jadi tanpa JavaScript kesemua 16 kisah tetap terpapar.
+
+## Cap versi aset
+
+`bina.mjs` menambah `?v=<hash>` pada CSS dan JS berdasarkan kandungan fail.
+Tanpa ini pelayar akan terus menghidangkan gaya lama selepas deploy.
 
 ## Nota teknikal
 

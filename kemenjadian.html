@@ -24,10 +24,10 @@
 <meta name="twitter:title" content="Kemenjadian Murid · Mohd Haiqal bin Abdullah Chik">
 <meta name="twitter:description" content="Enam belas kisah kemenjadian murid di bawah bimbingan Mohd Haiqal bin Abdullah Chik — johan peringkat negeri, anugerah emas kebangsaan dan bimbingan individu.">
 <meta name="twitter:image" content="https://mrmohdhaiqal.vercel.app/assets/og.jpg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
-<link rel="stylesheet" href="assets/gaya.css">
+<link rel="preload" href="assets/fon/plus-jakarta-sans-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fon/source-serif-4-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fon.css?v=a8a9a3f5">
+<link rel="stylesheet" href="assets/gaya.css?v=512e2405">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23a8121e'/%3E%3Ctext x='16' y='22' font-family='system-ui,sans-serif' font-size='14' font-weight='800' fill='white' text-anchor='middle'%3EMH%3C/text%3E%3C/svg%3E">
 </head>
 <body>
@@ -79,98 +79,108 @@
           <div class="kad-kaki"><button type="button" class="btn btn-garis btn-kecil" data-dok="1WMDITOPLPj7R8qgqND2qaSwRdmGavXII" data-dok-tajuk="Kemenjadian Murid" data-dok-sub="Bahagian 6.7 · 24 halaman">Buka Bahagian 6.7 (24 hlm.) <span aria-hidden="true">→</span></button></div>
         </div>
     </div>
-    <div class="grid grid-2 grid-rapat">
-      <div class="kad">
+    <!-- Bar penapis. Disembunyikan secara lalai dan didedahkan oleh JS,
+         supaya tanpa JavaScript kesemua 16 kisah tetap terpapar. -->
+    <div class="tapis" id="tapis-kemenjadian" role="group" aria-label="Tapis kisah kemenjadian" hidden>
+      <button type="button" class="tapis-btn" data-tapis="semua" aria-pressed="true">Semua <span class="tapis-bil">16</span></button>
+      <button type="button" class="tapis-btn" data-tapis="pertandingan" aria-pressed="false">Pertandingan <span class="tapis-bil">12</span></button>
+      <button type="button" class="tapis-btn" data-tapis="bimbingan" aria-pressed="false">Bimbingan individu <span class="tapis-bil">10</span></button>
+      <button type="button" class="tapis-btn" data-tapis="bekas" aria-pressed="false">Bekas murid <span class="tapis-bil">4</span></button>
+    </div>
+    <p class="tapis-kira" role="status" aria-live="polite"></p>
+
+    <div class="grid grid-2 grid-rapat" id="senarai-kemenjadian">
+      <div class="kad" data-kategori="pertandingan bekas">
           <span class="label">Guru pembimbing Poetry Recitation</span>
           <h3>Auni Hannani binti Hasbuddin</h3>
           <p>Pasukan SK Abdul Samat mendapat tempat ke-3 peringkat negeri Selangor tahun 2022. Auni kini pelajar Tingkatan 3 di MRSM ATM Bera, Pahang.</p>
           <div class="kad-kaki"></div>
         </div>
-      <div class="kad">
+      <div class="kad" data-kategori="bimbingan bekas">
           <span class="label">Bimbingan intensif temuduga IPG</span>
           <h3>Muhamad Syakir bin Kamaruzaman</h3>
           <p>Selepas sesi bimbingan intensif persediaan temuduga kemasukan ke Institut Pendidikan Guru, Syakir ditawarkan jurusan TESL di IPG Kampus Tuanku Bainun.</p>
           <div class="kad-kaki"></div>
         </div>
-      <div class="kad">
+      <div class="kad" data-kategori="pertandingan bimbingan bekas">
           <span class="label">Penulis skrip &amp; jurulatih</span>
           <h3>Pasukan Trio Monodrama “Kasih Yang Tersisa”</h3>
           <p>Menghasilkan skrip dalam Bahasa Melayu dan berguru dengan rakan dalam bidang teater untuk memahami konsep trio monodrama. Beraksi di Auditorium Dewan Bahasa dan Pustaka. Salah seorang murid, Damia Qisya, kini pelajar seni lakon di Sekolah Seni Malaysia Kuala Lumpur.</p>
           <div class="kad-kaki"></div>
         </div>
-      <div class="kad">
+      <div class="kad" data-kategori="pertandingan bimbingan">
           <span class="label">Ketua jurulatih negeri Selangor</span>
           <h3>Areff Jeffre anak Johan — SK Sungai Bumbun (A)</h3>
           <p>Naib Johan Poem Recitation, Karnival Pendidikan Murid Orang Asli peringkat kebangsaan 2025. Sebagai Ketua Hakim peringkat negeri Selangor, diberi mandat JPN Selangor menjadi ketua jurulatih — membantu memperbaiki teks sajak, sebutan dan gaya persembahan. Kejayaan ini memecahkan kemarau pencapaian Selangor bagi kategori ini di peringkat kebangsaan.</p>
           <div class="kad-kaki"></div>
         </div>
-      <div class="kad">
+      <div class="kad" data-kategori="pertandingan bimbingan">
           <span class="label">Jurulatih</span>
           <h3>Pasukan Scrabble sekolah</h3>
           <p>Buat pertama kalinya pasukan Scrabble SK Abdul Samat menduduki kelompok 30 terbaik daripada hampir 80 sekolah rendah di daerah Klang.</p>
           <div class="kad-kaki"></div>
         </div>
-      <div class="kad">
+      <div class="kad" data-kategori="bimbingan">
           <span class="label">Jurulatih pengucapan awam</span>
           <h3>Pasukan TKRS sekolah</h3>
           <p>Latihan intensif selama seminggu semasa waktu rehat dan selepas PdPC untuk 10 kadet TKRS, dengan penghasilan lebih 20 teks pidato. Kesemua kadet berjaya dinaikkan pangkat sebagai Koperal TKRS.</p>
           <div class="kad-kaki"></div>
         </div>
-      <div class="kad">
+      <div class="kad" data-kategori="pertandingan bimbingan">
           <span class="label">Anugerah Emas peringkat kebangsaan</span>
           <h3>Pasukan Show and Tell</h3>
           <p>Membimbing, melatih, menyediakan skrip serta merekod pembentangan bagi pertandingan Show &amp; Tell sempena Karnival HIP peringkat kebangsaan 2024.</p>
           <div class="kad-kaki"></div>
         </div>
-      <div class="kad">
+      <div class="kad" data-kategori="pertandingan bimbingan">
           <span class="label">Tempat ke-4 Dare to Spell PPD Klang</span>
           <h3>Muhammad Daaris Amsyar bin Mohd Rozi</h3>
           <p>Berjaya mendapat tempat ke-4 daripada 70 peserta keseluruhan di peringkat PPD Klang.</p>
           <div class="kad-kaki"></div>
         </div>
-      <div class="kad">
+      <div class="kad" data-kategori="pertandingan bimbingan">
           <span class="label">Johan negeri Selangor 2022</span>
           <h3>Pasukan English Sketch SKAS</h3>
           <p>Melatih hampir 20 murid selama hampir 3 bulan untuk sebuah pementasan. Pasukan drama Bahasa Inggeris 2021 dan 2022, diangkat sebagai Johan peringkat negeri Selangor pada 2022.</p>
           <div class="kad-kaki"></div>
         </div>
-      <div class="kad">
+      <div class="kad" data-kategori="pertandingan">
           <span class="label">Johan Karnival Koakademik Selangor 2023</span>
           <h3>Pasukan Poetry Recitation SK Abdul Samat</h3>
           <p>Berganding bahu bersama Cikgu Nazirah menukilkan sebuah sajak yang berjaya menjadi Johan dalam Karnival Koakademik Bahasa Inggeris peringkat negeri Selangor tahun 2023.</p>
           <div class="kad-kaki"></div>
         </div>
-      <div class="kad">
+      <div class="kad" data-kategori="bimbingan">
           <span class="label">AJK acara peringkat kebangsaan</span>
           <h3>Dua murid — bacaan doa &amp; lafaz ikrar</h3>
           <p>Dua murid terpilih oleh pihak penganjur untuk mengetuai bacaan doa dan lafaz ikrar dalam pertandingan akhir Seni Kraf Kolaj peringkat kebangsaan 2024 — dalam program yang sama, calon bertugas sebagai juruacara majlis.</p>
           <div class="kad-kaki"></div>
         </div>
-      <div class="kad">
+      <div class="kad" data-kategori="bimbingan bekas">
           <span class="label">Bakat pengacaraan</span>
           <h3>Abid, Nadia, Rizqi &amp; Cinta</h3>
           <p>Abid dan Nadia kini pelajar IPGM Kampus Bahasa Antarabangsa. Rizqi dan Cinta kini di sekolah menengah dan masih menggalas tugas sebagai pengacara majlis rasmi di sekolah mereka.</p>
           <div class="kad-kaki"></div>
         </div>
-      <div class="kad">
+      <div class="kad" data-kategori="pertandingan">
           <span class="label">Aspirasi MADANI KPM 2024</span>
           <h3>53 murid — Pidato 3 Minit Bahasa Inggeris</h3>
           <p>Penyertaan 53 murid dalam pertandingan pidato 3 minit Bahasa Inggeris.</p>
           <div class="kad-kaki"></div>
         </div>
-      <div class="kad">
+      <div class="kad" data-kategori="pertandingan">
           <span class="label">Peringkat negeri Selangor 2022</span>
           <h3>Pasukan Choral Speaking SK Abdul Samat</h3>
           <p>Mara ke peringkat negeri Selangor pada tahun 2022.</p>
           <div class="kad-kaki"></div>
         </div>
-      <div class="kad">
+      <div class="kad" data-kategori="pertandingan">
           <span class="label">Peringkat kebangsaan 2021</span>
           <h3>HIP: Let’s Read and Share</h3>
           <p>Penyertaan dalam pertandingan HIP: Let’s Read and Share peringkat kebangsaan.</p>
           <div class="kad-kaki"></div>
         </div>
-      <div class="kad">
+      <div class="kad" data-kategori="pertandingan">
           <span class="label">Pencapaian Emas kebangsaan 2024</span>
           <h3>Show and Tell HIPMAX</h3>
           <p>Pencapaian Emas dalam pertandingan Show and Tell HIPMAX peringkat kebangsaan 2024.</p>
@@ -214,6 +224,6 @@
   </div>
 </div>
 
-<script src="assets/laman.js"></script>
+<script src="assets/laman.js?v=5e1c3783"></script>
 </body>
 </html>

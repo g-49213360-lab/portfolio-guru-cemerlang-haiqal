@@ -11,11 +11,24 @@
    merentas setiap baris grid — tiada kad tergantung atau senget.
    ========================================================================== */
 
-import { writeFileSync, mkdirSync } from 'node:fs';
+import { writeFileSync, mkdirSync, readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const AKAR = dirname(fileURLToPath(import.meta.url));
+
+/* Cap versi aset. Tanpa ini, pelayar (dan cache Vercel) akan terus
+   menghidangkan CSS/JS lama selepas deploy, jadi perubahan reka bentuk
+   tidak kelihatan sehingga pengguna kosongkan cache. */
+const cap = (fail) => {
+  try {
+    return createHash('sha1').update(readFileSync(join(AKAR, fail))).digest('hex').slice(0, 8);
+  } catch {
+    return '0';
+  }
+};
+const V = { gaya: cap('assets/gaya.css'), laman: cap('assets/laman.js'), fon: cap('assets/fon.css') };
 
 /* ---------------------------------------------------------------- MAKLUMAT */
 
@@ -189,10 +202,10 @@ function susunan({ fail, tajuk, huraian, badan }) {
 <meta name="twitter:title" content="${esc(tajuk)} · ${esc(CALON.nama)}">
 <meta name="twitter:description" content="${esc(huraian)}">
 <meta name="twitter:image" content="${CALON.laman}/assets/og.jpg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
-<link rel="stylesheet" href="assets/gaya.css">
+<link rel="preload" href="assets/fon/plus-jakarta-sans-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fon/source-serif-4-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fon.css?v=${V.fon}">
+<link rel="stylesheet" href="assets/gaya.css?v=${V.gaya}">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23a8121e'/%3E%3Ctext x='16' y='22' font-family='system-ui,sans-serif' font-size='14' font-weight='800' fill='white' text-anchor='middle'%3EMH%3C/text%3E%3C/svg%3E">
 </head>
 <body>
@@ -244,7 +257,7 @@ ${badan}
   </div>
 </div>
 
-<script src="assets/laman.js"></script>
+<script src="assets/laman.js?v=${V.laman}"></script>
 </body>
 </html>
 `;
@@ -858,23 +871,34 @@ ${kepalaLaman('Bahagian 4.0 · 6.0', 'Faktor WAU & anugerah kecemerlangan',
 
 /* ==================================================== HALAMAN: KEMENJADIAN */
 
+/* Kategori penapis. Satu kisah boleh tergolong dalam lebih daripada satu.
+     pertandingan — penyertaan atau pencapaian dalam pertandingan
+     bimbingan    — bimbingan atau latihan langsung oleh calon
+     bekas        — bekas murid yang laluannya selepas sekolah direkodkan */
 const KEMENJADIAN = [
-  ['Auni Hannani binti Hasbuddin', 'Guru pembimbing Poetry Recitation', 'Pasukan SK Abdul Samat mendapat tempat ke-3 peringkat negeri Selangor tahun 2022. Auni kini pelajar Tingkatan 3 di MRSM ATM Bera, Pahang.'],
-  ['Muhamad Syakir bin Kamaruzaman', 'Bimbingan intensif temuduga IPG', 'Selepas sesi bimbingan intensif persediaan temuduga kemasukan ke Institut Pendidikan Guru, Syakir ditawarkan jurusan TESL di IPG Kampus Tuanku Bainun.'],
-  ['Pasukan Trio Monodrama “Kasih Yang Tersisa”', 'Penulis skrip &amp; jurulatih', 'Menghasilkan skrip dalam Bahasa Melayu dan berguru dengan rakan dalam bidang teater untuk memahami konsep trio monodrama. Beraksi di Auditorium Dewan Bahasa dan Pustaka. Salah seorang murid, Damia Qisya, kini pelajar seni lakon di Sekolah Seni Malaysia Kuala Lumpur.'],
-  ['Areff Jeffre anak Johan — SK Sungai Bumbun (A)', 'Ketua jurulatih negeri Selangor', 'Naib Johan Poem Recitation, Karnival Pendidikan Murid Orang Asli peringkat kebangsaan 2025. Sebagai Ketua Hakim peringkat negeri Selangor, diberi mandat JPN Selangor menjadi ketua jurulatih — membantu memperbaiki teks sajak, sebutan dan gaya persembahan. Kejayaan ini memecahkan kemarau pencapaian Selangor bagi kategori ini di peringkat kebangsaan.'],
-  ['Pasukan Scrabble sekolah', 'Jurulatih', 'Buat pertama kalinya pasukan Scrabble SK Abdul Samat menduduki kelompok 30 terbaik daripada hampir 80 sekolah rendah di daerah Klang.'],
-  ['Pasukan TKRS sekolah', 'Jurulatih pengucapan awam', 'Latihan intensif selama seminggu semasa waktu rehat dan selepas PdPC untuk 10 kadet TKRS, dengan penghasilan lebih 20 teks pidato. Kesemua kadet berjaya dinaikkan pangkat sebagai Koperal TKRS.'],
-  ['Pasukan Show and Tell', 'Anugerah Emas peringkat kebangsaan', 'Membimbing, melatih, menyediakan skrip serta merekod pembentangan bagi pertandingan Show &amp; Tell sempena Karnival HIP peringkat kebangsaan 2024.'],
-  ['Muhammad Daaris Amsyar bin Mohd Rozi', 'Tempat ke-4 Dare to Spell PPD Klang', 'Berjaya mendapat tempat ke-4 daripada 70 peserta keseluruhan di peringkat PPD Klang.'],
-  ['Pasukan English Sketch SKAS', 'Johan negeri Selangor 2022', 'Melatih hampir 20 murid selama hampir 3 bulan untuk sebuah pementasan. Pasukan drama Bahasa Inggeris 2021 dan 2022, diangkat sebagai Johan peringkat negeri Selangor pada 2022.'],
-  ['Pasukan Poetry Recitation SK Abdul Samat', 'Johan Karnival Koakademik Selangor 2023', 'Berganding bahu bersama Cikgu Nazirah menukilkan sebuah sajak yang berjaya menjadi Johan dalam Karnival Koakademik Bahasa Inggeris peringkat negeri Selangor tahun 2023.'],
-  ['Dua murid — bacaan doa &amp; lafaz ikrar', 'AJK acara peringkat kebangsaan', 'Dua murid terpilih oleh pihak penganjur untuk mengetuai bacaan doa dan lafaz ikrar dalam pertandingan akhir Seni Kraf Kolaj peringkat kebangsaan 2024 — dalam program yang sama, calon bertugas sebagai juruacara majlis.'],
-  ['Abid, Nadia, Rizqi &amp; Cinta', 'Bakat pengacaraan', 'Abid dan Nadia kini pelajar IPGM Kampus Bahasa Antarabangsa. Rizqi dan Cinta kini di sekolah menengah dan masih menggalas tugas sebagai pengacara majlis rasmi di sekolah mereka.'],
-  ['53 murid — Pidato 3 Minit Bahasa Inggeris', 'Aspirasi MADANI KPM 2024', 'Penyertaan 53 murid dalam pertandingan pidato 3 minit Bahasa Inggeris.'],
-  ['Pasukan Choral Speaking SK Abdul Samat', 'Peringkat negeri Selangor 2022', 'Mara ke peringkat negeri Selangor pada tahun 2022.'],
-  ['HIP: Let’s Read and Share', 'Peringkat kebangsaan 2021', 'Penyertaan dalam pertandingan HIP: Let’s Read and Share peringkat kebangsaan.'],
-  ['Show and Tell HIPMAX', 'Pencapaian Emas kebangsaan 2024', 'Pencapaian Emas dalam pertandingan Show and Tell HIPMAX peringkat kebangsaan 2024.'],
+  ['Auni Hannani binti Hasbuddin', 'Guru pembimbing Poetry Recitation', 'Pasukan SK Abdul Samat mendapat tempat ke-3 peringkat negeri Selangor tahun 2022. Auni kini pelajar Tingkatan 3 di MRSM ATM Bera, Pahang.', ['pertandingan', 'bekas']],
+  ['Muhamad Syakir bin Kamaruzaman', 'Bimbingan intensif temuduga IPG', 'Selepas sesi bimbingan intensif persediaan temuduga kemasukan ke Institut Pendidikan Guru, Syakir ditawarkan jurusan TESL di IPG Kampus Tuanku Bainun.', ['bimbingan', 'bekas']],
+  ['Pasukan Trio Monodrama “Kasih Yang Tersisa”', 'Penulis skrip &amp; jurulatih', 'Menghasilkan skrip dalam Bahasa Melayu dan berguru dengan rakan dalam bidang teater untuk memahami konsep trio monodrama. Beraksi di Auditorium Dewan Bahasa dan Pustaka. Salah seorang murid, Damia Qisya, kini pelajar seni lakon di Sekolah Seni Malaysia Kuala Lumpur.', ['pertandingan', 'bimbingan', 'bekas']],
+  ['Areff Jeffre anak Johan — SK Sungai Bumbun (A)', 'Ketua jurulatih negeri Selangor', 'Naib Johan Poem Recitation, Karnival Pendidikan Murid Orang Asli peringkat kebangsaan 2025. Sebagai Ketua Hakim peringkat negeri Selangor, diberi mandat JPN Selangor menjadi ketua jurulatih — membantu memperbaiki teks sajak, sebutan dan gaya persembahan. Kejayaan ini memecahkan kemarau pencapaian Selangor bagi kategori ini di peringkat kebangsaan.', ['pertandingan', 'bimbingan']],
+  ['Pasukan Scrabble sekolah', 'Jurulatih', 'Buat pertama kalinya pasukan Scrabble SK Abdul Samat menduduki kelompok 30 terbaik daripada hampir 80 sekolah rendah di daerah Klang.', ['pertandingan', 'bimbingan']],
+  ['Pasukan TKRS sekolah', 'Jurulatih pengucapan awam', 'Latihan intensif selama seminggu semasa waktu rehat dan selepas PdPC untuk 10 kadet TKRS, dengan penghasilan lebih 20 teks pidato. Kesemua kadet berjaya dinaikkan pangkat sebagai Koperal TKRS.', ['bimbingan']],
+  ['Pasukan Show and Tell', 'Anugerah Emas peringkat kebangsaan', 'Membimbing, melatih, menyediakan skrip serta merekod pembentangan bagi pertandingan Show &amp; Tell sempena Karnival HIP peringkat kebangsaan 2024.', ['pertandingan', 'bimbingan']],
+  ['Muhammad Daaris Amsyar bin Mohd Rozi', 'Tempat ke-4 Dare to Spell PPD Klang', 'Berjaya mendapat tempat ke-4 daripada 70 peserta keseluruhan di peringkat PPD Klang.', ['pertandingan', 'bimbingan']],
+  ['Pasukan English Sketch SKAS', 'Johan negeri Selangor 2022', 'Melatih hampir 20 murid selama hampir 3 bulan untuk sebuah pementasan. Pasukan drama Bahasa Inggeris 2021 dan 2022, diangkat sebagai Johan peringkat negeri Selangor pada 2022.', ['pertandingan', 'bimbingan']],
+  ['Pasukan Poetry Recitation SK Abdul Samat', 'Johan Karnival Koakademik Selangor 2023', 'Berganding bahu bersama Cikgu Nazirah menukilkan sebuah sajak yang berjaya menjadi Johan dalam Karnival Koakademik Bahasa Inggeris peringkat negeri Selangor tahun 2023.', ['pertandingan']],
+  ['Dua murid — bacaan doa &amp; lafaz ikrar', 'AJK acara peringkat kebangsaan', 'Dua murid terpilih oleh pihak penganjur untuk mengetuai bacaan doa dan lafaz ikrar dalam pertandingan akhir Seni Kraf Kolaj peringkat kebangsaan 2024 — dalam program yang sama, calon bertugas sebagai juruacara majlis.', ['bimbingan']],
+  ['Abid, Nadia, Rizqi &amp; Cinta', 'Bakat pengacaraan', 'Abid dan Nadia kini pelajar IPGM Kampus Bahasa Antarabangsa. Rizqi dan Cinta kini di sekolah menengah dan masih menggalas tugas sebagai pengacara majlis rasmi di sekolah mereka.', ['bimbingan', 'bekas']],
+  ['53 murid — Pidato 3 Minit Bahasa Inggeris', 'Aspirasi MADANI KPM 2024', 'Penyertaan 53 murid dalam pertandingan pidato 3 minit Bahasa Inggeris.', ['pertandingan']],
+  ['Pasukan Choral Speaking SK Abdul Samat', 'Peringkat negeri Selangor 2022', 'Mara ke peringkat negeri Selangor pada tahun 2022.', ['pertandingan']],
+  ['HIP: Let’s Read and Share', 'Peringkat kebangsaan 2021', 'Penyertaan dalam pertandingan HIP: Let’s Read and Share peringkat kebangsaan.', ['pertandingan']],
+  ['Show and Tell HIPMAX', 'Pencapaian Emas kebangsaan 2024', 'Pencapaian Emas dalam pertandingan Show and Tell HIPMAX peringkat kebangsaan 2024.', ['pertandingan']],
+];
+
+const TAPIS = [
+  ['semua', 'Semua'],
+  ['pertandingan', 'Pertandingan'],
+  ['bimbingan', 'Bimbingan individu'],
+  ['bekas', 'Bekas murid'],
 ];
 
 function halamanKemenjadian() {
@@ -896,12 +920,21 @@ ${kepalaLaman('Bahagian 6.7', 'Kemenjadian murid',
         kaki: pautanEvidens('kemenjadian', 'Buka Bahagian 6.7 (24 hlm.)'),
       })}
     </div>
-    <div class="grid grid-2 grid-rapat">
-      ${KEMENJADIAN.map(([nama, peranan, teks]) => kad({
-        label: peranan,
-        tajuk: nama,
-        teks,
-      })).join('\n      ')}
+    <!-- Bar penapis. Disembunyikan secara lalai dan didedahkan oleh JS,
+         supaya tanpa JavaScript kesemua 16 kisah tetap terpapar. -->
+    <div class="tapis" id="tapis-kemenjadian" role="group" aria-label="Tapis kisah kemenjadian" hidden>
+      ${TAPIS.map(([kunci, label]) => {
+        const bil = kunci === 'semua' ? KEMENJADIAN.length : KEMENJADIAN.filter((k) => k[3].includes(kunci)).length;
+        return `<button type="button" class="tapis-btn" data-tapis="${kunci}" aria-pressed="${kunci === 'semua'}">${label} <span class="tapis-bil">${bil}</span></button>`;
+      }).join('\n      ')}
+    </div>
+    <p class="tapis-kira" role="status" aria-live="polite"></p>
+
+    <div class="grid grid-2 grid-rapat" id="senarai-kemenjadian">
+      ${KEMENJADIAN.map(([nama, peranan, teks, kategori]) => {
+        const k = kad({ label: peranan, tajuk: nama, teks });
+        return k.replace('<div class="kad"', `<div class="kad" data-kategori="${kategori.join(' ')}"`);
+      }).join('\n      ')}
     </div>
   </div>
 </section>
