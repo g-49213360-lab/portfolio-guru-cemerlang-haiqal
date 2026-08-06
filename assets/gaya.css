@@ -266,7 +266,10 @@ p:last-child { margin-bottom: 0; }
   padding: var(--r7) var(--r4) 0;
 }
 .hero-teks { padding-bottom: var(--r7); }
-.hero h1 { color: #fff; margin: var(--r3) 0 0; max-width: 15ch; }
+/* Nama pada satu baris di desktop. Ia hanya membalut apabila skrin
+   benar-benar terlalu sempit untuk memuatkannya. */
+.hero h1 { color: #fff; margin: var(--r3) 0 0; white-space: nowrap; }
+@media (max-width: 1080px) { .hero h1 { white-space: normal; } }
 .hero-jawatan { margin-top: var(--r4); font-size: 1.02rem; color: rgba(255, 255, 255, .8); max-width: 48ch; }
 .hero-jawatan strong { color: #fff; font-weight: 700; }
 .hero-gred {
@@ -318,10 +321,35 @@ p:last-child { margin-bottom: 0; }
   background: radial-gradient(680px 320px at 90% 4%, rgba(207, 161, 86, .24), transparent 62%);
 }
 .laman-kepala .balut { position: relative; z-index: 2; }
-.laman-kepala h1 { color: #fff; font-size: clamp(1.85rem, 4vw, 2.6rem); margin-top: var(--r3); max-width: 20ch; }
+.laman-kepala h1 { color: #fff; font-size: clamp(1.85rem, 4vw, 2.6rem); margin-top: var(--r3); }
 .laman-kepala .pengenalan {
   margin-top: var(--r3); max-width: 62ch;
   color: rgba(255, 255, 255, .74); font-size: 1.02rem;
+}
+
+/* Jalur sorotan kejayaan di dalam kepala halaman. Tujuan laman ini
+   mempromosi pencapaian, jadi setiap bahagian membuka dengan angka
+   pencapaiannya sendiri, bukan terus kepada teks. */
+.kepala-sorotan {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: var(--r4);
+  margin-top: var(--r6); padding-top: var(--r5);
+  border-top: 1px solid rgba(255, 255, 255, .13);
+}
+.kepala-sorotan > div { display: flex; flex-direction: column; gap: 5px; }
+.sorotan-nilai {
+  font-family: var(--f-tajuk); font-weight: 600; font-size: 1.5rem;
+  line-height: 1.15; color: #fff; letter-spacing: -.01em;
+}
+.sorotan-nilai em {
+  font-family: var(--f-teks); font-style: normal;
+  color: var(--emas-terang); font-size: .55em; font-weight: 700; margin-left: .25em;
+}
+.sorotan-label { font-size: .81rem; line-height: 1.45; color: rgba(255, 255, 255, .58); }
+@media (max-width: 760px) {
+  .kepala-sorotan { grid-template-columns: 1fr; gap: var(--r3); margin-top: var(--r5); padding-top: var(--r4); }
+  .kepala-sorotan > div { flex-direction: row; align-items: baseline; gap: var(--r3); }
+  .sorotan-nilai { flex: none; min-width: 4.5em; }
 }
 
 /* ------------------------------------------------------------ STATISTIK */
@@ -385,6 +413,12 @@ p:last-child { margin-bottom: 0; }
 /* Susunan dua lajur untuk teks + sisipan; sisi tidak diregangkan */
 .belah { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--r6); align-items: start; }
 .belah > * { min-width: 0; }
+
+/* Lajur sisi yang lebih pendek daripada lajur utama akan meninggalkan
+   ruang kosong. Melekatkannya semasa skrol menghapuskan ruang itu dan
+   mengekalkan evidens dalam pandangan sepanjang senarai dibaca. */
+.lekat { position: sticky; top: 92px; display: grid; gap: var(--r4); }
+@media (max-width: 760px) { .lekat { position: static; } }
 
 @media (max-width: 1000px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } .grid-3 { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 760px) {
@@ -588,7 +622,27 @@ table.jad td { color: var(--arang); font-weight: 600; line-height: 1.5; }
 
 .dok-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(194px, 1fr)); gap: var(--r4); }
 .dok-grid > * { min-width: 0; }
-.dok-solo { max-width: 208px; }
+
+/* Kad dokumen mendatar — untuk dokumen tunggal yang berdiri di sebelah
+   kad lain. Ia mengisi lebar lajur penuh, jadi tiada lagi kad sempit
+   bersebelahan kad lebar dalam lajur yang sama. */
+.dok-baris {
+  display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: var(--r4);
+  align-items: start; width: 100%; text-align: left;
+  background: #fff; border: 1px solid var(--garis); border-radius: var(--lengkung);
+  padding: var(--r4); cursor: pointer; font: inherit; color: inherit;
+  transition: box-shadow var(--tt), border-color var(--tt), transform var(--tt);
+}
+.dok-baris:hover { box-shadow: var(--bayang-2); border-color: #ccd5e2; transform: translateY(-2px); }
+.dok-baris img {
+  width: 96px; aspect-ratio: 1 / 1.414; object-fit: cover; object-position: top center;
+  border-radius: var(--lengkung-s); border: 1px solid var(--garis);
+}
+.dok-baris-teks { display: flex; flex-direction: column; gap: var(--r1); min-width: 0; }
+@media (max-width: 480px) {
+  .dok-baris { grid-template-columns: 72px minmax(0, 1fr); gap: var(--r3); }
+  .dok-baris img { width: 72px; }
+}
 /* Pada telefon, paksa dua lajur — satu lajur menjadikan kulit terlalu besar */
 @media (max-width: 640px) {
   .dok-grid { grid-template-columns: repeat(2, 1fr); gap: var(--r3); }

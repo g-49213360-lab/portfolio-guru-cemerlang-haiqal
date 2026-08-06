@@ -117,7 +117,20 @@ function kadDok(kunci, nota = '') {
         </button>`;
 }
 
-const kadDokSolo = (kunci, nota = '') => `<div class="dok-solo">${kadDok(kunci, nota)}</div>`;
+/** Kad dokumen mendatar — mengisi lebar lajur penuh. Guna ini apabila
+    satu dokumen berdiri di sebelah kad lain, supaya lebarnya sepadan. */
+function kadDokBaris(kunci, nota = '') {
+  const d = DOK[kunci];
+  return `<button type="button" class="dok-baris" data-dok="${d.id}" data-dok-tajuk="${esc(d.tajuk)}" data-dok-sub="${esc(d.bhg)} · ${d.hlm} halaman">
+          <img src="assets/kulit/${d.kulit}.jpg" alt="Muka depan ${esc(d.tajuk)}" loading="lazy" width="96" height="136">
+          <span class="dok-baris-teks">
+            <span class="dok-tajuk">${esc(d.tajuk)}</span>
+            <span class="dok-hlm">${esc(d.bhg)} · ${d.hlm} hlm.</span>
+            ${nota ? `<span class="dok-nota">${nota}</span>` : ''}
+            <span class="kad-pautan" style="margin-top:var(--r2)">Papar dokumen</span>
+          </span>
+        </button>`;
+}
 
 /**
  * Kad seragam. Semua kad di seluruh laman melalui fungsi ini supaya
@@ -158,13 +171,24 @@ function kepalaSek({ label, tajuk, pengenalan = '', tengah = false }) {
       </div>`;
 }
 
-/** Kepala halaman (bukan Utama) */
-function kepalaLaman(label, tajuk, pengenalan) {
+/**
+ * Kepala halaman (bukan Utama).
+ * `sorotan` — tiga pencapaian utama bahagian itu, dipaparkan sebagai jalur
+ * di bawah pengenalan. Tujuan laman ini mempromosi kejayaan, jadi setiap
+ * halaman membuka dengan angkanya, bukan terus kepada teks.
+ */
+function kepalaLaman(label, tajuk, pengenalan, sorotan = []) {
   return `<section class="laman-kepala">
   <div class="balut">
     <span class="lencana">${esc(label)}</span>
     <h1>${esc(tajuk)}</h1>
     <p class="pengenalan">${pengenalan}</p>
+    ${sorotan.length ? `<div class="kepala-sorotan">
+      ${sorotan.map(([nilai, unit, label]) => `<div>
+        <span class="sorotan-nilai">${nilai}${unit ? `<em>${unit}</em>` : ''}</span>
+        <span class="sorotan-label">${label}</span>
+      </div>`).join('\n      ')}
+    </div>` : ''}
   </div>
 </section>`;
 }
@@ -461,8 +485,13 @@ const PENDIDIKAN = [
 
 function halamanProfil() {
   const badan = `
-${kepalaLaman('Bahagian 1.0 · Dokumentasi', 'Profil, kelayakan & dokumentasi rasmi',
-    'Maklumat asas calon, latar pendidikan, skor pencerapan PdP dan kesemua dokumen rasmi yang disertakan dalam Bahagian 1.0 hingga 1.11 portfolio.')}
+${kepalaLaman('Bahagian 1.0 · Dokumentasi', 'Profil & kelayakan',
+    'Maklumat asas calon, latar pendidikan, skor pencerapan PdP dan kesemua dokumen rasmi yang disertakan dalam Bahagian 1.0 hingga 1.11 portfolio.',
+    [
+      ['~14', 'tahun', 'Perkhidmatan pendidikan sejak 2012, bermula di SK Layon, Nabawan, Sabah'],
+      ['4', 'lantikan', 'Jurulatih utama peringkat negeri dan kebangsaan, termasuk Master Trainer CEFR'],
+      ['2', 'ijazah', 'Sarjana Muda TESL Universiti Malaya dan Sarjana Pendidikan Awal Kanak-Kanak'],
+    ])}
 
 <section class="sek">
   <div class="balut">
@@ -593,8 +622,13 @@ const INOVASI_KONGSI = [
 
 function halamanKepakaran() {
   const badan = `
-${kepalaLaman('Bahagian 2.0 · 3.0 · 5.0', 'Kepakaran, penulisan & inovasi',
-    'Penulisan profesional dan buku berdaftar ISBN, kajian tindakan berasaskan AI, inovasi pengintegrasian digital dalam bilik darjah, serta program dan latihan yang dihadiri.')}
+${kepalaLaman('Bahagian 2.0 · 3.0 · 5.0', 'Kepakaran & inovasi',
+    'Penulisan profesional dan buku berdaftar ISBN, kajian tindakan berasaskan AI, inovasi pengintegrasian digital dalam bilik darjah, serta program dan latihan yang dihadiri.',
+    [
+      ['Gold', 'award', 'Best Innovation Gold Award bagi kajian penulisan karangan menerusi Google Gemini'],
+      ['3', 'buku', 'Buku cerita Bahasa Inggeris berdaftar ISBN di Perpustakaan Negara Malaysia'],
+      ['36', 'daripada 36', 'Murid Tahun 4 menghantar tugasan tepat pada masa selepas beralih ke Canva'],
+    ])}
 
 <section class="sek" id="penulisan">
   <div class="balut">
@@ -607,13 +641,13 @@ ${kepalaLaman('Bahagian 2.0 · 3.0 · 5.0', 'Kepakaran, penulisan & inovasi',
       <ol class="senarai-nombor">
         ${PENULISAN.map(([t, thn, k]) => `<li><strong>${t}</strong><span>${thn ? `<b style="color:var(--emas);font-weight:700">${thn}</b> · ` : ''}${k}</span></li>`).join('\n        ')}
       </ol>
-      <div style="display:grid;gap:var(--r4)">
+      <div class="lekat">
         ${kad({
           label: 'Pendaftaran ISBN', emas: true,
           tajuk: 'Tiga buah buku cerita dan sebuah modul berdaftar ISBN',
           teks: 'Kesemuanya didaftarkan di Perpustakaan Negara Malaysia — bukti sumbangan penulisan yang kekal dan boleh dirujuk.',
         })}
-        ${kadDokSolo('kajian', 'Sembilan evidens penulisan profesional, termasuk muka hadapan dan belakang setiap buku.')}
+        ${kadDokBaris('kajian', 'Sembilan evidens penulisan profesional, termasuk muka hadapan dan belakang setiap buku.')}
       </div>
     </div>
   </div>
@@ -678,7 +712,7 @@ ${kepalaLaman('Bahagian 2.0 · 3.0 · 5.0', 'Kepakaran, penulisan & inovasi',
       <ol class="senarai-nombor">
         ${PROGRAM.map(([t, p]) => `<li><strong>${t}</strong><span>${p}</span></li>`).join('\n        ')}
       </ol>
-      <div>${kadDokSolo('program', 'Sijil, surat dan gambar bagi kesepuluh program.')}</div>
+      <div class="lekat">${kadDokBaris('program', 'Sijil, surat dan gambar bagi kesepuluh program.')}</div>
     </div>
   </div>
 </section>
@@ -783,8 +817,13 @@ const PERINGKAT_SOKONGAN = [
 
 function halamanWau() {
   const badan = `
-${kepalaLaman('Bahagian 4.0 · 6.0', 'Faktor WAU & anugerah kecemerlangan',
-    'Lapan faktor WAU yang merangkumkan sumbangan di luar bilik darjah — dan dua anugerah kecemerlangan terkini di peringkat kebangsaan.')}
+${kepalaLaman('Bahagian 4.0 · 6.0', 'Faktor WAU & anugerah',
+    'Lapan faktor WAU yang merangkumkan sumbangan di luar bilik darjah — dan dua anugerah kecemerlangan terkini di peringkat kebangsaan.',
+    [
+      ['20+', 'episod', 'Penyampai DidikTV KPM sepanjang 2022 hingga 2025'],
+      ['2', 'antarabangsa', 'Pengacara majlis SEAMEO SEN 2026 dan ASEAN 2025'],
+      ['5', 'peringkat', 'Sumbangan direkodkan dari peringkat institusi hingga antarabangsa'],
+    ])}
 
 <section class="sek">
   <div class="balut">
@@ -904,7 +943,12 @@ const TAPIS = [
 function halamanKemenjadian() {
   const badan = `
 ${kepalaLaman('Bahagian 6.7', 'Kemenjadian murid',
-    'Enam belas kisah kemenjadian yang direkodkan dalam portfolio — pencapaian pertandingan, bimbingan individu, dan bekas murid yang kini meneruskan jejak dalam pendidikan dan seni.')}
+    'Enam belas kisah kemenjadian yang direkodkan dalam portfolio — pencapaian pertandingan, bimbingan individu, dan bekas murid yang kini meneruskan jejak dalam pendidikan dan seni.',
+    [
+      ['2', 'johan', 'Johan peringkat negeri Selangor — English Sketch 2022 dan Poetry Recitation 2023'],
+      ['2', 'emas', 'Anugerah Emas Show and Tell peringkat kebangsaan pada 2024'],
+      ['16', 'kisah', 'Daripada bimbingan individu hingga pasukan sekolah, direkodkan satu per satu'],
+    ])}
 
 <section class="sek">
   <div class="balut">
@@ -973,7 +1017,12 @@ const TESTIMONI_TULIS = [
 function halamanTestimoni() {
   const badan = `
 ${kepalaLaman('Bahagian 7.0 · 8.0', 'Testimoni & penghargaan',
-    'Sebuah video testimoni yang menghimpunkan sepuluh suara — pentadbir, rakan guru, kakitangan sekolah, pengurusan DidikTV KPM dan wakil ibu bapa — serta lima testimoni bertulis.')}
+    'Sebuah video testimoni yang menghimpunkan sepuluh suara — pentadbir, rakan guru, kakitangan sekolah, pengurusan DidikTV KPM dan wakil ibu bapa — serta lima testimoni bertulis.',
+    [
+      ['10', 'suara', 'Dalam satu video khas, daripada Guru Besar hinggalah pengawal keselamatan sekolah'],
+      ['5', 'bertulis', 'Termasuk bekas Guru Besar dan pegawai SISC+ PPD Klang'],
+      ['3', 'pihak', 'Pentadbir sekolah, rakan guru dan ibu bapa — ketiga-tiganya bersuara'],
+    ])}
 
 <section class="sek">
   <div class="balut">
@@ -1007,7 +1056,7 @@ ${kepalaLaman('Bahagian 7.0 · 8.0', 'Testimoni & penghargaan',
         butir: TESTIMONI_TULIS,
         kaki: pautanEvidens('testimoni', 'Buka Bahagian 7.0'),
       })}
-      <div>${kadDokSolo('testimoni', 'Senarai penuh pemberi testimoni, kod QR video khas dan salinan testimoni bertulis.')}</div>
+      <div class="lekat">${kadDokBaris('testimoni', 'Senarai penuh pemberi testimoni, kod QR video khas dan salinan testimoni bertulis.')}</div>
     </div>
   </div>
 </section>
@@ -1049,8 +1098,13 @@ const SUSUN_DOK = [
 function halamanDokumen() {
   const jumlahHlm = Object.values(DOK).reduce((a, d) => a + d.hlm, 0);
   const badan = `
-${kepalaLaman('Arkib', 'Arkib dokumen permohonan',
-    `Kesemua ${Object.keys(DOK).length} fail PDF yang dikemukakan bersama permohonan ini — sebanyak ${jumlahHlm} halaman evidens. Klik mana-mana kulit untuk membacanya tanpa meninggalkan laman.`)}
+${kepalaLaman('Arkib', 'Arkib dokumen',
+    `Kesemua ${Object.keys(DOK).length} fail PDF yang dikemukakan bersama permohonan ini. Klik mana-mana kulit untuk membacanya tanpa meninggalkan laman.`,
+    [
+      [`${Object.keys(DOK).length}`, 'fail', 'Setiap fail dipaparkan terus daripada folder Drive asal, tanpa salinan berasingan'],
+      [`${jumlahHlm}`, 'halaman', 'Evidens bernombor sehingga halaman 311 dalam portfolio bercetak'],
+      ['8', 'bahagian', 'Daripada dokumentasi rasmi hingga testimoni dan penghargaan'],
+    ])}
 
 <section class="sek">
   <div class="balut">
