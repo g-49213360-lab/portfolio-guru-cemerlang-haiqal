@@ -24,7 +24,9 @@ const CALON = {
   sijilGuru: 'G130316-03922',
   permohonan: 'Permohonan Guru Cemerlang DG12 · Sesi 2026',
   folderDrive: '1nGl9KcVwGUeID0KKAerAKqCRIoXrXb9N',
-  videoJourney: '', // ← letak pautan YouTube "MY JOURNEY" di sini bila ada
+  // Video "MY JOURNEY" — https://youtu.be/qyhawB76ucs
+  // Guna domain nocookie supaya YouTube tidak menetapkan kuki penjejakan sebelum video dimainkan.
+  videoJourney: 'https://www.youtube-nocookie.com/embed/qyhawB76ucs?rel=0',
 };
 
 /* --------------------------------------------------------------- DOKUMEN */
@@ -338,7 +340,12 @@ function halamanUtama() {
     </div>
     <div class="pusat">
       ${CALON.videoJourney
-        ? `<div style="max-width:820px;margin-inline:auto;aspect-ratio:16/9;border-radius:var(--radius);overflow:hidden;box-shadow:var(--bayang-2)"><iframe style="width:100%;height:100%;border:0" src="${CALON.videoJourney}" title="MY JOURNEY — Permohonan Guru Cemerlang DG12 2026" allowfullscreen></iframe></div>`
+        ? `<div style="max-width:860px;margin-inline:auto;aspect-ratio:16/9;border-radius:var(--radius);overflow:hidden;box-shadow:var(--bayang-2);background:#000">
+          <iframe style="width:100%;height:100%;border:0;display:block" src="${CALON.videoJourney}" title="MY JOURNEY — Permohonan Guru Cemerlang DG12 2026" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>
+        </div>
+        <div style="margin-top:20px">
+          <a class="btn btn-garis btn-kecil" href="https://youtu.be/qyhawB76ucs" target="_blank" rel="noopener">Tonton di YouTube <span aria-hidden="true">→</span></a>
+        </div>`
         : `<div class="nota" style="max-width:620px;margin-inline:auto;text-align:left"><strong>Perlu diisi:</strong> pautan YouTube video “MY JOURNEY (Permohonan Guru Cemerlang DG12 2026)” belum ada — dalam Resume ia hanya diberikan sebagai kod QR. Beri pautan tersebut dan ia akan terbenam di sini. Sementara itu, kod QR boleh dilihat pada halaman 3 Resume.</div>
         <div style="margin-top:20px">${pautanEvidens('resume', 'Buka Resume (halaman kod QR)')}</div>`}
     </div>
