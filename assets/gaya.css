@@ -217,7 +217,7 @@ main:focus { outline: none; }
   padding: 8px 12px; border-radius: var(--lengkung-s);
   transition: color var(--tt), background var(--tt); white-space: nowrap;
 }
-.nav a:hover { background: var(--kertas-3); color: var(--arang); text-decoration: none; }
+.nav a:hover { background: var(--biru-lembut); color: var(--biru); text-decoration: none; }
 .nav a[aria-current="page"] { color: var(--biru); background: var(--biru-lembut); }
 
 .butang-menu {
@@ -266,7 +266,12 @@ main:focus { outline: none; }
 .btn-hantu { background: rgba(255, 255, 255, .07); color: #fff; border-color: rgba(255, 255, 255, .28); }
 .btn-hantu:hover { background: rgba(255, 255, 255, .14); transform: translateY(-1px); }
 .btn-garis { background: #fff; color: var(--arang); border-color: var(--garis); }
-.btn-garis:hover { border-color: var(--kelabu-muda); transform: translateY(-1px); }
+.btn-garis:hover {
+  border-color: var(--biru); background: var(--biru-lembut); color: var(--biru);
+  transform: translateY(-1px);
+}
+.btn-garis:active { background: #e3ecf8; transform: translateY(0); }
+.btn-utama:active, .btn-hantu:active { transform: translateY(0); }
 .btn-kecil { padding: 9px 16px; font-size: .81rem; }
 
 .btn-baris { display: flex; flex-wrap: wrap; gap: 10px; }
@@ -489,9 +494,32 @@ main:focus { outline: none; }
 }
 .kad-emas > .label { color: var(--emas); font-weight: 800; }
 
-.kad:hover { box-shadow: var(--bayang-2); border-color: #dcd6cd; transform: translateY(-2px); }
-.kad-emas:hover { border-color: rgba(163, 118, 44, .5); }
-a.kad, a.kad:hover { text-decoration: none; color: inherit; }
+a.kad { text-decoration: none; color: inherit; }
+a.kad:hover { text-decoration: none; }
+
+/* Hover hanya pada peranti yang benar-benar ada penuding — pada skrin
+   sentuh, gaya hover melekat selepas ketikan. Lihat :active di bawah. */
+@media (hover: hover) {
+  /* Kad statik: angkat halus tanpa warna. Ia tidak boleh diklik, jadi
+     ia tidak sepatutnya kelihatan begitu. */
+  .kad:hover { box-shadow: var(--bayang-2); border-color: #ccd5e2; transform: translateY(-2px); }
+  .kad-emas:hover { border-color: rgba(163, 118, 44, .55); }
+
+  /* Kad yang boleh diklik: warna biru jelas. */
+  a.kad:hover {
+    border-color: var(--biru); background: var(--biru-lembut); box-shadow: var(--bayang-2);
+  }
+  a.kad:hover h3 { color: var(--biru); }
+  a.kad:hover .kad-pautan { text-decoration: underline; text-underline-offset: 3px; }
+
+  /* Kad anugerah kekal emas apabila dihover, bukan bertukar biru. */
+  a.kad-emas:hover { border-color: var(--emas); background: var(--emas-lembut); }
+  a.kad-emas:hover h3 { color: var(--emas); }
+}
+
+/* Maklum balas ketikan pada skrin sentuh, menggantikan hover */
+a.kad:active { background: var(--biru-lembut); border-color: var(--biru); }
+a.kad-emas:active { background: var(--emas-lembut); border-color: var(--emas); }
 
 .kad > .label { margin-bottom: var(--r2); }
 .kad > h3 { margin-bottom: var(--r2); }
@@ -530,7 +558,8 @@ a.kad, a.kad:hover { text-decoration: none; color: inherit; }
   padding: 9px 16px; line-height: 1.2;
   transition: color var(--tt), background var(--tt), border-color var(--tt);
 }
-.tapis-btn:hover { color: var(--arang); border-color: var(--kelabu-muda); }
+.tapis-btn:hover { color: var(--biru); border-color: var(--biru); background: var(--biru-lembut); }
+.tapis-btn[aria-pressed="true"]:hover { color: #fff; background: var(--biru-tua); border-color: var(--biru-tua); }
 
 .tapis-bil {
   font-size: .72rem; font-weight: 700; font-variant-numeric: tabular-nums;
@@ -677,7 +706,15 @@ table.jad td { color: var(--arang); font-weight: 600; line-height: 1.5; }
   padding: var(--r4); cursor: pointer; font: inherit; color: inherit;
   transition: box-shadow var(--tt), border-color var(--tt), transform var(--tt);
 }
-.dok-baris:hover { box-shadow: var(--bayang-2); border-color: #ccd5e2; transform: translateY(-2px); }
+@media (hover: hover) {
+  .dok-baris:hover {
+    box-shadow: var(--bayang-2); transform: translateY(-2px);
+    border-color: var(--biru); background: var(--biru-lembut);
+  }
+  .dok-baris:hover .dok-tajuk { color: var(--biru); }
+  .dok-baris:hover .kad-pautan { text-decoration: underline; text-underline-offset: 3px; }
+}
+.dok-baris:active { border-color: var(--biru); background: var(--biru-lembut); }
 .dok-baris img {
   width: 96px; aspect-ratio: 1 / 1.414; object-fit: cover; object-position: top center;
   border-radius: var(--lengkung-s); border: 1px solid var(--garis);
@@ -701,7 +738,14 @@ table.jad td { color: var(--arang); font-weight: 600; line-height: 1.5; }
   cursor: pointer; font: inherit; color: inherit;
   transition: box-shadow var(--tt), border-color var(--tt), transform var(--tt);
 }
-.dok:hover { box-shadow: var(--bayang-2); border-color: #dcd6cd; transform: translateY(-3px); }
+@media (hover: hover) {
+  .dok:hover {
+    box-shadow: var(--bayang-2); transform: translateY(-3px);
+    border-color: var(--biru); background: var(--biru-lembut);
+  }
+  .dok:hover .dok-tajuk { color: var(--biru); }
+}
+.dok:active { border-color: var(--biru); background: var(--biru-lembut); }
 .dok-kulit { display: block; aspect-ratio: 1 / 1.414; background: var(--kertas-3); overflow: hidden; position: relative; }
 .dok-kulit img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
 .dok-kulit::after {
