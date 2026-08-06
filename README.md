@@ -14,8 +14,22 @@ permohonan — 299 halaman evidens — kepada tujuh halaman yang boleh dilayari.
 | Sandaran (GitHub Pages) | <https://g-49213360-lab.github.io/portfolio-guru-cemerlang-haiqal/> |
 | Repo | <https://github.com/g-49213360-lab/portfolio-guru-cemerlang-haiqal> |
 
-Vercel disambungkan kepada repo GitHub ini. **Setiap `git push` ke `main` akan
-melancarkan deployment produksi baharu secara automatik** — tiada arahan tambahan perlu.
+### Cara melancarkan kemas kini
+
+Laman ini diterbitkan ke Vercel di bawah skop **sir-aliff**, projek `mrmohdhaiqal`.
+Selepas mengedit kandungan:
+
+```bash
+cd "laman-web" && node bina.mjs && npx vercel@latest deploy --prod --yes
+```
+
+Itu sahaja — tiada GitHub diperlukan. Vercel CLI menggunakan token sendiri, jadi
+akaun `gh` yang aktif tidak penting.
+
+Repo GitHub `g-49213360-lab/portfolio-guru-cemerlang-haiqal` masih tersambung kepada
+projek Vercel, jadi `git push` ke `main` juga akan mencetuskan deployment. Tetapi push
+memerlukan akaun `g-49213360-lab` aktif dalam `gh` — gunakan cara Vercel di atas untuk
+mengelak kerumitan itu.
 
 ---
 
@@ -56,10 +70,11 @@ dan telah dinyahkod semula untuk mengesahkan ia membawa ke `https://mrmohdhaiqal
 
 ## Cara mengemas kini kandungan
 
-Semua teks, senarai dan ID fail Drive terkumpul dalam `bina.mjs`. Selepas mengedit:
+Semua teks, senarai dan ID fail Drive terkumpul dalam `bina.mjs`. Selepas mengedit,
+jana semula HTML dan terus lancarkan:
 
 ```bash
-node bina.mjs
+node bina.mjs && npx vercel@latest deploy --prod --yes
 ```
 
 ## Bagaimana PDF dipaparkan
