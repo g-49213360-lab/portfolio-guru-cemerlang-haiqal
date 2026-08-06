@@ -28,6 +28,10 @@ const cap = (fail) => {
     return '0';
   }
 };
+/* Tarikh bina, dipaparkan pada footer supaya panel tahu laman ini terkini. */
+const TARIKH = new Intl.DateTimeFormat('ms-MY', { day: 'numeric', month: 'long', year: 'numeric' })
+  .format(new Date());
+
 const V = { gaya: cap('assets/gaya.css'), laman: cap('assets/laman.js'), fon: cap('assets/fon.css') };
 
 /* ---------------------------------------------------------------- MAKLUMAT */
@@ -60,23 +64,23 @@ const VIDEO = {
 /* --------------------------------------------------------------- DOKUMEN */
 
 const DOK = {
-  resume:       { id: '1VIUTVQUc0FPMR6kgEpsANfiZVNhFDD5u', kulit: 'resume',       tajuk: 'Resume Calon',                          hlm: 3,  bhg: 'Pengenalan' },
-  kompetensi:   { id: '1hleS1TNpv1ZFaRXJtyZ5c93-faAKEJJr', kulit: 'kompetensi',   tajuk: 'Lembaran Kompetensi & Dokumentasi',      hlm: 26, bhg: 'Bahagian 1.0' },
-  lnpt:         { id: '133OL1oeaPPaT2YJjGQQ-lVyoo0F5RsXg', kulit: 'lnpt',         tajuk: 'Markah Prestasi LNPT 2023–2025',        hlm: 4,  bhg: 'Bahagian 1.4' },
-  surat:        { id: '1_PjkNHvCjdvqp5vq8lix6tXWbnQZBCH3', kulit: 'surat',        tajuk: 'Salinan Surat-Surat Perkhidmatan',       hlm: 5,  bhg: 'Bahagian 1.5' },
-  akademik:     { id: '13CTMQ1A62SI3LO_vHT5rmeDXNM26N4Fj', kulit: 'akademik',     tajuk: 'Sijil Kelulusan Akademik',              hlm: 3,  bhg: 'Bahagian 1.6' },
-  perkhidmatan: { id: '1Nd5HzbUU_SPna6fOjc5XwmSVjDg-jGHy', kulit: 'perkhidmatan', tajuk: 'Kenyataan Perkhidmatan',                hlm: 26, bhg: 'Bahagian 1.8' },
-  harta:        { id: '1IQu1I-vf2zj1cx5AcJGjoDLzP3jz6vBf', kulit: 'harta',        tajuk: 'Surat Pengisytiharan Harta',            hlm: 2,  bhg: 'Bahagian 1.9' },
-  jadual:       { id: '1eL0vZNK7SuZnzdvhy-54iB24dH08h8ia', kulit: 'jadual',       tajuk: 'Jadual Waktu Mengajar 2023–2026',       hlm: 5,  bhg: 'Bahagian 1.10' },
-  sijil:        { id: '1XIg-BYdbL8IALvrHpEiKhe49Xv0WIgtV', kulit: 'sijil',        tajuk: 'Sijil, Surat Penghargaan & Dokumen Sokongan', hlm: 64, bhg: 'Bahagian 1.11' },
-  program:      { id: '1Y7OEKldt7PubtyipmhccNaBJdZ4sDyDL', kulit: 'program',      tajuk: 'Program & Latihan Yang Dihadiri',        hlm: 24, bhg: 'Bahagian 2.0' },
-  kajian:       { id: '1WWI-CslsOdfYFs5Ko5wtZ487zoluHtnO', kulit: 'kajian',       tajuk: 'Kajian, Kertas Kerja & Penulisan Profesional', hlm: 17, bhg: 'Bahagian 3.0' },
-  anugerah:     { id: '18RE03Vv7o0X53ieLEscERYrlFBibTSdN', kulit: 'anugerah',     tajuk: 'Anugerah Kecemerlangan & Pengiktirafan Terkini', hlm: 7, bhg: 'Bahagian 4.0' },
-  inovasi:      { id: '1AA6ImVtsGgccp6uC_CTOUqMasNLLBit_', kulit: 'inovasi',      tajuk: 'Inovasi Berkaitan Mata Pelajaran / Bidang Kepakaran', hlm: 10, bhg: 'Bahagian 5.0' },
-  wau:          { id: '177IMurG_YKZ40s1xDdzDGOYu3iUoVGWY', kulit: 'wau',          tajuk: 'Faktor WAU',                            hlm: 69, bhg: 'Bahagian 6.0' },
-  kemenjadian:  { id: '1WMDITOPLPj7R8qgqND2qaSwRdmGavXII', kulit: 'kemenjadian',  tajuk: 'Kemenjadian Murid',                     hlm: 24, bhg: 'Bahagian 6.7' },
-  testimoni:    { id: '125KWoEXp3FPvetfU8k2_LCv_3JU10bMJ', kulit: 'testimoni',    tajuk: 'Testimoni Calon',                       hlm: 8,  bhg: 'Bahagian 7.0' },
-  penghargaan:  { id: '1PTWzPlKS-qOVXZp2452T6szy1nJAS1ID', kulit: 'penghargaan',  tajuk: 'Penghargaan',                           hlm: 2,  bhg: 'Bahagian 8.0' },
+  resume: { id: '1VIUTVQUc0FPMR6kgEpsANfiZVNhFDD5u', kulit: 'resume',       tajuk: 'Resume Calon',                          hlm: 3,  bhg: 'Pengenalan', jenis: 'profil', ringkasan: 'Resume calon, Sijil Guru Malaysia dan pautan video MY JOURNEY.', sokong: 'Identiti, kelayakan dan lantikan calon', kunci: 'profil kelayakan lantikan my journey qr sijil guru malaysia' },
+  kompetensi: { id: '1hleS1TNpv1ZFaRXJtyZ5c93-faAKEJJr', kulit: 'kompetensi',   tajuk: 'Lembaran Kompetensi & Dokumentasi',      hlm: 26, bhg: 'Bahagian 1.0', jenis: 'rasmi', ringkasan: 'Borang pemarkahan pencerapan PdP 2026 oleh empat pencerap, borang permohonan dan lembaran kompetensi.', sokong: 'Kualiti PdP disahkan oleh Ketua Jabatan, PK dan rakan panitia', kunci: 'pencerapan pdp skor eviden ketua jabatan penolong kanan panitia borang permohonan' },
+  lnpt: { id: '133OL1oeaPPaT2YJjGQQ-lVyoo0F5RsXg', kulit: 'lnpt',         tajuk: 'Markah Prestasi LNPT 2023–2025',        hlm: 4,  bhg: 'Bahagian 1.4', jenis: 'rasmi', ringkasan: 'Markah prestasi Pegawai Perkhidmatan Pendidikan bagi 2023, 2024 dan 2025.', sokong: 'Prestasi perkhidmatan tiga tahun berturut-turut', kunci: 'prestasi tahunan markah 2023 2024 2025' },
+  surat: { id: '1_PjkNHvCjdvqp5vq8lix6tXWbnQZBCH3', kulit: 'surat',        tajuk: 'Salinan Surat-Surat Perkhidmatan',       hlm: 5,  bhg: 'Bahagian 1.5', jenis: 'rasmi', ringkasan: 'Surat kenaikan pangkat, pengesahan pelantikan dan pertukaran dari SK Layon ke SK Abdul Samat.', sokong: 'Rekod perkhidmatan rasmi', kunci: 'kenaikan pangkat pelantikan pengesahan pertukaran sk layon nabawan sabah' },
+  akademik: { id: '13CTMQ1A62SI3LO_vHT5rmeDXNM26N4Fj', kulit: 'akademik',     tajuk: 'Sijil Kelulusan Akademik',              hlm: 3,  bhg: 'Bahagian 1.6', jenis: 'rasmi', ringkasan: 'Ijazah Sarjana Muda TESL Universiti Malaya (2012) dan Ijazah Sarjana UNITAR (2016).', sokong: 'Kelayakan akademik opsyen Bahasa Inggeris', kunci: 'ijazah sarjana muda tesl universiti malaya unitar awal kanak-kanak' },
+  perkhidmatan: { id: '1Nd5HzbUU_SPna6fOjc5XwmSVjDg-jGHy', kulit: 'perkhidmatan', tajuk: 'Kenyataan Perkhidmatan',                hlm: 26, bhg: 'Bahagian 1.8', jenis: 'rasmi', ringkasan: 'Kenyataan perkhidmatan penuh sepanjang kerjaya.', sokong: 'Tempoh dan kesinambungan perkhidmatan', kunci: 'kenyataan rekod tempoh' },
+  harta: { id: '1IQu1I-vf2zj1cx5AcJGjoDLzP3jz6vBf', kulit: 'harta',        tajuk: 'Surat Pengisytiharan Harta',            hlm: 2,  bhg: 'Bahagian 1.9', jenis: 'rasmi', ringkasan: 'Surat pemakluman pengisytiharan harta terkini.', sokong: 'Pematuhan tatakelakuan perkhidmatan awam', kunci: 'pengisytiharan harta tatakelakuan' },
+  jadual: { id: '1eL0vZNK7SuZnzdvhy-54iB24dH08h8ia', kulit: 'jadual',       tajuk: 'Jadual Waktu Mengajar 2023–2026',       hlm: 5,  bhg: 'Bahagian 1.10', jenis: 'rasmi', ringkasan: 'Jadual waktu mengajar bagi 2023, 2024, 2025 dan 2026.', sokong: 'Beban mengajar sebenar dalam bilik darjah', kunci: 'waktu mengajar 2023 2024 2025 2026 beban' },
+  sijil: { id: '1XIg-BYdbL8IALvrHpEiKhe49Xv0WIgtV', kulit: 'sijil',        tajuk: 'Sijil, Surat Penghargaan & Dokumen Sokongan', hlm: 64, bhg: 'Bahagian 1.11', jenis: 'sumbangan', ringkasan: 'Evidens peringkat antarabangsa, kebangsaan, negeri, daerah dan institusi — sepuluh evidens setiap peringkat.', sokong: 'Sumbangan merentas lima peringkat', kunci: 'antarabangsa kebangsaan negeri daerah institusi ucmi k-semanis persidangan' },
+  program: { id: '1Y7OEKldt7PubtyipmhccNaBJdZ4sDyDL', kulit: 'program',      tajuk: 'Program & Latihan Yang Dihadiri',        hlm: 24, bhg: 'Bahagian 2.0', jenis: 'sumbangan', ringkasan: 'Sepuluh program dan latihan yang dihadiri, dari Persidangan Edufluencers KPM hingga bengkel semakan kurikulum.', sokong: 'Pembangunan profesional berterusan', kunci: 'bengkel latihan tot mbmmbi kurikulum kspk kssr kssm korea haemil gen-ai' },
+  kajian: { id: '1WWI-CslsOdfYFs5Ko5wtZ487zoluHtnO', kulit: 'kajian',       tajuk: 'Kajian, Kertas Kerja & Penulisan Profesional', hlm: 17, bhg: 'Bahagian 3.0', jenis: 'kajian', ringkasan: 'Tiga buku cerita ISBN, panel penulis modul BPK, modul intervensi PBD, abstrak kajian tindakan dan artikel Dewan Masyarakat.', sokong: 'Penulisan ilmiah dan kajian tindakan', kunci: 'gemini isbn buku cerita mobim pbd dbp dewan masyarakat abstrak modul intervensi uasa mmi' },
+  anugerah: { id: '18RE03Vv7o0X53ieLEscERYrlFBibTSdN', kulit: 'anugerah',     tajuk: 'Anugerah Kecemerlangan & Pengiktirafan Terkini', hlm: 7, bhg: 'Bahagian 4.0', jenis: 'sumbangan', ringkasan: 'Best Innovation Gold Award dan Bronze Pertandingan Kajian Tindakan (Terbuka) UPSI 2026.', sokong: 'Pengiktirafan kecemerlangan peringkat kebangsaan', kunci: 'gemini google ai gold award bronze upsi kebangsaan inovasi kajian tindakan karnival' },
+  inovasi: { id: '1AA6ImVtsGgccp6uC_CTOUqMasNLLBit_', kulit: 'inovasi',      tajuk: 'Inovasi Berkaitan Mata Pelajaran / Bidang Kepakaran', hlm: 10, bhg: 'Bahagian 5.0', jenis: 'kajian', ringkasan: 'Pengintegrasian Canva dan Google Classroom, 20+ set Blooket, perkongsian PdPC menerusi Telegram dan TikTok.', sokong: 'Inovasi bilik darjah dan perkongsian amalan', kunci: 'canva google classroom blooket telegram tiktok youtube facebook delima digital pbl projek gemini' },
+  wau: { id: '177IMurG_YKZ40s1xDdzDGOYu3iUoVGWY', kulit: 'wau',          tajuk: 'Faktor WAU',                            hlm: 69, bhg: 'Bahagian 6.0', jenis: 'sumbangan', ringkasan: 'Lapan faktor WAU: Edufluencer KPM, juruacara majlis, DidikTV, bahan sumber, ahli panel, penulis, kemenjadian murid dan kelas kondusif.', sokong: 'Sumbangan di luar bilik darjah', kunci: 'didiktv edufluencer seameo asean pengacara juruacara podcast panel penulis kelas kondusif madani' },
+  kemenjadian: { id: '1WMDITOPLPj7R8qgqND2qaSwRdmGavXII', kulit: 'kemenjadian',  tajuk: 'Kemenjadian Murid',                     hlm: 24, bhg: 'Bahagian 6.7', jenis: 'impak', ringkasan: 'Enam belas kisah kemenjadian murid, daripada johan peringkat negeri hingga bekas murid yang kini guru pelatih.', sokong: 'Impak langsung terhadap murid', kunci: 'johan emas poetry recitation english sketch scrabble tkrs show and tell choral speaking hip' },
+  testimoni: { id: '125KWoEXp3FPvetfU8k2_LCv_3JU10bMJ', kulit: 'testimoni',    tajuk: 'Testimoni Calon',                       hlm: 8,  bhg: 'Bahagian 7.0', jenis: 'impak', ringkasan: 'Sepuluh pemberi testimoni video dan lima testimoni bertulis, dari Guru Besar hingga wakil ibu bapa.', sokong: 'Pengesahan pihak ketiga terhadap calon', kunci: 'guru besar pibg sisc ibu bapa video qarl pentadbir' },
+  penghargaan: { id: '1PTWzPlKS-qOVXZp2452T6szy1nJAS1ID', kulit: 'penghargaan',  tajuk: 'Penghargaan',                           hlm: 2,  bhg: 'Bahagian 8.0', jenis: 'profil', ringkasan: 'Penghargaan calon kepada pentadbir, rakan guru, pegawai KPM dan keluarga.', sokong: 'Konteks dan refleksi peribadi', kunci: 'refleksi keluarga pentadbir rakan guru' },
 };
 
 /* --------------------------------------------------------------- NAVIGASI */
@@ -104,15 +108,33 @@ function pemicuDok(kunci, isi, kelas = '') {
 const pautanEvidens = (kunci, label = 'Lihat evidens') =>
   pemicuDok(kunci, `${label} <span aria-hidden="true">→</span>`, 'btn btn-garis btn-kecil');
 
-/** Kad dokumen dengan imej kulit */
-function kadDok(kunci, nota = '') {
+/** Nama paparan bagi setiap jenis dokumen */
+const JENIS = {
+  profil: 'Profil calon',
+  rasmi: 'Dokumen rasmi',
+  kajian: 'Kajian & inovasi',
+  sumbangan: 'Sumbangan & anugerah',
+  impak: 'Impak & testimoni',
+};
+
+/**
+ * Kad dokumen dengan imej kulit.
+ * `arkib` menambah metadata penuh dan atribut untuk carian serta tapisan.
+ */
+function kadDok(kunci, nota = '', arkib = false) {
   const d = DOK[kunci];
-  return `<button type="button" class="dok" data-dok="${d.id}" data-dok-tajuk="${esc(d.tajuk)}" data-dok-sub="${esc(d.bhg)} · ${d.hlm} halaman">
+  const teksCari = [d.tajuk, d.bhg, JENIS[d.jenis], d.ringkasan, d.sokong, d.kunci].join(' ').toLowerCase();
+  const atribut = arkib
+    ? ` data-jenis="${d.jenis}" data-cari="${esc(teksCari)}"`
+    : '';
+  const keterangan = arkib ? d.ringkasan : nota;
+  return `<button type="button" class="dok"${atribut} data-dok="${d.id}" data-dok-tajuk="${esc(d.tajuk)}" data-dok-sub="${esc(d.bhg)} · ${d.hlm} halaman">
           <span class="dok-kulit"><img src="assets/kulit/${d.kulit}.jpg" alt="Muka depan ${esc(d.tajuk)}" loading="lazy" width="196" height="277"></span>
           <span class="dok-teks">
             <span class="dok-tajuk">${esc(d.tajuk)}</span>
-            <span class="dok-hlm">${esc(d.bhg)} · ${d.hlm} hlm.</span>
-            ${nota ? `<span class="dok-nota">${nota}</span>` : ''}
+            <span class="dok-hlm">${esc(d.bhg)} · ${d.hlm} hlm.${arkib ? ` · ${esc(JENIS[d.jenis])}` : ''}</span>
+            ${keterangan ? `<span class="dok-nota">${esc(keterangan)}</span>` : ''}
+            ${arkib ? `<span class="dok-sokong"><b>Menyokong:</b> ${esc(d.sokong)}</span>` : ''}
           </span>
         </button>`;
 }
@@ -127,7 +149,7 @@ function kadDokBaris(kunci, nota = '') {
             <span class="dok-tajuk">${esc(d.tajuk)}</span>
             <span class="dok-hlm">${esc(d.bhg)} · ${d.hlm} hlm.</span>
             ${nota ? `<span class="dok-nota">${nota}</span>` : ''}
-            <span class="kad-pautan" style="margin-top:var(--r2)">Papar dokumen</span>
+            <span class="kad-pautan mt-2">Papar dokumen</span>
           </span>
         </button>`;
 }
@@ -142,7 +164,7 @@ function kad({ label = '', tajuk, teks = '', butir = [], kaki = '', emas = false
     label ? `<span class="label">${label}</span>` : '',
     `<h3>${tajuk}</h3>`,
     teks ? `<p>${teks}</p>` : '',
-    butir.length ? `<ul class="senarai-tanda" style="margin-top:var(--r3)">${butir.map((b) => `<li>${b}</li>`).join('')}</ul>` : '',
+    butir.length ? `<ul class="senarai-tanda mt-3">${butir.map((b) => `<li>${b}</li>`).join('')}</ul>` : '',
     `<div class="kad-kaki">${kaki}</div>`,
   ].filter(Boolean).join('\n          ');
 
@@ -151,12 +173,18 @@ function kad({ label = '', tajuk, teks = '', butir = [], kaki = '', emas = false
     : `<div class="${kelas}">\n          ${isi}\n        </div>`;
 }
 
-/** Video YouTube terbenam */
+/**
+ * Video YouTube dengan facade. Thumbnail dihoskan sendiri dipaparkan
+ * dahulu; iframe hanya dimuatkan selepas penonton menekan main. Tiada
+ * permintaan kepada YouTube sebelum itu, dan tiada kotak hitam.
+ */
 function video({ id, tajuk }) {
-  return `<div class="video">
-          <iframe src="https://www.youtube-nocookie.com/embed/${id}?rel=0" title="${esc(tajuk)}" loading="lazy"
-            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>
-        </div>`;
+  return `<button type="button" class="video video-facade" data-video="${id}" data-tajuk="${esc(tajuk)}"
+          aria-label="Main video: ${esc(tajuk)}">
+          <img src="assets/video/${id}.jpg" alt="" width="960" height="540" loading="lazy">
+          <span class="video-main" aria-hidden="true"></span>
+          <span class="video-tajuk">${esc(tajuk)}</span>
+        </button>`;
 }
 
 const pautanYouTube = (id, label = 'Tonton di YouTube') =>
@@ -260,12 +288,12 @@ ${badan}
 <footer class="kaki">
   <div class="balut kaki-dalam">
     <div>
-      <p><strong style="color:var(--arang)">${esc(CALON.nama)}</strong><br>
+      <p><strong class="teks-arang">${esc(CALON.nama)}</strong><br>
       ${esc(CALON.peranan)} · ${esc(CALON.sekolah)}<br>
       <a href="mailto:${CALON.emel}">${CALON.emel}</a></p>
-      <p style="margin-top:var(--r3);font-size:.8rem;color:var(--kelabu-muda)">${esc(CALON.permohonan)}<br>
+      <p class="nota-kaki">${esc(CALON.permohonan)} · Dikemas kini ${TARIKH}<br>
       Laman ini disediakan sebagai rujukan digital kepada dokumen permohonan.<br>Semua evidens dipaparkan terus daripada fail asal.</p>
-      <p style="margin-top:var(--r3)"><a href="https://drive.google.com/drive/folders/${CALON.folderDrive}" target="_blank" rel="noopener">Folder dokumen di Google Drive</a></p>
+      <p class="mt-3"><a href="https://drive.google.com/drive/folders/${CALON.folderDrive}" target="_blank" rel="noopener">Folder dokumen di Google Drive</a></p>
     </div>
     <nav class="kaki-nav" aria-label="Navigasi kaki">
             ${kakiNav}
@@ -357,7 +385,7 @@ function halamanUtama() {
       </p>
     </div>
     <div class="hero-potret">
-      <img src="assets/potret.jpg" alt="Potret ${esc(CALON.nama)}" width="640" height="800">
+      <img src="assets/potret.jpg" alt="Potret ${esc(CALON.nama)}" width="640" height="800" fetchpriority="high" decoding="async">
     </div>
   </div>
 </section>
@@ -396,9 +424,9 @@ function halamanUtama() {
   <div class="balut">
     <div class="belah">
       <div>
-        <span class="label label-aksen" style="margin-bottom:var(--r3)">Laluan pantas</span>
+        <span class="label label-aksen mb-3">Laluan pantas</span>
         <h2>Tiga laluan untuk panel</h2>
-        <div class="grid" style="gap:var(--r3);margin-top:var(--r5)">
+        <div class="grid tumpuk mt-5">
           ${LALUAN.map(([tajuk, teks, pautan]) => kad({
             tajuk, teks, pautan, padat: true, kaki: '<span class="kad-pautan">Buka bahagian</span>',
           })).join('\n          ')}
@@ -420,9 +448,9 @@ function halamanUtama() {
       pengenalan: 'Perjalanan hampir 14 tahun dalam bidang pendidikan dirangkumkan dalam sebuah video berdurasi 5 minit, dihasilkan menggunakan Gemini, ChatGPT dan VEO 3.',
       tengah: true,
     })}
-    <div style="max-width:900px;margin-inline:auto">
+    <div class="tengah-900">
       ${video(VIDEO.journey)}
-      <div class="btn-baris btn-baris-tengah" style="margin-top:var(--r4)">${pautanYouTube(VIDEO.journey.id)}</div>
+      <div class="btn-baris btn-baris-tengah mt-4">${pautanYouTube(VIDEO.journey.id)}</div>
     </div>
   </div>
 </section>
@@ -475,9 +503,9 @@ ${kepalaLaman('Bahagian 1.0 · Dokumentasi', 'Profil & kelayakan',
   <div class="balut">
     <div class="belah">
       <div>
-        <span class="label label-aksen" style="margin-bottom:var(--r3)">Maklumat calon</span>
+        <span class="label label-aksen mb-3">Maklumat calon</span>
         <h2>Butiran asas</h2>
-        <div class="jad-balut" style="margin-top:var(--r4)">
+        <div class="jad-balut mt-4">
           <table class="jad">
             <tbody>
               <tr><th scope="row">Nama</th><td>${esc(CALON.nama)}</td></tr>
@@ -494,13 +522,13 @@ ${kepalaLaman('Bahagian 1.0 · Dokumentasi', 'Profil & kelayakan',
         </div>
       </div>
       <div>
-        <span class="label label-aksen" style="margin-bottom:var(--r3)">Peranan &amp; lantikan</span>
+        <span class="label label-aksen mb-3">Peranan &amp; lantikan</span>
         <h2>Profil profesional</h2>
-        <ul class="senarai-tanda" style="margin-top:var(--r4)">
+        <ul class="senarai-tanda mt-4">
           ${LANTIKAN.map(([n, t]) => `<li><strong>${n}</strong> — ${t}</li>`).join('\n          ')}
         </ul>
-        <h3 style="margin-top:var(--r5)">Kemahiran</h3>
-        <ul class="senarai-tanda" style="margin-top:var(--r3)">
+        <h3 class="mt-5">Kemahiran</h3>
+        <ul class="senarai-tanda mt-3">
           ${KEMAHIRAN.map((k) => `<li>${k}</li>`).join('\n          ')}
         </ul>
       </div>
@@ -617,7 +645,7 @@ ${kepalaLaman('Bahagian 2.0 · 3.0 · 5.0', 'Kepakaran & inovasi',
     })}
     <div class="belah">
       <ol class="senarai-nombor">
-        ${PENULISAN.map(([t, thn, k]) => `<li><strong>${t}</strong><span>${thn ? `<b style="color:var(--emas);font-weight:700">${thn}</b> · ` : ''}${k}</span></li>`).join('\n        ')}
+        ${PENULISAN.map(([t, thn, k]) => `<li><strong>${t}</strong><span>${thn ? `<b class="teks-emas">${thn}</b> · ` : ''}${k}</span></li>`).join('\n        ')}
       </ol>
       <div class="lekat">
         ${kad({
@@ -654,7 +682,7 @@ ${kepalaLaman('Bahagian 2.0 · 3.0 · 5.0', 'Kepakaran & inovasi',
         <p class="kunci"><strong>Kata kunci:</strong> Pengintegrasian Digital, Canva, Google Classroom, PBL, Bahasa Inggeris</p>
       </div>
     </div>
-    <div style="margin-top:var(--r4)">
+    <div class="mt-4">
       ${kad({
         label: 'Bronze · Peringkat kebangsaan · 10 Januari 2026', emas: true,
         tajuk: 'Meningkatkan Penguasaan Menulis Emel Bahasa Inggeris Menerusi Aplikasi Gemini',
@@ -675,7 +703,7 @@ ${kepalaLaman('Bahagian 2.0 · 3.0 · 5.0', 'Kepakaran & inovasi',
     <div class="grid grid-3">
       ${INOVASI_KONGSI.map(([p, k]) => kad({ label: 'Platform perkongsian', tajuk: p, teks: k })).join('\n      ')}
     </div>
-    <div class="btn-baris" style="margin-top:var(--r5)">${pautanEvidens('inovasi', 'Buka Bahagian 5.0 — Inovasi')}</div>
+    <div class="btn-baris mt-5">${pautanEvidens('inovasi', 'Buka Bahagian 5.0 — Inovasi')}</div>
   </div>
 </section>
 
@@ -807,13 +835,13 @@ ${kepalaLaman('Bahagian 4.0 · 6.0', 'Faktor WAU & anugerah',
   <div class="balut">
     <div class="belah">
       <div>
-        <span class="label label-aksen" style="margin-bottom:var(--r3)">Naratif</span>
+        <span class="label label-aksen mb-3">Naratif</span>
         <h2>Ruang dan Peluang</h2>
-        <div class="utama-teks" style="margin-top:var(--r4)">
+        <div class="utama-teks mt-4">
           <p>Lantikan sebagai Master Trainer CEFR pada 2016 bukan pengiktirafan semata-mata, tetapi mandat untuk membina suara yang mampu mengangkat wacana ilmu ke pentas yang lebih bermakna — memimpin bengkel, melatih guru-guru dan membentuk generasi pendidik yang bukan sahaja fasih kurikulum, malah berjiwa empati.</p>
           <p>Di sebalik layar, sumbangan diteruskan sebagai panel penulis dua modul di Bahagian Pembangunan Kurikulum. Tiga buah buku cerita dan sebuah modul yang memiliki ISBN tersendiri menjadi saksi bahawa bahasa mampu membentuk jiwa, dan cerita mampu membina makna.</p>
         </div>
-        <div class="btn-baris" style="margin-top:var(--r5)">${pautanEvidens('wau', 'Buka Bahagian 6.0 (69 hlm.)')}</div>
+        <div class="btn-baris mt-5">${pautanEvidens('wau', 'Buka Bahagian 6.0 (69 hlm.)')}</div>
       </div>
       <blockquote class="petikan">
         <p>“Namun, Kemenjadian Murid tetap menjadi keutamaan. Ia bukan slogan, tetapi doa yang dijelmakan dalam tindakan dan pencapaian.”</p>
@@ -871,10 +899,10 @@ ${kepalaLaman('Bahagian 4.0 · 6.0', 'Faktor WAU & anugerah',
       tajuk: 'Sumbangan merentas lima peringkat',
       pengenalan: 'Fail sokongan 64 halaman disusun mengikut peringkat, dengan sepuluh evidens bagi setiap peringkat kebangsaan, negeri, daerah dan institusi.',
     })}
-    <div class="grid" style="gap:var(--r3)">
+    <div class="grid tumpuk">
       ${PERINGKAT_SOKONGAN.map(([p, k]) => kad({ label: 'Peringkat', tajuk: p, teks: k, padat: true })).join('\n      ')}
     </div>
-    <div class="btn-baris" style="margin-top:var(--r5)">${pautanEvidens('sijil', 'Buka fail sokongan (64 hlm.)')}</div>
+    <div class="btn-baris mt-5">${pautanEvidens('sijil', 'Buka fail sokongan (64 hlm.)')}</div>
   </div>
 </section>
 `;
@@ -931,7 +959,7 @@ ${kepalaLaman('Bahagian 6.7', 'Kemenjadian murid',
 <section class="sek">
   <div class="balut">
     <h2 class="tajuk-tersembunyi">Suara bekas anak didik</h2>
-    <div class="belah" style="margin-bottom:var(--r7)">
+    <div class="belah mb-7">
       <blockquote class="petikan petikan-tengah">
         <p>“Kemenjadian Murid tetap menjadi keutamaan. Ia bukan slogan, tetapi doa yang dijelmakan dalam tindakan dan pencapaian.”</p>
         <footer>Faktor WAU · hlm. 206</footer>
@@ -1017,12 +1045,12 @@ ${kepalaLaman('Bahagian 7.0 · 8.0', 'Testimoni & penghargaan',
       pengenalan: 'Satu video khas merakamkan pandangan rakan pentadbir, guru, kakitangan sekolah dan ibu bapa terhadap calon.',
       tengah: true,
     })}
-    <div style="max-width:900px;margin-inline:auto">
+    <div class="tengah-900">
       ${video(VIDEO.testimoni)}
-      <div class="btn-baris btn-baris-tengah" style="margin-top:var(--r4)">${pautanYouTube(VIDEO.testimoni.id)}</div>
+      <div class="btn-baris btn-baris-tengah mt-4">${pautanYouTube(VIDEO.testimoni.id)}</div>
 
-      <div style="margin-top:var(--r7)">
-        <span class="label label-aksen" style="margin-bottom:var(--r3)">Sepuluh suara dalam video ini</span>
+      <div class="mt-7">
+        <span class="label label-aksen mb-3">Sepuluh suara dalam video ini</span>
         <ul class="senarai-nama">
           ${SUARA_VIDEO.map(([nama, jawatan]) => `<li><strong>${nama}</strong><span>${jawatan}</span></li>`).join('\n          ')}
         </ul>
@@ -1053,7 +1081,7 @@ ${kepalaLaman('Bahagian 7.0 · 8.0', 'Testimoni & penghargaan',
       <div class="utama-teks">
         <p>Penghargaan dirakamkan kepada barisan pentadbir SK Abdul Samat yang diterajui oleh <strong>Encik Faridzul Azwan bin Mohd Kamarudin</strong>, serta rakan-rakan guru yang sentiasa memberi ruang, peluang dan kepercayaan untuk terus meneroka potensi diri dan menyumbang bakti dalam pelbagai lapangan di pelbagai peringkat.</p>
         <p>Penghargaan juga ditujukan kepada para pegawai di peringkat Kementerian Pendidikan, JPN Selangor dan PPD Klang atas bimbingan, kepercayaan dan peluang yang diberikan — serta kepada isteri, anak-anak dan seluruh keluarga yang memahami dan menguatkan sepanjang perjalanan kerjaya ini.</p>
-        <div class="btn-baris" style="margin-top:var(--r5)">${pautanEvidens('penghargaan', 'Buka Bahagian 8.0')}</div>
+        <div class="btn-baris mt-5">${pautanEvidens('penghargaan', 'Buka Bahagian 8.0')}</div>
       </div>
       <blockquote class="petikan">
         <p>“Tidak dilupakan para ibu bapa, anak-anak murid yang saya kasihi serta bekas anak-anak didik yang telah menjadikan saya guru yang lebih sabar dan lebih matang hari ini. Kalianlah sebab saya terus bangkit dengan semangat yang tidak pernah pudar.”</p>
@@ -1073,11 +1101,20 @@ ${kepalaLaman('Bahagian 7.0 · 8.0', 'Testimoni & penghargaan',
 
 /* ======================================================== HALAMAN: DOKUMEN */
 
-const SUSUN_DOK = [
-  ['Pengenalan', ['resume']],
-  ['Bahagian 1.0 – 1.11 · Dokumentasi', ['kompetensi', 'lnpt', 'surat', 'akademik', 'perkhidmatan', 'harta', 'jadual', 'sijil']],
-  ['Bahagian 2.0 – 5.0 · Kompetensi profesional', ['program', 'kajian', 'anugerah', 'inovasi']],
-  ['Bahagian 6.0 – 8.0 · Faktor WAU, testimoni & penghargaan', ['wau', 'kemenjadian', 'testimoni', 'penghargaan']],
+/* Urutan dokumen dalam arkib — mengikut susunan portfolio bercetak */
+const SUSUN_DOK = ['resume', 'kompetensi', 'lnpt', 'surat', 'akademik', 'perkhidmatan',
+  'harta', 'jadual', 'sijil', 'program', 'kajian', 'anugerah', 'inovasi',
+  'wau', 'kemenjadian', 'testimoni', 'penghargaan'];
+
+/* Urutan bacaan yang disyorkan kepada panel — enam langkah, daripada
+   gambaran keseluruhan kepada dokumen sokongan penuh. */
+const BACAAN_PANEL = [
+  ['Ringkasan calon', 'Resume, kelayakan dan lantikan dalam tiga halaman.', 'dok', 'resume'],
+  ['Kompetensi & prestasi', 'Skor pencerapan PdP 2026 oleh empat pencerap, dan LNPT tiga tahun.', 'dok', 'kompetensi'],
+  ['Impak PdP & kajian tindakan', 'Kajian Google Gemini dan pengintegrasian Canva, berserta hasilnya.', 'laman', 'kepakaran.html#kajian'],
+  ['Kemenjadian murid', 'Enam belas kisah, boleh ditapis mengikut jenis impak.', 'laman', 'kemenjadian.html'],
+  ['Lantikan & sumbangan', 'Lapan faktor WAU dan sumbangan merentas lima peringkat.', 'laman', 'wau.html'],
+  ['Dokumen sokongan penuh', 'Sijil, surat penghargaan dan evidens setiap peringkat — 64 halaman.', 'dok', 'sijil'],
 ];
 
 function halamanDokumen() {
@@ -1093,13 +1130,59 @@ ${kepalaLaman('Arkib', 'Arkib dokumen',
 
 <section class="sek">
   <div class="balut">
-    ${SUSUN_DOK.map(([tajuk, senarai]) => `<div style="margin-bottom:var(--r7)">
-      <h2 style="font-size:1.28rem;margin-bottom:var(--r4)">${tajuk}</h2>
-      <div class="dok-grid">
-        ${senarai.map((k) => kadDok(k)).join('\n        ')}
-      </div>
-    </div>`).join('\n    ')}
+    ${kepalaSek({
+      label: 'Urutan bacaan',
+      tajuk: 'Disyorkan untuk panel',
+      pengenalan: 'Enam langkah, daripada gambaran keseluruhan kepada dokumen sokongan penuh.',
+    })}
+    <ol class="senarai-nombor mb-7">
+      ${BACAAN_PANEL.map(([tajuk, teks, jenis, sasaran]) => {
+        const pautan = jenis === 'dok'
+          ? pemicuDok(sasaran, 'Buka dokumen <span aria-hidden="true">→</span>', 'kad-pautan')
+          : `<a class="kad-pautan" href="${sasaran}">Buka bahagian <span aria-hidden="true">→</span></a>`;
+        return `<li><strong>${tajuk}</strong><span>${teks}</span><span class="mt-2">${pautan}</span></li>`;
+      }).join('\n      ')}
+    </ol>
+  </div>
+</section>
 
+<section class="sek sek-kelabu">
+  <div class="balut">
+    ${kepalaSek({
+      label: 'Arkib penuh',
+      tajuk: `Kesemua ${Object.keys(DOK).length} dokumen`,
+      pengenalan: 'Cari mengikut tajuk, bahagian atau kandungan, atau tapis mengikut jenis dokumen.',
+    })}
+
+    <div class="arkib-alat">
+      <div class="cari-kotak">
+        <label class="tajuk-tersembunyi" for="cari-dok">Cari dokumen</label>
+        <input type="search" id="cari-dok" placeholder="Cari tajuk, bahagian atau kandungan…" autocomplete="off">
+      </div>
+      <div class="tukar-papar" role="group" aria-label="Tukar paparan">
+        <button type="button" data-papar="kad" aria-pressed="true">Kad</button>
+        <button type="button" data-papar="senarai" aria-pressed="false">Senarai</button>
+      </div>
+    </div>
+
+    <div class="tapis" id="tapis-dok" role="group" aria-label="Tapis mengikut jenis dokumen" hidden>
+      ${[['semua', 'Semua'], ...Object.entries(JENIS)].map(([kunci, label]) => {
+        const bil = kunci === 'semua'
+          ? Object.keys(DOK).length
+          : Object.values(DOK).filter((d) => d.jenis === kunci).length;
+        return bil ? `<button type="button" class="tapis-btn" data-tapis="${kunci}" aria-pressed="${kunci === 'semua'}">${label} <span class="tapis-bil">${bil}</span></button>` : '';
+      }).filter(Boolean).join('\n      ')}
+    </div>
+    <p class="tapis-kira" role="status" aria-live="polite"></p>
+
+    <div class="dok-grid" id="senarai-dok">
+      ${SUSUN_DOK.map((k) => kadDok(k, '', true)).join('\n      ')}
+    </div>
+  </div>
+</section>
+
+<section class="sek">
+  <div class="balut">
     <div class="hubungi">
       <span class="lencana">Sumber asal</span>
       <h2>Folder dokumen di Google Drive</h2>

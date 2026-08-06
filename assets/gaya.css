@@ -133,6 +133,25 @@ p:last-child { margin-bottom: 0; }
 .label-aksen { color: var(--biru); font-weight: 800; letter-spacing: .11em; }
 .label-emas { color: var(--emas); font-weight: 800; letter-spacing: .11em; }
 
+/* ------------------------------------------------------------ UTILITI */
+/* Kelas kecil ini menggantikan atribut style= dalam HTML. Dengan tiada
+   gaya inline, CSP boleh dikuatkuasakan tanpa 'unsafe-inline'. */
+
+.mt-2 { margin-top: var(--r2); }
+.mt-3 { margin-top: var(--r3); }
+.mt-4 { margin-top: var(--r4); }
+.mt-5 { margin-top: var(--r5); }
+.mt-7 { margin-top: var(--r7); }
+.mb-3 { margin-bottom: var(--r3); }
+.mb-7 { margin-bottom: var(--r7); }
+
+.teks-arang { color: var(--arang); }
+.teks-emas { color: var(--emas); font-weight: 700; }
+.nota-kaki { margin-top: var(--r3); font-size: .8rem; color: var(--kelabu-muda); }
+.h2-kecil { font-size: 1.28rem; margin-bottom: var(--r4); }
+.tengah-900 { max-width: 900px; margin-inline: auto; }
+.tumpuk { display: grid; gap: var(--r3); }
+
 /* ------------------------------------------------------------ SUSUN ATUR */
 
 .balut {
@@ -692,6 +711,57 @@ table.jad td { color: var(--arang); font-weight: 600; line-height: 1.5; }
   display: flex; flex-direction: column; flex: 1;
   padding: var(--r3) var(--r3) var(--r4); gap: var(--r1);
 }
+.dok-sokong {
+  display: block; margin-top: auto; padding-top: var(--r2);
+  font-size: .76rem; line-height: 1.45; color: var(--kelabu-muda);
+}
+.dok-sokong b { color: var(--biru); font-weight: 700; }
+
+/* ---- Alat arkib: carian, tapis jenis, tukar paparan ---- */
+
+.arkib-alat {
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--r3);
+  padding-bottom: var(--r4); border-bottom: 1px solid var(--garis);
+}
+.cari-kotak { position: relative; flex: 1 1 260px; min-width: 0; }
+.cari-kotak input {
+  width: 100%; font: inherit; font-size: .92rem;
+  padding: 12px 16px 12px 42px;
+  background: #fff; color: var(--arang);
+  border: 1px solid var(--garis); border-radius: 999px;
+  transition: border-color var(--tt), box-shadow var(--tt);
+}
+.cari-kotak input::placeholder { color: var(--kelabu-muda); }
+.cari-kotak input:focus { border-color: var(--biru); box-shadow: 0 0 0 3px var(--biru-lembut); outline: none; }
+.cari-kotak::before {
+  content: ""; position: absolute; left: 16px; top: 50%; width: 14px; height: 14px;
+  margin-top: -9px; border: 2px solid var(--kelabu-muda); border-radius: 50%;
+}
+.cari-kotak::after {
+  content: ""; position: absolute; left: 27px; top: 50%; width: 6px; height: 2px;
+  margin-top: 4px; background: var(--kelabu-muda); transform: rotate(45deg);
+}
+
+.tukar-papar { display: flex; gap: 4px; background: var(--kertas-3); border-radius: 999px; padding: 4px; }
+.tukar-papar button {
+  font: inherit; font-size: .82rem; font-weight: 600; color: var(--kelabu);
+  background: none; border: 0; border-radius: 999px; padding: 8px 15px; cursor: pointer;
+}
+.tukar-papar button[aria-pressed="true"] { background: #fff; color: var(--arang); box-shadow: var(--bayang-1); }
+
+/* Paparan senarai padat — kulit kecil di kiri, maklumat penuh di kanan */
+.dok-grid.mod-senarai { grid-template-columns: 1fr; gap: var(--r2); }
+.dok-grid.mod-senarai .dok {
+  display: grid; grid-template-columns: 54px minmax(0, 1fr); gap: var(--r4);
+  align-items: center; padding: var(--r3) var(--r4);
+}
+.dok-grid.mod-senarai .dok:hover { transform: none; }
+.dok-grid.mod-senarai .dok-kulit { aspect-ratio: 1 / 1.414; border-radius: 5px; border: 1px solid var(--garis); }
+.dok-grid.mod-senarai .dok-kulit::after { display: none; }
+.dok-grid.mod-senarai .dok-teks { padding: 0; gap: 3px; }
+.dok-grid.mod-senarai .dok-sokong { margin-top: 0; padding-top: 3px; }
+
+.dok[hidden] { display: none; }
 .dok-tajuk {
   display: block; font-family: var(--f-teks); font-weight: 700;
   font-size: .87rem; line-height: 1.38; color: var(--arang); letter-spacing: -.008em;
@@ -702,10 +772,45 @@ table.jad td { color: var(--arang); font-weight: 600; line-height: 1.5; }
 /* ------------------------------------------------------------ VIDEO */
 
 .video {
-  border-radius: var(--lengkung); overflow: hidden;
+  position: relative; display: block; width: 100%; padding: 0;
+  border: 0; border-radius: var(--lengkung); overflow: hidden;
   background: #000; aspect-ratio: 16 / 9; box-shadow: var(--bayang-2);
 }
 .video iframe { width: 100%; height: 100%; border: 0; display: block; }
+.video img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.video-facade { cursor: pointer; font: inherit; color: inherit; text-align: left; }
+.video-facade::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(10, 17, 32, .35) 0%, transparent 34%, rgba(10, 17, 32, .55) 100%);
+  transition: background var(--tt);
+}
+.video-facade:hover::after { background: rgba(10, 17, 32, .3); }
+
+/* Butang main — dilukis dengan CSS, tiada imej luar */
+.video-main {
+  position: absolute; left: 50%; top: 50%; z-index: 2;
+  width: 76px; height: 54px; margin: -27px 0 0 -38px;
+  background: rgba(15, 23, 36, .82); border-radius: 14px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, .4);
+  transition: background var(--tt), transform var(--tt);
+}
+.video-main::before {
+  content: ""; position: absolute; left: 50%; top: 50%;
+  margin: -11px 0 0 -7px; border-style: solid;
+  border-width: 11px 0 11px 18px; border-color: transparent transparent transparent #fff;
+}
+.video-facade:hover .video-main { background: var(--biru); transform: scale(1.06); }
+
+.video-tajuk {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+  padding: var(--r4) var(--r4) var(--r3);
+  color: #fff; font-size: .92rem; font-weight: 600; line-height: 1.4;
+}
+@media (max-width: 560px) {
+  .video-main { width: 62px; height: 44px; margin: -22px 0 0 -31px; }
+  .video-tajuk { font-size: .82rem; padding: var(--r3); }
+}
 
 /* ------------------------------------------------------------ MODAL */
 
