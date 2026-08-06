@@ -152,6 +152,15 @@ p:last-child { margin-bottom: 0; }
 .sek-kepala > .pengenalan { margin-top: var(--r3); font-size: 1.04rem; color: var(--kelabu); }
 .sek-kepala-tengah { margin-inline: auto; text-align: center; }
 
+/* Tajuk yang wujud untuk struktur dokumen dan pembaca skrin, tetapi
+   tidak perlu dilihat kerana konteksnya sudah jelas secara visual. */
+.tajuk-tersembunyi {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip-path: inset(50%); white-space: nowrap;
+}
+
+main:focus { outline: none; }
+
 .lompat {
   position: absolute; left: -9999px; top: 0; z-index: 200;
   background: var(--arang); color: #fff; padding: 12px 18px;
@@ -244,6 +253,18 @@ p:last-child { margin-bottom: 0; }
 .btn-baris { display: flex; flex-wrap: wrap; gap: 10px; }
 .btn-baris-tengah { justify-content: center; }
 
+/* Peranti sentuh: setiap sasaran sekurang-kurangnya 48px tinggi, dan
+   touch-action menghapuskan lengah 300ms pada sesetengah pelayar. */
+.btn, .tapis-btn, .modal-tutup, .butang-menu, .dok, .dok-baris, .nav a {
+  touch-action: manipulation;
+}
+@media (pointer: coarse) {
+  .btn, .tapis-btn, .butang-menu { min-height: 48px; }
+  .modal-tutup { width: 48px; height: 48px; }
+  .nav a { min-height: 48px; display: flex; align-items: center; }
+  .btn-baris { gap: 12px; }
+}
+
 /* ------------------------------------------------------------ HERO */
 
 .hero {
@@ -265,24 +286,24 @@ p:last-child { margin-bottom: 0; }
   gap: var(--r6); align-items: end;
   padding: var(--r7) var(--r4) 0;
 }
-.hero-teks { padding-bottom: var(--r7); }
+.hero-teks { padding-bottom: var(--r7); display: flex; flex-direction: column; align-items: flex-start; }
 /* Nama pada satu baris di desktop. Ia hanya membalut apabila skrin
    benar-benar terlalu sempit untuk memuatkannya. */
 .hero h1 { color: #fff; margin: var(--r3) 0 0; white-space: nowrap; }
 @media (max-width: 1080px) { .hero h1 { white-space: normal; } }
-.hero-jawatan { margin-top: var(--r4); font-size: 1.02rem; color: rgba(255, 255, 255, .8); max-width: 48ch; }
-.hero-jawatan strong { color: #fff; font-weight: 700; }
-.hero-gred {
-  display: inline-flex; align-items: center; gap: 10px; margin-top: var(--r4);
-  background: rgba(255, 255, 255, .06); border: 1px solid rgba(255, 255, 255, .15);
-  padding: 6px 16px 6px 7px; border-radius: 999px;
-  font-size: .8rem; color: rgba(255, 255, 255, .88); font-weight: 500;
+/* Proposisi nilai — satu ayat yang menjawab "kenapa calon ini" sebelum
+   sebarang butiran pentadbiran. */
+.hero-nilai {
+  margin-top: var(--r4); font-size: 1.16rem; line-height: 1.5;
+  color: rgba(255, 255, 255, .88); max-width: 46ch;
 }
-.hero-gred span {
-  background: var(--emas-terang); color: #241a05; font-weight: 800;
-  padding: 3px 10px; border-radius: 999px; font-size: .68rem;
-  letter-spacing: .06em; text-transform: uppercase;
+/* Jawatan, sekolah dan nombor sijil ialah butiran sekunder. Ia diturunkan
+   ke bawah butang pada telefon supaya tindakan utama naik ke atas lipatan. */
+.hero-jawatan {
+  margin-top: var(--r5); font-size: .88rem; line-height: 1.65;
+  color: rgba(255, 255, 255, .58); max-width: 52ch;
 }
+.hero-jawatan strong { color: rgba(255, 255, 255, .82); font-weight: 600; }
 .hero-cta { margin-top: var(--r5); }
 
 .hero-potret { display: flex; justify-content: flex-end; align-items: flex-end; }
@@ -294,9 +315,14 @@ p:last-child { margin-bottom: 0; }
 }
 
 @media (max-width: 860px) {
-  .hero-dalam { grid-template-columns: 1fr; gap: 0; padding-top: var(--r6); }
-  .hero-teks { padding-bottom: var(--r6); order: 2; }
-  .hero-potret { order: 1; justify-content: center; margin-bottom: var(--r5); }
+  .hero-dalam { grid-template-columns: 1fr; gap: 0; padding-top: var(--r5); }
+  /* Teks dahulu, potret selepasnya: butang tindakan utama perlu kelihatan
+     tanpa menatal pada telefon biasa. */
+  .hero-teks { padding-bottom: var(--r5); order: 1; }
+  .hero-nilai { font-size: 1.05rem; margin-top: var(--r3); }
+  .hero-cta { margin-top: var(--r4); order: 4; }
+  .hero-jawatan { order: 5; margin-top: var(--r4); }
+  .hero-potret { order: 2; justify-content: center; margin-bottom: var(--r5); }
   .hero-potret img {
     max-width: 180px; border-radius: var(--lengkung);
     border-bottom: 1px solid rgba(255, 255, 255, .2);

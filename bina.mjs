@@ -251,7 +251,9 @@ function susunan({ fail, tajuk, huraian, badan }) {
   </div>
 </header>
 
-<main id="kandungan">
+<!-- tabindex="-1" supaya pautan lompat benar-benar memindahkan fokus
+     papan kekunci ke sini, bukan hanya menatal. -->
+<main id="kandungan" tabindex="-1">
 ${badan}
 </main>
 
@@ -263,6 +265,7 @@ ${badan}
       <a href="mailto:${CALON.emel}">${CALON.emel}</a></p>
       <p style="margin-top:var(--r3);font-size:.8rem;color:var(--kelabu-muda)">${esc(CALON.permohonan)}<br>
       Laman ini disediakan sebagai rujukan digital kepada dokumen permohonan.<br>Semua evidens dipaparkan terus daripada fail asal.</p>
+      <p style="margin-top:var(--r3)"><a href="https://drive.google.com/drive/folders/${CALON.folderDrive}" target="_blank" rel="noopener">Folder dokumen di Google Drive</a></p>
     </div>
     <nav class="kaki-nav" aria-label="Navigasi kaki">
             ${kakiNav}
@@ -289,69 +292,69 @@ ${badan}
 
 /* =========================================================== HALAMAN: UTAMA */
 
+/* Statistik hero menekankan HASIL, bukan jumlah bahan. Kiraan fail dan
+   halaman dipindahkan ke halaman Arkib, tempat ia benar-benar berguna. */
 const STATISTIK = [
-  ['~14', 'Tahun', 'Perkhidmatan dalam bidang pendidikan sejak 2012'],
-  ['4', '', 'Lantikan jurulatih utama peringkat negeri &amp; kebangsaan'],
-  ['20+', '', 'Episod sebagai penyampai DidikTV KPM (2022–2025)'],
-  ['3', '', 'Buku cerita Bahasa Inggeris berdaftar ISBN'],
-  ['299', 'Hlm', 'Halaman evidens dalam 17 fail dokumen'],
+  ['~14', 'tahun', 'Perkhidmatan pendidikan sejak 2012'],
+  ['36', 'daripada 36', 'Murid menghantar tugasan tepat pada masa selepas beralih ke Canva'],
+  ['2', 'kebangsaan', 'Pengiktirafan kajian tindakan: Gold Award dan Bronze UPSI 2026'],
+  ['20+', 'episod', 'Penyampai DidikTV KPM sepanjang 2022–2025'],
 ];
 
-const SOROTAN = [
+/* Tiga impak utama. Setiap kad: satu hasil, satu contoh, satu pautan evidens. */
+const IMPAK = [
   {
-    label: 'Anugerah · Peringkat kebangsaan',
-    tajuk: 'Best Innovation Gold Award',
-    teks: 'Bagi abstrak kajian <em>“Improving English Essay Writing Skills Among Year 6 Gigih Pupils Through the Use of Google Gemini Application”</em>.',
-    dok: 'anugerah', emas: true,
+    label: 'Impak terhadap murid',
+    tajuk: 'Daripada 21 kepada 36 penghantaran tepat masa',
+    hasil: 'Apabila tugasan projek Tahun 4 beralih daripada buku skrap fizikal kepada Canva dan Google Classroom, kesemua <strong>36 murid</strong> menghantar dalam tempoh ditetapkan — berbanding 21 sebelum itu.',
+    contoh: 'Johan English Sketch dan Poetry Recitation peringkat negeri Selangor; dua Anugerah Emas Show and Tell peringkat kebangsaan.',
+    pautan: 'kemenjadian.html',
+    labelPautan: 'Lihat 16 kisah kemenjadian',
   },
   {
-    label: 'Anugerah · UPSI 2026',
-    tajuk: 'Bronze — Pertandingan Kajian Tindakan (Terbuka)',
-    teks: 'Karnival Pengajian Pendidikan 2026 peringkat kebangsaan. Tajuk: <em>Meningkatkan Penguasaan Menulis Emel Bahasa Inggeris Menerusi Aplikasi Gemini</em>.',
-    dok: 'anugerah', emas: true,
+    label: 'Kepimpinan pedagogi',
+    tajuk: 'Empat lantikan jurulatih utama',
+    hasil: 'Termasuk <strong>Jurulatih Utama Kebangsaan Kajian Tindakan Berasaskan AI</strong> (2026) dan Master Trainer CEFR sejak 2016 — mandat melatih guru, bukan sekadar mengajar murid.',
+    contoh: 'Panel penulis dua modul di Bahagian Pembangunan Kurikulum; tiga buku cerita Bahasa Inggeris berdaftar ISBN.',
+    pautan: 'kepakaran.html',
+    labelPautan: 'Lihat penulisan &amp; kepakaran',
   },
   {
-    label: 'Lantikan · 2026',
-    tajuk: 'Jurulatih Utama Kebangsaan Kajian Tindakan Berasaskan AI',
-    teks: 'Lantikan terkini di peringkat kebangsaan, seiring peranan sebagai Jurulatih Utama Bahasa Inggeris JPN Selangor sejak 2018.',
-    dok: 'sijil',
-  },
-  {
-    label: 'Pengacaraan · Antarabangsa',
-    tajuk: 'Pengacara Majlis SEAMEO SEN 2026 &amp; ASEAN 2025',
-    teks: 'Selain Mesyuarat Pemukiman Pengurusan Tertinggi KPM 2025 dan Konvensyen Kebangsaan Perlindungan Murid 2024.',
-    dok: 'wau',
+    label: 'Inovasi &amp; jangkauan',
+    tajuk: 'Dua pengiktirafan kebangsaan bagi kajian AI',
+    hasil: '<strong>Best Innovation Gold Award</strong> dan <strong>Bronze</strong> Pertandingan Kajian Tindakan (Terbuka) peringkat kebangsaan, kedua-duanya bagi kajian penggunaan Google Gemini dalam penulisan Bahasa Inggeris.',
+    contoh: 'Lebih 20 episod DidikTV KPM; 20+ set permainan tatabahasa Blooket dikongsi percuma kepada guru.',
+    pautan: 'wau.html',
+    labelPautan: 'Lihat Faktor WAU &amp; anugerah',
   },
 ];
 
-const KAD_NAVIGASI = [
-  ['Bahagian 1.0', 'Dokumentasi &amp; Lembaran Kompetensi', 'Borang pemarkahan pencerapan PdP 2026, lembaran kompetensi, LNPT 2023–2025, kenyataan perkhidmatan dan dokumen rasmi.', 'profil.html'],
-  ['Bahagian 2.0', 'Program &amp; Latihan Yang Dihadiri', 'Sepuluh evidens program peringkat kebangsaan, negeri dan daerah — daripada Persidangan Edufluencers KPM hingga bengkel semakan kurikulum.', 'kepakaran.html#program'],
-  ['Bahagian 3.0', 'Kajian, Kertas Kerja &amp; Penulisan', 'Tiga buku cerita berdaftar ISBN, panel penulis modul BPK, modul intervensi PBD, kajian tindakan dan artikel HIP dalam Dewan Masyarakat DBP.', 'kepakaran.html#penulisan'],
-  ['Bahagian 4.0', 'Anugerah &amp; Pengiktirafan Terkini', 'Best Innovation Gold Award dan Bronze Pertandingan Kajian Tindakan (Terbuka) Karnival Pengajian Pendidikan 2026 peringkat kebangsaan.', 'wau.html#anugerah'],
-  ['Bahagian 5.0', 'Inovasi Bidang Kepakaran', 'Pengintegrasian digital melalui Canva dan Google Classroom, 20+ set permainan tatabahasa Blooket, perkongsian PdPC menerusi Telegram dan TikTok.', 'kepakaran.html#inovasi'],
-  ['Bahagian 6.0', 'Faktor WAU', 'Lapan faktor: Edufluencer KPM, juruacara majlis, penyampai DidikTV KPM, bahan sumber teknologi, ahli panel, penulis, kemenjadian murid dan kelas kondusif.', 'wau.html'],
-  ['Bahagian 6.7', 'Kemenjadian Murid', 'Enam belas kisah kemenjadian — johan peringkat negeri, anugerah emas kebangsaan, dan bekas murid yang kini menjadi guru pelatih serta pelajar seni lakon.', 'kemenjadian.html'],
-  ['Bahagian 7.0', 'Testimoni Calon', 'Video testimoni sepuluh individu termasuk Guru Besar, pengurusan DidikTV KPM dan wakil ibu bapa, serta lima testimoni bertulis.', 'testimoni.html'],
+/* Tiga laluan pantas, menggantikan senarai lapan bahagian yang hanya
+   mengulang navigasi di bahagian atas laman. */
+const LALUAN = [
+  ['Nilai profil &amp; kelayakan', 'Butiran asas, kelayakan akademik, lantikan dan dokumen rasmi Bahagian 1.0–1.11.', 'profil.html'],
+  ['Nilai impak PdP &amp; kemenjadian', 'Enam belas kisah kemenjadian murid, boleh ditapis mengikut pertandingan, bimbingan atau bekas murid.', 'kemenjadian.html'],
+  ['Semak evidens &amp; dokumen rasmi', 'Kesemua 17 fail PDF, 299 halaman, dipaparkan terus daripada folder Drive asal.', 'dokumen.html'],
 ];
+
+
 
 function halamanUtama() {
   const badan = `
 <section class="hero">
   <div class="balut hero-dalam">
     <div class="hero-teks">
-      <span class="lencana">${esc(CALON.permohonan)}</span>
+      <span class="lencana">Calon Guru Cemerlang DG12 · Bahasa Inggeris · Sesi 2026</span>
       <h1>${esc(CALON.nama)}</h1>
-      <p class="hero-jawatan">
-        <strong>${esc(CALON.peranan)}</strong><br>
-        ${esc(CALON.jawatan)}<br>
-        ${esc(CALON.sekolah)}
-      </p>
-      <p class="hero-gred"><span>Opsyen</span> Bahasa Inggeris · Sijil Guru Malaysia ${esc(CALON.sijilGuru)}</p>
+      <p class="hero-nilai">Guru Bahasa Inggeris yang menggabungkan pedagogi, teknologi dan bimbingan untuk menghasilkan impak murid yang boleh dibuktikan.</p>
       <div class="btn-baris hero-cta">
-        <a class="btn btn-utama" href="profil.html">Mula dengan profil calon</a>
-        <a class="btn btn-hantu" href="dokumen.html">Arkib 17 dokumen</a>
+        <a class="btn btn-utama" href="kemenjadian.html">Lihat impak terhadap murid</a>
+        <a class="btn btn-hantu" href="dokumen.html">Semak evidens utama</a>
       </div>
+      <p class="hero-jawatan">
+        <strong>${esc(CALON.peranan)}</strong> · ${esc(CALON.jawatan)}<br>
+        ${esc(CALON.sekolah)} · Sijil Guru Malaysia ${esc(CALON.sijilGuru)}
+      </p>
     </div>
     <div class="hero-potret">
       <img src="assets/potret.jpg" alt="Potret ${esc(CALON.nama)}" width="640" height="800">
@@ -372,51 +375,39 @@ function halamanUtama() {
 
 <section class="sek">
   <div class="balut">
-    <div class="belah">
-      <div>
-        <span class="label label-aksen" style="margin-bottom:var(--r3)">Ringkasan calon</span>
-        <h2>Ruang ialah anugerah, dan peluang ialah amanah.</h2>
-        <div class="utama-teks" style="margin-top:var(--r4)">
-          <p>Hampir 14 tahun dalam perkhidmatan pendidikan, bermula sebagai guru di SK Layon, Nabawan, Sabah dan kini di SK Abdul Samat, Klang. Lantikan sebagai <strong>Master Trainer CEFR pada 2016</strong> membuka ruang memimpin bengkel dan melatih guru-guru Bahasa Inggeris.</p>
-          <p>Penguasaan kurikulum Bahasa Inggeris diserlahkan melalui lebih <strong>dua puluh episod DidikTV KPM</strong>. Kemahiran berbahasa Melayu dan Inggeris membuka peluang menggalas peranan pengacara majlis di peringkat kementerian, termasuk peringkat ASEAN dan SEAMEO.</p>
-          <p>Sebagai <strong>Edufluencer KPM</strong>, sumbangan diteruskan dalam ruang digital — permainan tatabahasa di Blooket, video PdPC di TikTok, Instagram dan Facebook, serta bahan percuma menerusi Telegram dan Ruang Ilmu DELIMa KPM.</p>
-        </div>
-        <div class="btn-baris" style="margin-top:var(--r5)">${pautanEvidens('wau', 'Baca naratif penuh Faktor WAU')}</div>
-      </div>
-      <blockquote class="petikan">
-        <p>“Segala yang terhimpun dalam Faktor WAU ini bukanlah untuk dibanggakan, tetapi untuk disyukuri dan dikongsi. Kerana apabila kita bekerja dengan ikhlas, berani berinovasi dan setia kepada amanah pendidikan, kita sebenarnya sedang menulis masa depan bangsa, huruf demi huruf, jiwa demi jiwa, dalam kitab besar bernama harapan.”</p>
-        <footer>Faktor WAU · hlm. 205–206</footer>
-      </blockquote>
+    ${kepalaSek({
+      label: 'Impak',
+      tajuk: 'Tiga impak utama',
+      pengenalan: 'Setiap kad menyatakan satu hasil, satu contoh, dan pautan terus kepada evidensnya.',
+    })}
+    <div class="grid grid-3">
+      ${IMPAK.map((i) => kad({
+        label: i.label,
+        tajuk: i.tajuk,
+        teks: i.hasil,
+        butir: [i.contoh],
+        kaki: `<a class="btn btn-garis btn-kecil" href="${i.pautan}">${i.labelPautan} <span aria-hidden="true">→</span></a>`,
+      })).join('\n      ')}
     </div>
   </div>
 </section>
 
 <section class="sek sek-kelabu">
   <div class="balut">
-    ${kepalaSek({
-      label: 'Sorotan terkini',
-      tajuk: 'Pencapaian dan pengiktirafan terkini',
-      pengenalan: 'Empat pencapaian paling terkini yang menyokong permohonan ini. Klik untuk memapar fail evidens asal.',
-    })}
-    <div class="grid grid-2">
-      ${SOROTAN.map((s) => kad({
-        label: s.label, tajuk: s.tajuk, teks: s.teks, emas: s.emas, kaki: pautanEvidens(s.dok),
-      })).join('\n      ')}
-    </div>
-  </div>
-</section>
-
-<section class="sek">
-  <div class="balut">
-    ${kepalaSek({
-      label: 'Struktur portfolio',
-      tajuk: 'Lapan bahagian utama',
-      pengenalan: 'Portfolio permohonan ini merangkumi 17 fail dokumen dengan 299 halaman evidens, bernombor sehingga halaman 311.',
-    })}
-    <div class="grid grid-2">
-      ${KAD_NAVIGASI.map(([label, tajuk, teks, pautan]) => kad({
-        label, tajuk, teks, pautan, kaki: '<span class="kad-pautan">Lihat bahagian</span>',
-      })).join('\n      ')}
+    <div class="belah">
+      <div>
+        <span class="label label-aksen" style="margin-bottom:var(--r3)">Laluan pantas</span>
+        <h2>Tiga laluan untuk panel</h2>
+        <div class="grid" style="gap:var(--r3);margin-top:var(--r5)">
+          ${LALUAN.map(([tajuk, teks, pautan]) => kad({
+            tajuk, teks, pautan, padat: true, kaki: '<span class="kad-pautan">Buka bahagian</span>',
+          })).join('\n          ')}
+        </div>
+      </div>
+      <blockquote class="petikan">
+        <p>“Ruang ialah anugerah, dan peluang ialah amanah.”</p>
+        <footer>Faktor WAU · hlm. 205</footer>
+      </blockquote>
     </div>
   </div>
 </section>
@@ -436,19 +427,6 @@ function halamanUtama() {
   </div>
 </section>
 
-<section class="sek">
-  <div class="balut">
-    <div class="hubungi">
-      <span class="lencana">Hubungi</span>
-      <h2>Sebarang pertanyaan berkaitan permohonan ini</h2>
-      <p>Semua evidens dalam laman ini dipaparkan terus daripada fail PDF asal yang dikemukakan bersama borang permohonan.</p>
-      <div class="btn-baris">
-        <a class="btn btn-utama" href="mailto:${CALON.emel}">${CALON.emel}</a>
-        <a class="btn btn-hantu" href="https://drive.google.com/drive/folders/${CALON.folderDrive}" target="_blank" rel="noopener">Folder dokumen di Drive</a>
-      </div>
-    </div>
-  </div>
-</section>
 `;
   return susunan({
     fail: 'index.html',
@@ -952,7 +930,8 @@ ${kepalaLaman('Bahagian 6.7', 'Kemenjadian murid',
 
 <section class="sek">
   <div class="balut">
-    <div class="belah" style="margin-bottom:var(--r6)">
+    <h2 class="tajuk-tersembunyi">Suara bekas anak didik</h2>
+    <div class="belah" style="margin-bottom:var(--r7)">
       <blockquote class="petikan petikan-tengah">
         <p>“Kemenjadian Murid tetap menjadi keutamaan. Ia bukan slogan, tetapi doa yang dijelmakan dalam tindakan dan pencapaian.”</p>
         <footer>Faktor WAU · hlm. 206</footer>
@@ -964,6 +943,12 @@ ${kepalaLaman('Bahagian 6.7', 'Kemenjadian murid',
         kaki: pautanEvidens('kemenjadian', 'Buka Bahagian 6.7 (24 hlm.)'),
       })}
     </div>
+
+    ${kepalaSek({
+      label: 'Bahagian 6.7',
+      tajuk: 'Enam belas kisah kemenjadian',
+      pengenalan: 'Tapis mengikut jenis impak. Satu kisah boleh tergolong dalam lebih daripada satu kategori.',
+    })}
     <!-- Bar penapis. Disembunyikan secara lalai dan didedahkan oleh JS,
          supaya tanpa JavaScript kesemua 16 kisah tetap terpapar. -->
     <div class="tapis" id="tapis-kemenjadian" role="group" aria-label="Tapis kisah kemenjadian" hidden>

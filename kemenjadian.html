@@ -27,7 +27,7 @@
 <link rel="preload" href="assets/fon/plus-jakarta-sans-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fon/source-serif-4-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/fon.css?v=a8a9a3f5">
-<link rel="stylesheet" href="assets/gaya.css?v=123f6629">
+<link rel="stylesheet" href="assets/gaya.css?v=51f43d3b">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2314427a'/%3E%3Ctext x='16' y='22' font-family='system-ui,sans-serif' font-size='14' font-weight='800' fill='white' text-anchor='middle'%3EMH%3C/text%3E%3C/svg%3E">
 </head>
 <body>
@@ -55,7 +55,9 @@
   </div>
 </header>
 
-<main id="kandungan">
+<!-- tabindex="-1" supaya pautan lompat benar-benar memindahkan fokus
+     papan kekunci ke sini, bukan hanya menatal. -->
+<main id="kandungan" tabindex="-1">
 
 <section class="laman-kepala">
   <div class="balut">
@@ -81,7 +83,8 @@
 
 <section class="sek">
   <div class="balut">
-    <div class="belah" style="margin-bottom:var(--r6)">
+    <h2 class="tajuk-tersembunyi">Suara bekas anak didik</h2>
+    <div class="belah" style="margin-bottom:var(--r7)">
       <blockquote class="petikan petikan-tengah">
         <p>“Kemenjadian Murid tetap menjadi keutamaan. Ia bukan slogan, tetapi doa yang dijelmakan dalam tindakan dan pencapaian.”</p>
         <footer>Faktor WAU · hlm. 206</footer>
@@ -93,6 +96,12 @@
           <div class="kad-kaki"><button type="button" class="btn btn-garis btn-kecil" data-dok="1WMDITOPLPj7R8qgqND2qaSwRdmGavXII" data-dok-tajuk="Kemenjadian Murid" data-dok-sub="Bahagian 6.7 · 24 halaman">Buka Bahagian 6.7 (24 hlm.) <span aria-hidden="true">→</span></button></div>
         </div>
     </div>
+
+    <div class="sek-kepala">
+        <span class="label label-aksen">Bahagian 6.7</span>
+        <h2>Enam belas kisah kemenjadian</h2>
+        <p class="pengenalan">Tapis mengikut jenis impak. Satu kisah boleh tergolong dalam lebih daripada satu kategori.</p>
+      </div>
     <!-- Bar penapis. Disembunyikan secara lalai dan didedahkan oleh JS,
          supaya tanpa JavaScript kesemua 16 kisah tetap terpapar. -->
     <div class="tapis" id="tapis-kemenjadian" role="group" aria-label="Tapis kisah kemenjadian" hidden>
@@ -214,6 +223,7 @@
       <a href="mailto:g-41341128@moe-dl.edu.my">g-41341128@moe-dl.edu.my</a></p>
       <p style="margin-top:var(--r3);font-size:.8rem;color:var(--kelabu-muda)">Permohonan Guru Cemerlang DG12 · Sesi 2026<br>
       Laman ini disediakan sebagai rujukan digital kepada dokumen permohonan.<br>Semua evidens dipaparkan terus daripada fail asal.</p>
+      <p style="margin-top:var(--r3)"><a href="https://drive.google.com/drive/folders/1nGl9KcVwGUeID0KKAerAKqCRIoXrXb9N" target="_blank" rel="noopener">Folder dokumen di Google Drive</a></p>
     </div>
     <nav class="kaki-nav" aria-label="Navigasi kaki">
             <a href="index.html">Utama</a>
