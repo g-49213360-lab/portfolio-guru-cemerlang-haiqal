@@ -6,6 +6,17 @@ Guru Bahasa Inggeris, SK Abdul Samat, Klang, Selangor
 Laman web statik (HTML + CSS, tanpa pergantungan luar) yang menyusun 17 fail dokumen
 permohonan — 299 halaman evidens — kepada tujuh halaman yang boleh dilayari.
 
+## Pautan langsung
+
+| | |
+| --- | --- |
+| **Utama (Vercel)** | <https://mrmohdhaiqal.vercel.app> |
+| Sandaran (GitHub Pages) | <https://g-49213360-lab.github.io/portfolio-guru-cemerlang-haiqal/> |
+| Repo | <https://github.com/g-49213360-lab/portfolio-guru-cemerlang-haiqal> |
+
+Vercel disambungkan kepada repo GitHub ini. **Setiap `git push` ke `main` akan
+melancarkan deployment produksi baharu secara automatik** — tiada arahan tambahan perlu.
+
 ---
 
 ## Cara melihat laman ini
@@ -57,13 +68,13 @@ Kesannya:
 
 ID fail Drive disimpan dalam objek `DOK` di dalam `bina.mjs`.
 
-## Yang masih perlu diisi
+## Yang masih perlu diputuskan
 
-1. **Pautan video YouTube "MY JOURNEY"** — dalam Resume ia hanya diberi sebagai kod QR.
-   Letakkan pautan pada `CALON.videoJourney` dalam `bina.mjs`, jalankan `node bina.mjs`,
-   dan video akan terbenam di halaman Utama.
-2. **Nombor telefon** — sengaja tidak dipaparkan. Jika mahu, tambah pada bahagian
+1. **Nombor telefon** — sengaja tidak dipaparkan. Jika mahu, tambah pada bahagian
    `CALON` dan pada jadual di `halamanProfil()`.
+2. **Nombor kad pengenalan dalam RESUME.pdf** — lihat bahagian di bawah.
+
+Video "MY JOURNEY" (<https://youtu.be/qyhawB76ucs>) sudah terbenam di halaman Utama.
 
 ## Yang sengaja tidak dipaparkan
 
