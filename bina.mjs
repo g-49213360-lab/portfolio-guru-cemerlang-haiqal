@@ -78,7 +78,7 @@ const DOK = {
   anugerah: { id: '18RE03Vv7o0X53ieLEscERYrlFBibTSdN', kulit: 'anugerah',     tajuk: 'Anugerah Kecemerlangan & Pengiktirafan Terkini', hlm: 7, bhg: 'Bahagian 4.0', jenis: 'sumbangan', ringkasan: 'Best Innovation Gold Award dan Bronze Pertandingan Kajian Tindakan (Terbuka) UPSI 2026.', sokong: 'Pengiktirafan kecemerlangan peringkat kebangsaan', kunci: 'gemini google ai gold award bronze upsi kebangsaan inovasi kajian tindakan karnival' },
   inovasi: { id: '1AA6ImVtsGgccp6uC_CTOUqMasNLLBit_', kulit: 'inovasi',      tajuk: 'Inovasi Berkaitan Mata Pelajaran / Bidang Kepakaran', hlm: 10, bhg: 'Bahagian 5.0', jenis: 'kajian', ringkasan: 'Pengintegrasian Canva dan Google Classroom, 20+ set Blooket, perkongsian PdPC menerusi Telegram dan TikTok.', sokong: 'Inovasi bilik darjah dan perkongsian amalan', kunci: 'canva google classroom blooket telegram tiktok youtube facebook delima digital pbl projek gemini' },
   wau: { id: '177IMurG_YKZ40s1xDdzDGOYu3iUoVGWY', kulit: 'wau',          tajuk: 'Faktor WAU',                            hlm: 69, bhg: 'Bahagian 6.0', jenis: 'sumbangan', ringkasan: 'Lapan faktor WAU: Edufluencer KPM, juruacara majlis, DidikTV, bahan sumber, ahli panel, penulis, kemenjadian murid dan kelas kondusif.', sokong: 'Sumbangan di luar bilik darjah', kunci: 'didiktv edufluencer seameo asean pengacara juruacara podcast panel penulis kelas kondusif madani' },
-  kemenjadian: { id: '1WMDITOPLPj7R8qgqND2qaSwRdmGavXII', kulit: 'kemenjadian',  tajuk: 'Kemenjadian Murid',                     hlm: 24, bhg: 'Bahagian 6.7', jenis: 'impak', ringkasan: 'Enam belas kisah kemenjadian murid, daripada johan peringkat negeri hingga bekas murid yang kini guru pelatih.', sokong: 'Impak langsung terhadap murid', kunci: 'johan emas poetry recitation english sketch scrabble tkrs show and tell choral speaking hip' },
+  kemenjadian: { id: '1WMDITOPLPj7R8qgqND2qaSwRdmGavXII', kulit: 'kemenjadian',  tajuk: 'Kemenjadian Murid',                     hlm: 24, bhg: 'Bahagian 6.7', jenis: 'impak', ringkasan: 'Dua puluh kisah kemenjadian murid, daripada johan peringkat negeri hingga bekas murid yang kini guru pelatih.', sokong: 'Impak langsung terhadap murid', kunci: 'johan emas poetry recitation english sketch scrabble tkrs show and tell choral speaking hip' },
   testimoni: { id: '125KWoEXp3FPvetfU8k2_LCv_3JU10bMJ', kulit: 'testimoni',    tajuk: 'Testimoni Calon',                       hlm: 8,  bhg: 'Bahagian 7.0', jenis: 'impak', ringkasan: 'Sepuluh pemberi testimoni video dan lima testimoni bertulis, dari Guru Besar hingga wakil ibu bapa.', sokong: 'Pengesahan pihak ketiga terhadap calon', kunci: 'guru besar pibg sisc ibu bapa video qarl pentadbir' },
   penghargaan: { id: '1PTWzPlKS-qOVXZp2452T6szy1nJAS1ID', kulit: 'penghargaan',  tajuk: 'Penghargaan',                           hlm: 2,  bhg: 'Bahagian 8.0', jenis: 'profil', ringkasan: 'Penghargaan calon kepada pentadbir, rakan guru, pegawai KPM dan keluarga.', sokong: 'Konteks dan refleksi peribadi', kunci: 'refleksi keluarga pentadbir rakan guru' },
 };
@@ -423,7 +423,7 @@ ${badan}
 const STATISTIK = [
   ['~14', 'tahun', 'Perkhidmatan pendidikan sejak 2012'],
   ['36', 'daripada 36', 'Murid menghantar tugasan tepat pada masa selepas beralih ke Canva'],
-  ['2', 'kebangsaan', 'Pengiktirafan kajian tindakan: Gold Award dan Bronze UPSI 2026'],
+  ['6', 'anugerah', 'Tiga antarabangsa, dua kebangsaan, satu negeri \u2014 termasuk tiga Emas'],
   ['20+', 'episod', 'Penyampai DidikTV KPM sepanjang 2022–2025'],
 ];
 
@@ -431,13 +431,13 @@ const STATISTIK = [
 const IMPAK = [
   {
     label: 'Impak terhadap Murid',
-    tajuk: 'Daripada 21 kepada 36 penghantaran tepat masa',
-    hasil: 'Apabila tugasan projek Tahun 4 beralih daripada buku skrap fizikal kepada Canva dan Google Classroom, kesemua <strong>36 murid</strong> menghantar dalam tempoh ditetapkan — berbanding 21 sebelum itu.',
-    contoh: 'Johan English Sketch dan Poetry Recitation peringkat negeri Selangor; dua Anugerah Emas Show and Tell peringkat kebangsaan.',
+    tajuk: 'Murid lemah penulisan turun daripada 21 kepada 3',
+    hasil: 'Dalam kajian Google Gemini bersama <strong>38 murid Tahun 6</strong>, yang mendapat 0–5 markah turun daripada <strong>21 kepada 3</strong> orang, dan yang mendapat 11–15 markah naik daripada <strong>5 kepada 15</strong> orang. Tugasan projek Tahun 4 pula mencapai <strong>36 daripada 36</strong> penghantaran tepat masa selepas beralih ke Canva.',
+    contoh: 'Johan English Sketch dan Poetry Recitation peringkat negeri Selangor; dua Anugerah Emas Show and Tell kebangsaan; Tempat Kedua VLOG Battle PSS 2026.',
     imej: 'assets/eviden/kemenjadian/h-10.jpg',
     imejAlt: 'Pasukan English Sketch SK Abdul Samat, Johan peringkat negeri Selangor 2022',
     pautan: 'kemenjadian.html',
-    labelPautan: 'Lihat 16 kisah kemenjadian',
+    labelPautan: 'Lihat 20 kisah kemenjadian',
   },
   {
     label: 'Kepimpinan Pedagogi',
@@ -451,8 +451,8 @@ const IMPAK = [
   },
   {
     label: 'Inovasi &amp; Jangkauan',
-    tajuk: 'Dua pengiktirafan kebangsaan bagi kajian AI',
-    hasil: '<strong>Best Innovation Gold Award</strong> dan <strong>Bronze</strong> Pertandingan Kajian Tindakan (Terbuka) peringkat kebangsaan, kedua-duanya bagi kajian penggunaan Google Gemini dalam penulisan Bahasa Inggeris.',
+    tajuk: 'Enam anugerah, tiga daripadanya Emas',
+    hasil: 'Dua <strong>Emas peringkat antarabangsa</strong> bagi inovasi Google Gemini dan Canva, satu <strong>Emas peringkat negeri</strong> bagi Sinergi Kajian Tindakan SOAR 25, Gangsa kebangsaan UPSI 2026, Anugerah Pembentang Terbaik antarabangsa, dan Anugerah Perkhidmatan Cemerlang KPM.',
     contoh: 'Lebih 20 episod DidikTV KPM; 20+ set permainan tatabahasa Blooket dikongsi percuma kepada guru.',
     imej: 'assets/eviden/anugerah/h-5.jpg',
     imejAlt: 'Certificate of Excellence — Best Innovation Gold Award',
@@ -463,20 +463,39 @@ const IMPAK = [
 
 /* Tiga laluan pantas, menggantikan senarai lapan bahagian yang hanya
    mengulang navigasi di bahagian atas laman. */
+/* Anugerah yang DIMENANGI. Lima pertama ialah senarai rasmi calon sendiri
+   (Bahagian 4.0, halaman 187). Yang keenam dijumpai semasa semakan visual
+   halaman evidens dan tiada dalam jadual itu. */
+const ANUGERAH = [
+  ['Anugerah Emas Inovasi Terbaik', 'Antarabangsa', '2025',
+   '1st International Conference on Digital Innovations in Education and Social Sciences — bagi abstrak kajian penulisan karangan menerusi Google Gemini',
+   'anugerah', 'h-5.jpg'],
+  ['Anugerah Emas Bicara Amalan Terbaik (Guru)', 'Antarabangsa', '2025',
+   'K-SEMANIS \u201925, Best Practice Presentation Competition (Teacher Category), International Level — Open University Malaysia dengan Majlis Bandaraya Klang',
+   'anugerah', 'h-4.jpg'],
+  ['Anugerah Pembentang Terbaik', 'Antarabangsa', '2025',
+   'Best Virtual Presenter, 1st International Conference on Digital Innovations in Education and Social Sciences, University College MAIWP International',
+   'anugerah', 'h-3.jpg'],
+  ['Anugerah Gangsa Pertandingan Kajian Tindakan (Terbuka)', 'Kebangsaan', '2026',
+   'Karnival Pengajian Pendidikan, Universiti Pendidikan Sultan Idris — tajuk: Meningkatkan Penguasaan Menulis Emel Bahasa Inggeris Menerusi Aplikasi Gemini',
+   'anugerah', 'h-6.jpg'],
+  ['Anugerah Perkhidmatan Cemerlang', 'Kebangsaan', '2020',
+   'Sijil Perkhidmatan Cemerlang, Kementerian Pendidikan Malaysia',
+   'anugerah', 'h-7.jpg'],
+  ['Sijil Pencapaian Emas — Sinergi Kajian Tindakan (SOAR 25)', 'Negeri', '2025',
+   'Peringkat negeri Selangor, anjuran PPD Klang dengan kerjasama SSTP JPN Selangor, 26\u201327 Februari 2025',
+   'sijil', 'h-31.jpg'],
+];
+
 /* Enam evidens paling kuat, dipilih sendiri. Ini yang panel patut nampak
    dalam sepuluh saat pertama. */
-const SOROTAN_IMEJ = [
-  ['anugerah', 'h-5.jpg', 'Best Innovation Gold Award — kajian penulisan karangan menerusi Google Gemini', 'Gold Award · Antarabangsa'],
-  ['anugerah', 'h-6.jpg', 'Bronze, Pertandingan Kajian Tindakan (Terbuka), Karnival Pengajian Pendidikan UPSI 2026', 'Bronze · Kebangsaan'],
-  ['anugerah', 'h-7.jpg', 'Sijil Perkhidmatan Cemerlang, Kementerian Pendidikan Malaysia (2020)', 'Perkhidmatan Cemerlang'],
-  ['anugerah', 'h-3.jpg', 'Best Virtual Presenter, 1st International Conference on Digital Innovations in Education 2025', 'Antarabangsa'],
-  ['wau', 'h-11.jpg', 'Surat pelantikan sebagai Pengacara Majlis SEAMEO SEN 2026', 'Pengacara · Antarabangsa'],
-  ['kemenjadian', 'h-11.jpg', 'Johan Poetry Recitation, Karnival Koakademik Bahasa Inggeris negeri Selangor 2023', 'Johan · Negeri'],
-];
+const SOROTAN_IMEJ = ANUGERAH.map(([tajuk, peringkat, tahun, nota, slug, fail]) =>
+  [slug, fail, `${tajuk} — ${nota}`, `${peringkat} · ${tahun}`]);
+
 
 const LALUAN = [
   ['Nilai Profil &amp; Kelayakan', 'Butiran asas, kelayakan akademik, lantikan dan dokumen rasmi Bahagian 1.0–1.11.', 'profil.html'],
-  ['Nilai Impak PdP &amp; Kemenjadian', 'Enam belas kisah kemenjadian murid, boleh ditapis mengikut pertandingan, bimbingan atau bekas murid.', 'kemenjadian.html'],
+  ['Nilai Impak PdP &amp; Kemenjadian', 'Dua puluh kisah kemenjadian murid, boleh ditapis mengikut pertandingan, bimbingan atau bekas murid.', 'kemenjadian.html'],
   ['Semak Evidens &amp; Dokumen Rasmi', 'Kesemua 17 fail PDF, 299 halaman, dipaparkan terus daripada folder Drive asal.', 'dokumen.html'],
 ];
 
@@ -520,8 +539,8 @@ function halamanUtama() {
   <div class="balut">
     ${kepalaSek({
       label: 'Sorotan kejayaan',
-      tajuk: 'Enam Evidens Paling Kuat',
-      pengenalan: 'Anugerah antarabangsa, pengiktirafan kebangsaan dan johan peringkat negeri — halaman sebenar daripada portfolio. Klik untuk melihat penuh.',
+      tajuk: 'Enam Anugerah Dimenangi',
+      pengenalan: 'Tiga peringkat antarabangsa, dua kebangsaan dan satu negeri — tiga daripadanya Emas. Sijil sebenar daripada portfolio; klik untuk melihat penuh.',
     })}
     ${galeriPilihan('sorotan', SOROTAN_IMEJ)}
   </div>
@@ -931,7 +950,7 @@ const WAU = [
   },
   {
     no: '6.7', tajuk: 'Kemenjadian Murid', dok: 'kemenjadian',
-    teks: 'Enam belas kisah kemenjadian murid, daripada johan peringkat negeri hinggalah bekas murid yang kini menjadi guru pelatih dan pelajar seni lakon.',
+    teks: 'Dua puluh kisah kemenjadian murid, daripada johan peringkat negeri hinggalah bekas murid yang kini menjadi guru pelatih dan pelajar seni lakon.',
     butir: [
       'Johan English Sketch dan Poetry Recitation peringkat negeri Selangor',
       'Anugerah Emas Show and Tell peringkat kebangsaan',
@@ -987,22 +1006,22 @@ ${kepalaLaman('Bahagian 4.0 · 6.0', 'Faktor WAU & Anugerah',
   <div class="balut">
     ${kepalaSek({
       label: 'Bahagian 4.0',
-      tajuk: 'Anugerah Kecemerlangan &amp; Pengiktirafan Terkini',
-      pengenalan: 'Lima evidens anugerah, termasuk dua pencapaian dalam pertandingan kajian tindakan peringkat kebangsaan.',
+      tajuk: 'Enam Anugerah Dimenangi',
+      pengenalan: 'Disenaraikan mengikut peringkat. Lima yang pertama ialah senarai rasmi calon; Emas SOAR 25 peringkat negeri dikesan daripada halaman evidens Bahagian 1.11.',
     })}
-    <div class="grid grid-2">
-      ${kad({
-        label: 'Gold Award', emas: true,
-        tajuk: 'Best Innovation Gold Award',
-        teks: 'Bagi abstrak kajian <em>“Improving English Essay Writing Skills Among Year 6 Gigih Pupils Through the Use of Google Gemini Application”</em>.',
-        kaki: pautanEvidens('anugerah'),
-      })}
-      ${kad({
-        label: 'Bronze · 10 Januari 2026', emas: true,
-        tajuk: 'Pertandingan Kajian Tindakan (Terbuka) — Karnival Pengajian Pendidikan 2026',
-        teks: 'Peringkat kebangsaan, anjuran Jabatan Pengajian Pendidikan, Fakulti Pembangunan Manusia, Universiti Pendidikan Sultan Idris. Tajuk: <em>Meningkatkan Penguasaan Menulis Emel Bahasa Inggeris Menerusi Aplikasi Gemini</em>.',
-        kaki: pautanEvidens('anugerah'),
-      })}
+    <div class="jad-balut">
+      <table class="jad jad-anugerah">
+        <thead>
+          <tr><th scope="col">Anugerah</th><th scope="col">Peringkat</th><th scope="col">Tahun</th></tr>
+        </thead>
+        <tbody>
+          ${ANUGERAH.map(([tajuk, peringkat, tahun, nota]) => `<tr>
+            <td><strong>${tajuk}</strong><span class="jad-nota">${nota}</span></td>
+            <td><span class="lencana-peringkat lencana-${peringkat.toLowerCase()}">${peringkat}</span></td>
+            <td>${tahun}</td>
+          </tr>`).join('\n          ')}
+        </tbody>
+      </table>
     </div>
     <div class="mt-7">${galeri('anugerah')}</div>
   </div>
@@ -1092,6 +1111,10 @@ const KEMENJADIAN = [
   ['Pasukan Choral Speaking SK Abdul Samat', 'Peringkat negeri Selangor 2022', 'Mara ke peringkat negeri Selangor pada tahun 2022.', ['pertandingan']],
   ['HIP: Let’s Read and Share', 'Peringkat kebangsaan 2021', 'Penyertaan dalam pertandingan HIP: Let’s Read and Share peringkat kebangsaan.', ['pertandingan']],
   ['Show and Tell HIPMAX', 'Pencapaian Emas kebangsaan 2024', 'Pencapaian Emas dalam pertandingan Show and Tell HIPMAX peringkat kebangsaan 2024.', ['pertandingan']],
+  ['Murid dalam rancangan DidikTV KPM', 'Pelibatan siaran kebangsaan', 'Shivaani A/P Balooragavan dan Ahmad Fahez Hakimy bin Hasbuddin menerima Sijil Penyertaan DidikTV KPM 2024 selepas terlibat dalam rakaman rancangan.', ['bimbingan']],
+  ['Pasukan Petrosains Science Drama Competition', 'Penyertaan kebangsaan 2024', 'Penyertaan murid dalam Petrosains Science Drama Competition 2024, anjuran Kementerian Pendidikan bersama Petrosains.', ['pertandingan', 'bimbingan']],
+  ['Dua kumpulan murid — Pertandingan Suara Murid 2024', 'Penerbitan video murid', 'Dua kumpulan menghasilkan video “Tips Menguasai Matematik” dan “5 Tips Menguasai Bahasa Inggeris” untuk Pertandingan Suara Murid 2024.', ['pertandingan', 'bimbingan']],
+  ['Pasukan VLOG Battle — TVLOG PSS 2026', 'Tempat Kedua', 'Tempat Kedua Pertandingan VLOG Battle TVLOG PSS 2026 di Alamanda Shopping Centre, Putrajaya pada 24 Januari 2026, dengan hadiah RM300. Calon bertindak sebagai guru pembimbing.', ['pertandingan', 'bimbingan']],
 ];
 
 const TAPIS = [
@@ -1104,11 +1127,11 @@ const TAPIS = [
 function halamanKemenjadian() {
   const badan = `
 ${kepalaLaman('Bahagian 6.7', 'Kemenjadian Murid',
-    'Enam belas kisah kemenjadian yang direkodkan dalam portfolio — pencapaian pertandingan, bimbingan individu, dan bekas murid yang kini meneruskan jejak dalam pendidikan dan seni.',
+    'Dua puluh kisah kemenjadian yang direkodkan dalam portfolio — pencapaian pertandingan, bimbingan individu, dan bekas murid yang kini meneruskan jejak dalam pendidikan dan seni.',
     [
       ['2', 'johan', 'Johan peringkat negeri Selangor — English Sketch 2022 dan Poetry Recitation 2023'],
-      ['2', 'emas', 'Anugerah Emas Show and Tell peringkat kebangsaan pada 2024'],
-      ['16', 'kisah', 'Daripada bimbingan individu hingga pasukan sekolah, direkodkan satu per satu'],
+      ['3', 'menang', 'Dua Anugerah Emas Show and Tell kebangsaan 2024 dan Tempat Kedua VLOG Battle PSS 2026'],
+      ['20', 'kisah', 'Daripada bimbingan individu hingga pasukan sekolah, direkodkan satu per satu'],
     ])}
 
 <section class="sek">
@@ -1129,11 +1152,11 @@ ${kepalaLaman('Bahagian 6.7', 'Kemenjadian Murid',
 
     ${kepalaSek({
       label: 'Bahagian 6.7',
-      tajuk: 'Enam Belas Kisah Kemenjadian',
+      tajuk: 'Dua Puluh Kisah Kemenjadian',
       pengenalan: 'Tapis mengikut jenis impak. Satu kisah boleh tergolong dalam lebih daripada satu kategori.',
     })}
     <!-- Bar penapis. Disembunyikan secara lalai dan didedahkan oleh JS,
-         supaya tanpa JavaScript kesemua 16 kisah tetap terpapar. -->
+         supaya tanpa JavaScript kesemua 20 kisah tetap terpapar. -->
     <div class="tapis" id="tapis-kemenjadian" role="group" aria-label="Tapis kisah kemenjadian" hidden>
       ${TAPIS.map(([kunci, label]) => {
         const bil = kunci === 'semua' ? KEMENJADIAN.length : KEMENJADIAN.filter((k) => k[3].includes(kunci)).length;
@@ -1165,7 +1188,7 @@ ${kepalaLaman('Bahagian 6.7', 'Kemenjadian Murid',
   return susunan({
     fail: 'kemenjadian.html',
     tajuk: 'Kemenjadian Murid',
-    huraian: 'Enam belas kisah kemenjadian murid di bawah bimbingan Mohd Haiqal bin Abdullah Chik — johan peringkat negeri, anugerah emas kebangsaan dan bimbingan individu.',
+    huraian: 'Dua puluh kisah kemenjadian murid di bawah bimbingan Mohd Haiqal bin Abdullah Chik — johan peringkat negeri, anugerah emas kebangsaan dan bimbingan individu.',
     badan,
   });
 }
@@ -1279,7 +1302,7 @@ const BACAAN_PANEL = [
   ['Ringkasan calon', 'Resume, kelayakan dan lantikan dalam tiga halaman.', 'dok', 'resume'],
   ['Kompetensi & prestasi', 'Skor pencerapan PdP 2026 oleh empat pencerap, dan LNPT tiga tahun.', 'dok', 'kompetensi'],
   ['Impak PdP & kajian tindakan', 'Kajian Google Gemini dan pengintegrasian Canva, berserta hasilnya.', 'laman', 'kepakaran.html#kajian'],
-  ['Kemenjadian Murid', 'Enam belas kisah, boleh ditapis mengikut jenis impak.', 'laman', 'kemenjadian.html'],
+  ['Kemenjadian Murid', 'Dua puluh kisah, boleh ditapis mengikut jenis impak.', 'laman', 'kemenjadian.html'],
   ['Lantikan & sumbangan', 'Lapan faktor WAU dan sumbangan merentas lima peringkat.', 'laman', 'wau.html'],
   ['Dokumen sokongan penuh', 'Sijil, surat penghargaan dan evidens setiap peringkat — 64 halaman.', 'dok', 'sijil'],
 ];

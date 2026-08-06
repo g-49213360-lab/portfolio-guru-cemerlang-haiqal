@@ -688,6 +688,36 @@ table.jad td { color: var(--arang); font-weight: 600; line-height: 1.5; }
   table.jad th { margin-bottom: 3px; }
 }
 
+/* Jadual anugerah — nota kecil di bawah nama, lencana peringkat berwarna */
+.jad-anugerah thead th {
+  background: var(--kertas-3); color: var(--kelabu); font-size: .7rem;
+  font-weight: 800; letter-spacing: .1em; text-transform: uppercase; width: auto;
+}
+.jad-anugerah td { vertical-align: top; font-weight: 500; }
+.jad-anugerah td strong { display: block; color: var(--arang); font-weight: 700; font-size: 1rem; }
+.jad-nota { display: block; margin-top: 5px; font-size: .84rem; color: var(--kelabu); line-height: 1.5; font-weight: 400; }
+.jad-anugerah td:nth-child(2), .jad-anugerah td:nth-child(3) { white-space: nowrap; }
+.jad-anugerah td:nth-child(3) { font-variant-numeric: tabular-nums; }
+
+.lencana-peringkat {
+  display: inline-block; font-size: .7rem; font-weight: 800;
+  letter-spacing: .07em; text-transform: uppercase;
+  padding: 4px 11px; border-radius: 999px; white-space: nowrap;
+}
+.lencana-antarabangsa { color: #6b4e12; background: var(--emas-lembut); border: 1px solid rgba(163,118,44,.35); }
+.lencana-kebangsaan  { color: var(--biru); background: var(--biru-lembut); border: 1px solid rgba(20,66,122,.22); }
+.lencana-negeri      { color: var(--kelabu); background: var(--kertas-3); border: 1px solid var(--garis); }
+
+@media (max-width: 620px) {
+  .jad-anugerah, .jad-anugerah tbody, .jad-anugerah tr, .jad-anugerah td { display: block; width: auto; }
+  .jad-anugerah thead { display: none; }
+  .jad-anugerah tr { padding: var(--r3) var(--r4); border-bottom: 1px solid var(--garis-halus); }
+  .jad-anugerah tr:last-child { border-bottom: 0; }
+  .jad-anugerah td { padding: 0; border: 0; }
+  .jad-anugerah td:nth-child(2) { margin-top: var(--r2); display: inline-block; }
+  .jad-anugerah td:nth-child(3) { display: inline-block; margin-left: var(--r2); color: var(--kelabu-muda); font-size: .84rem; }
+}
+
 /* ------------------------------------------------------------ PETIKAN */
 
 .petikan {
