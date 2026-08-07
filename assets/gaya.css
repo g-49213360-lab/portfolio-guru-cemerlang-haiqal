@@ -137,25 +137,6 @@ p:last-child { margin-bottom: 0; }
 .label-aksen { color: var(--utama); font-weight: 800; letter-spacing: .11em; }
 .label-emas { color: var(--emas); font-weight: 800; letter-spacing: .11em; }
 
-/* ------------------------------------------------------------ UTILITI */
-/* Kelas kecil ini menggantikan atribut style= dalam HTML. Dengan tiada
-   gaya inline, CSP boleh dikuatkuasakan tanpa 'unsafe-inline'. */
-
-.mt-2 { margin-top: var(--r2); }
-.mt-3 { margin-top: var(--r3); }
-.mt-4 { margin-top: var(--r4); }
-.mt-5 { margin-top: var(--r5); }
-.mt-7 { margin-top: var(--r7); }
-.mb-3 { margin-bottom: var(--r3); }
-.mb-7 { margin-bottom: var(--r7); }
-
-.teks-arang { color: var(--arang); }
-.teks-emas { color: var(--emas); font-weight: 700; }
-.nota-kaki { margin-top: var(--r3); font-size: .8rem; color: var(--kelabu-muda); }
-.h2-kecil { font-size: 1.28rem; margin-bottom: var(--r4); }
-.tengah-900 { max-width: 900px; margin-inline: auto; }
-.tumpuk { display: grid; gap: var(--r3); }
-
 /* ------------------------------------------------------------ SUSUN ATUR */
 
 .balut {
@@ -1097,7 +1078,7 @@ table.jad td { color: var(--arang); font-weight: 600; line-height: 1.5; }
 }
 .hubungi > * { position: relative; z-index: 2; }
 .hubungi h2 { color: #fff; margin-top: var(--r3); }
-.hubungi p { color: rgba(255, 255, 255, .72); max-width: 56ch; margin-top: var(--r3); }
+.hubungi p { color: rgba(255, 255, 255, .72); max-width: 56ch; margin-top: var(--r4); }
 .hubungi .btn-baris { margin-top: var(--r5); }
 @media (max-width: 640px) { .hubungi { padding: var(--r5) var(--r4); } }
 
@@ -1118,6 +1099,37 @@ table.jad td { color: var(--arang); font-weight: 600; line-height: 1.5; }
 .kaki-nav { display: flex; flex-wrap: wrap; gap: 8px var(--r4); }
 .kaki-nav a { font-size: .85rem; color: var(--kelabu); font-weight: 600; }
 .kaki-nav a:hover { color: var(--utama); }
+
+/* ============================================================ UTILITI
+   Lapisan ini WAJIB berada di hujung. Kelas komponen seperti
+   .senarai-tanda menetapkan `margin: 0`; jika utiliti diisytiharkan
+   lebih awal, margin komponen mengatasinya dan kelas seperti .mt-4
+   gagal secara senyap — jurang tajuk-ke-senarai jadi 2px bukan 24px.
+
+   Susunan sahaja tidak cukup: peraturan komponen yang menggunakan
+   pemilih jenis (contoh `.hubungi p`) mempunyai kekhususan LEBIH TINGGI
+   daripada satu kelas, jadi ia tetap menang. Bila itu berlaku, betulkan
+   peraturan komponen itu — jangan tambah !important di sini.
+   ==================================================================== */
+
+/* Kelas kecil ini menggantikan atribut style= dalam HTML. Dengan tiada
+   gaya inline, CSP boleh dikuatkuasakan tanpa 'unsafe-inline'. */
+
+.mt-2 { margin-top: var(--r2); }
+.mt-3 { margin-top: var(--r3); }
+.mt-4 { margin-top: var(--r4); }
+.mt-5 { margin-top: var(--r5); }
+.mt-7 { margin-top: var(--r7); }
+.mb-3 { margin-bottom: var(--r3); }
+.mb-7 { margin-bottom: var(--r7); }
+
+.teks-arang { color: var(--arang); }
+.teks-emas { color: var(--emas); font-weight: 700; }
+.nota-kaki { margin-top: var(--r3); font-size: .8rem; color: var(--kelabu-muda); }
+.h2-kecil { font-size: 1.28rem; margin-bottom: var(--r4); }
+.tengah-900 { max-width: 900px; margin-inline: auto; }
+.tumpuk { display: grid; gap: var(--r3); }
+
 
 /* ------------------------------------------------------------ CETAK */
 

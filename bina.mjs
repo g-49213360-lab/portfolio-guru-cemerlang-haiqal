@@ -657,7 +657,7 @@ ${kepalaLaman('Bahagian 1.0 · Dokumentasi', 'Profil & Kelayakan',
       <div>
         <span class="label label-aksen mb-3">Maklumat calon</span>
         <h2>Butiran Asas</h2>
-        <div class="jad-balut mt-4">
+        <div class="jad-balut mt-2">
           <table class="jad">
             <tbody>
               <tr><th scope="row">Nama</th><td>${esc(CALON.nama)}</td></tr>
