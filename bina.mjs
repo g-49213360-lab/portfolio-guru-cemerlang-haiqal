@@ -322,7 +322,7 @@ function susunan({ fail, tajuk, huraian, badan }) {
 <meta name="description" content="${esc(huraian)}">
 <meta name="author" content="${esc(CALON.nama)}">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#0f1724">
+<meta name="theme-color" content="#1a0e12">
 <link rel="canonical" href="${url}">
 <meta property="og:title" content="${esc(tajuk)} · ${esc(CALON.nama)}">
 <meta property="og:description" content="${esc(huraian)}">
@@ -343,7 +343,7 @@ function susunan({ fail, tajuk, huraian, badan }) {
 <link rel="preload" href="assets/fon/source-serif-4-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/fon.css?v=${V.fon}">
 <link rel="stylesheet" href="assets/gaya.css?v=${V.gaya}">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2314427a'/%3E%3Ctext x='16' y='22' font-family='system-ui,sans-serif' font-size='14' font-weight='800' fill='white' text-anchor='middle'%3EMH%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%237a1229'/%3E%3Ctext x='16' y='22' font-family='system-ui,sans-serif' font-size='14' font-weight='800' fill='white' text-anchor='middle'%3EMH%3C/text%3E%3C/svg%3E">
 </head>
 <body>
 <a class="lompat" href="#kandungan">Lompat ke kandungan</a>
